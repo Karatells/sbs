@@ -80,6 +80,18 @@
 <td>Allows <code>net.craft</code>.</td>
 </tr>
 <tr>
+<td><code>allowControl</code></td>
+<td><code>true</code></td>
+<td></td>
+<td>Allows scripts to change Controller settings: order priority/pause/cancel (<code>net.setPriority</code>, <code>net.pause</code>, <code>net.resume</code>, <code>net.cancel</code>), stock rules (<code>stock.set/clear</code>) and recipe settings (<code>recipes.*</code> changes). Reading is always allowed.</td>
+</tr>
+<tr>
+<td><code>allowAlerts</code></td>
+<td><code>true</code></td>
+<td></td>
+<td>Allows <code>alert(text)</code> (chat warnings to owners of bound Wireless Terminals).</td>
+</tr>
+<tr>
 <td><code>maxScriptLength</code></td>
 <td><code>8000</code></td>
 <td>100 – 30000</td>

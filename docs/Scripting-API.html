@@ -140,6 +140,198 @@
 </tbody>
 </table>
 <p>If the bus has no network storage available, methods that need it throw <code>network is offline</code> (which stops the bus).</p>
+<h3 id="reservation-energy-and-statistics">Reservation, energy and statistics<a class="anchor" href="#reservation-energy-and-statistics" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net.reserved(id)</code></td>
+<td>number</td>
+<td>How many of the item are <a href="Autocrafting.html#resource-reservation">reserved</a> for accepted orders.</td>
+</tr>
+<tr>
+<td><code>net.available(id)</code></td>
+<td>number</td>
+<td>Stored minus reserved: what terminals and new orders can still use.</td>
+</tr>
+<tr>
+<td><code>net.totalReserved()</code></td>
+<td>number</td>
+<td>All reserved items together.</td>
+</tr>
+<tr>
+<td><code>net.energy()</code></td>
+<td>object</td>
+<td><code>{stored, max, percent}</code> of the Controller's energy buffer, or <code>null</code>.</td>
+</tr>
+<tr>
+<td><code>net.stats()</code></td>
+<td>object</td>
+<td><code>{patterns, assemblers, assemblersBusy, patternBuses, busJobs, libraryRecipes, reserved}</code>. <code>libraryRecipes</code> is 0 without a Recipe Library.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="planning-does-not-order-anything">Planning (does not order anything)<a class="anchor" href="#planning-does-not-order-anything" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net.canCraft(id, n)</code></td>
+<td>boolean</td>
+<td><code>true</code> if an order of <code>n</code> items would be accepted by the planner.</td>
+</tr>
+<tr>
+<td><code>net.why(id, n)</code></td>
+<td>object / <code>null</code></td>
+<td><code>null</code> if the order is possible, otherwise <code>{code}</code> or <code>{code, id, count}</code>. Codes: <code>no_network</code>, <code>no_pattern</code>, <code>missing</code> (with the missing <code>id</code> and <code>count</code>), <code>no_assembler</code>, <code>no_card</code>, <code>no_pattern</code>.</td>
+</tr>
+<tr>
+<td><code>net.plan(id, n)</code></td>
+<td>object / <code>null</code></td>
+<td><code>null</code> if no pattern makes the item, otherwise <code>{ok, steps: [{id, crafts}], missing: [{id, count}]}</code> (sub-crafts first).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="order-queue">Order queue<a class="anchor" href="#order-queue" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net.queue()</code></td>
+<td>array</td>
+<td><code>[{id, crafts, active, priority, paused, eta, progress}]</code>: <code>eta</code> in seconds (0 = unknown), <code>progress</code> 0–100, <code>priority</code> -9…+9.</td>
+</tr>
+<tr>
+<td><code>net.setPriority(id, p)</code></td>
+<td>number</td>
+<td>Sets the priority of the queued orders producing <code>id</code>. Returns how many queue entries were changed.</td>
+</tr>
+<tr>
+<td><code>net.pause(id)</code> / <code>net.resume(id)</code></td>
+<td>number</td>
+<td>Pauses / resumes them (a craft that is already running finishes first).</td>
+</tr>
+<tr>
+<td><code>net.cancel(id)</code></td>
+<td>number</td>
+<td>Cancels them (written to the journal).</td>
+</tr>
+</tbody>
+</table>
+<p>The four control methods can be disabled by the server (<code>allowControl</code>).</p>
+<h3 id="stock-stock-rules"><code>stock</code> — stock rules<a class="anchor" href="#stock-stock-rules" title="Permanent link">#</a></h3>
+<p>The same rules as the Controller's <strong>Stock</strong> tab (8 rules).</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stock.list()</code></td>
+<td>array</td>
+<td><code>[{slot, id, min, have, state}]</code>; <code>state</code> is <code>"ok"</code>, <code>"crafting"</code>, <code>"failed"</code> or <code>"off"</code>.</td>
+</tr>
+<tr>
+<td><code>stock.set(id, min)</code></td>
+<td>number</td>
+<td>Creates the rule for the item (or changes the existing one). Returns its slot, or <code>-1</code> if all 8 rules are in use. <code>min = 0</code> removes it.</td>
+</tr>
+<tr>
+<td><code>stock.clear(id)</code></td>
+<td>number</td>
+<td>Removes the rules for the item; returns how many.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="recipes-recipe-library-settings"><code>recipes</code> — Recipe Library settings<a class="anchor" href="#recipes-recipe-library-settings" title="Permanent link">#</a></h3>
+<p>The same settings as the Controller's <strong>Recipes</strong> tab (9 slots per list).</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>recipes.blacklist()</code> / <code>recipes.preferred()</code></td>
+<td>array</td>
+<td>Item ids on the recipe blacklist / the preferred ingredient list.</td>
+</tr>
+<tr>
+<td><code>recipes.block(id)</code> / <code>recipes.unblock(id)</code></td>
+<td>boolean</td>
+<td>Adds / removes the item on the blacklist (<code>false</code> = list full).</td>
+</tr>
+<tr>
+<td><code>recipes.prefer(id)</code> / <code>recipes.unprefer(id)</code></td>
+<td>boolean</td>
+<td>Same for the preferred ingredient variants.</td>
+</tr>
+<tr>
+<td><code>recipes.skipUnpacking()</code></td>
+<td>boolean</td>
+<td>Reads the "skip unpacking" switch. <code>recipes.skipUnpacking(true/false)</code> changes it and returns the new value.</td>
+</tr>
+</tbody>
+</table>
+<p>These can be disabled by the server (<code>allowControl</code>).</p>
+<h3 id="journal-and-alert"><code>journal</code> and <code>alert</code><a class="anchor" href="#journal-and-alert" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>journal.write(text, [icon])</code></td>
+<td>boolean</td>
+<td>Adds a line to the Controller's <strong>Journal</strong> tab (60 characters, optional item id as the icon, default paper).</td>
+</tr>
+<tr>
+<td><code>journal.warn(text, [icon])</code></td>
+<td>boolean</td>
+<td>Same, shown as a warning.</td>
+</tr>
+<tr>
+<td><code>journal.read([n])</code></td>
+<td>array</td>
+<td>The last <code>n</code> (default 10, max 30) entries, newest first: <code>[{type, id, count, age, text}]</code>. <code>age</code> is in seconds. <code>type</code> is one of <code>order</code>, <code>crafted</code>, <code>started</code>, <code>stock_order</code>, <code>stock_failed</code>, <code>cancelled</code>, <code>stuck</code>, <code>script</code>, <code>script_warn</code>.</td>
+</tr>
+<tr>
+<td><code>alert(text)</code></td>
+<td>boolean</td>
+<td>Sends a chat warning to every player who carries a Wireless Terminal bound to this network. Returns <code>false</code> if it was sent too recently (once per 30 s per bus). Can be disabled by the server (<code>allowAlerts</code>).</td>
+</tr>
+</tbody>
+</table>
+<p>Identical consecutive journal lines from the same bus are merged into <code>x2</code>, <code>x3</code>, …</p>
 <h2 id="sidedir-and-sidedir-id"><code>side(dir)</code> and <code>side(dir, id)</code><a class="anchor" href="#sidedir-and-sidedir-id" title="Permanent link">#</a></h2>
 <p><code>dir</code> is one of <code>"down"</code>, <code>"up"</code>, <code>"north"</code>, <code>"south"</code>, <code>"west"</code>, <code>"east"</code>, relative to the Logic Bus the inventory is read from.</p>
 <ul>
@@ -206,8 +398,9 @@ if (buses(&quot;smelters&quot;) === 0) log(&quot;no smelter buses!&quot;);
 <ul>
 <li><strong>Instructions</strong> and <strong>wall-clock time</strong></li>
 <li><strong>Items moved</strong></li>
-<li><strong>API calls</strong>: <code>side</code>, <code>buses</code>, <code>net.count/has/list/craft</code>, <code>ep.list/count/pull/push/move</code> each use one call. <code>ep.slots</code>, <code>net.usedBytes</code>, <code>net.freeBytes</code>, <code>log</code>, <code>time</code> are free.</li>
+<li><strong>API calls</strong>: <code>side</code>, <code>buses</code>, every <code>net.*</code> method except <code>usedBytes</code>/<code>freeBytes</code>, <code>stock.*</code>, <code>recipes.*</code>, <code>journal.*</code>, <code>alert</code>, <code>ep.list/count/pull/push/move</code> each use one call. <code>ep.slots</code>, <code>net.usedBytes</code>, <code>net.freeBytes</code>, <code>log</code>, <code>time</code> are free.</li>
 <li><strong>Craft calls</strong>: at most 4 <code>net.craft</code> calls per run.</li>
+<li><strong>Journal writes</strong>: at most 4 <code>journal.write/warn</code> calls per run; <strong>alerts</strong>: at most 1 <code>alert</code> per run.</li>
 </ul>
 <p>Exceeding a budget stops the bus with an error such as <code>instruction limit exceeded</code>. Items moved are clamped silently; <code>pull</code>/<code>push</code> simply return a smaller number once the item budget is used.</p>
 <h2 id="removed-built-ins">Removed built-ins<a class="anchor" href="#removed-built-ins" title="Permanent link">#</a></h2>
@@ -252,6 +445,14 @@ if (buses(&quot;smelters&quot;) === 0) log(&quot;no smelter buses!&quot;);
 <tr>
 <td><code>net.craft is disabled by the server admin</code></td>
 <td><code>allowCrafting = false</code>.</td>
+</tr>
+<tr>
+<td><code>… is disabled by the server admin</code> (<code>stock.set</code>, <code>net.pause</code>, <code>recipes.block</code>, <code>alert</code>, …)</td>
+<td><code>allowControl = false</code> or <code>allowAlerts = false</code>.</td>
+</tr>
+<tr>
+<td><code>journal write limit exceeded</code> / <code>alert call limit exceeded</code></td>
+<td>Too many journal writes / alerts in one run.</td>
 </tr>
 <tr>
 <td><code>instruction limit exceeded</code> / <code>time limit exceeded</code></td>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru" data-lang="ru">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,7 @@
   <div class="wrap">
     <a class="brand" href="#top"><img class="px" src="assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
     <nav class="links">
+      <a href="#new"><span class="ru">Новое</span><span class="en">New</span></a>
       <a href="#idea"><span class="ru">Идея</span><span class="en">Idea</span></a>
       <a href="#storage"><span class="ru">Хранение</span><span class="en">Storage</span></a>
       <a href="#blocks"><span class="ru">Блоки</span><span class="en">Blocks</span></a>
@@ -24,7 +25,7 @@
       <a href="#scripting">Scripting</a>
       <a href="#install"><span class="ru">Установка</span><span class="en">Install</span></a>
     </nav>
-    <button class="lang" id="langBtn" aria-label="Language">EN</button>
+    <button class="lang" id="langBtn" aria-label="Language">RU</button>
   </div>
 </header>
 
@@ -47,7 +48,7 @@
       <span class="badge">Minecraft <b>1.20.1</b></span>
       <span class="badge">Forge <b>47.2.0+</b></span>
       <span class="badge">Java <b>17</b></span>
-      <span class="badge"><span class="ru">Версия</span><span class="en">Version</span> <b>1.1.3</b></span>
+      <span class="badge"><span class="ru">Версия</span><span class="en">Version</span> <b>1.2.0</b></span>
       <span class="badge">MIT</span>
     </div>
     <div class="btns">
@@ -57,6 +58,22 @@
     </div>
   </div>
 </div>
+
+<section id="new">
+  <div class="wrap">
+    <h2><span class="ru">Новое в 1.2.0</span><span class="en">What's new in 1.2.0</span></h2>
+    <p class="sub"><span class="ru">Журнал автокрафта, резерв ресурсов, питание машин от сети, предупреждения о нехватке и намного более богатый API скриптов.</span><span class="en">An autocrafting journal, resource reservation, machine power from the network, shortage warnings and a much larger scripting API.</span></p>
+    <div class="grid g3">
+      <div class="card"><h3><span class="ru">Вкладка «Журнал»</span><span class="en">Journal tab</span></h3><p><span class="ru">Последние события автокрафта: заказы, завершённые крафты, запуски на шинах, правила запаса, отмены и зависшие машины.</span><span class="en">Latest autocrafting events: orders, finished crafts, Pattern Bus starts, stock-rule orders and failures, cancellations and stuck machines.</span></p></div>
+      <div class="card"><h3><span class="ru">Резерв ресурсов</span><span class="en">Resource reservation</span></h3><p><span class="ru">Сырьё принятого заказа бронируется: терминалы, I/O-шины и беспроводной терминал его не заберут. Отмена снимает резерв.</span><span class="en">Raw materials of an accepted order are reserved: terminals, I/O buses and the Wireless Terminal cannot take them. Cancelling releases them.</span></p></div>
+      <div class="card"><h3><span class="ru">Питание машин</span><span class="en">Machine power</span></h3><p><span class="ru">Шина шаблонов и новый Энергоинтерфейс заряжают соседние машины энергией сети.</span><span class="en">The Pattern Bus and the new Energy Interface charge adjacent machines from network energy.</span></p></div>
+      <div class="card"><h3><span class="ru">Предупреждения о нехватке</span><span class="en">Shortage warnings</span></h3><p><span class="ru">Причина сбоя правила запаса видна в подсказке над красным «!», а после трёх неудач приходит сообщение в чат. Зависший Асемблер попадает в журнал.</span><span class="en">Stock-rule failure reasons show in a tooltip over the red “!”, with a chat message after 3 failures in a row. A stuck Assembler is logged and reported.</span></p></div>
+      <div class="card"><h3><span class="ru">API скриптов</span><span class="en">Scripting API</span></h3><p><span class="ru">Информация о сети, планирование, управление очередью, правила запаса, настройки рецептов, журнал и чат-оповещения.</span><span class="en">Network info, planning, order queue control, stock rules, recipe settings, the journal and chat alerts.</span></p></div>
+      <div class="card"><h3><span class="ru">API для аддонов</span><span class="en">Addon API</span></h3><p><span class="ru">Стабильный фасад <code>NetworkControl</code> для сторонних аддонов.</span><span class="en">A stable <code>NetworkControl</code> facade for third-party addons.</span></p></div>
+    </div>
+    <p style="margin-top:18px"><a href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.2.0.md"><span class="ru">Полные заметки релиза →</span><span class="en">Full release notes →</span></a></p>
+  </div>
+</section>
 
 <section id="idea">
   <div class="wrap">
@@ -121,7 +138,7 @@
     <div class="grid g2">
       <div class="block"><img class="px" src="assets/img/controller_front_online.png" alt=""><div>
         <h3><span class="ru">Контроллер сети</span><span class="en">Network Controller</span></h3>
-        <p><span class="ru">Сердце сети. Буфер 100 000 FE, приём до 2 000 FE/т. Интерфейс с вкладками: обзор, хранилище, крафт, запас, рецепты (статистика, очередь, правила запаса).</span><span class="en">The heart of the network. 100,000 FE buffer, up to 2,000 FE/t input. GUI tabs for overview, storage, crafting queue, stock rules and recipes.</span></p>
+        <p><span class="ru">Сердце сети. Буфер 100 000 FE, приём до 2 000 FE/т. Интерфейс с вкладками: обзор, склад, крафт, запас, рецепты и журнал событий.</span><span class="en">The heart of the network. 100,000 FE buffer, up to 2,000 FE/t input. GUI tabs for overview, storage, crafting queue, stock rules, recipes and an event journal.</span></p>
       </div></div>
       <div class="block"><img class="px" src="assets/img/drive_front.png" alt=""><div>
         <h3><span class="ru">Накопитель</span><span class="en">Drive</span></h3>
@@ -138,6 +155,10 @@
       <div class="block"><img class="px" src="assets/img/io_bus.png" alt=""><div>
         <h3><span class="ru">I/O-шина</span><span class="en">I/O Bus</span></h3>
         <p><span class="ru">Импорт из соседнего инвентаря в сеть или экспорт с поддержанием нужного количества. 64 предмета за цикл, 9 фильтр-слотов.</span><span class="en">Imports from a neighbouring inventory or exports while keeping a target amount stocked. 64 items per cycle, 9 filter slots.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/energy_port.png" alt=""><div>
+        <h3><span class="ru">Энергоинтерфейс</span><span class="en">Energy Interface</span></h3>
+        <p><span class="ru">Подключается кабелем и заряжает соседние машины с энергобуфером от энергии сети, до 1000 FE/т. Сеть оставляет запас, чтобы машины её не обесточили.</span><span class="en">Connects by cable and charges adjacent machines that have an energy buffer from network power, up to 1000 FE/t. The network keeps a reserve so machines cannot black it out.</span></p>
       </div></div>
       <div class="block"><img class="px" src="assets/img/cable.png" alt=""><div>
         <h3><span class="ru">Кабель</span><span class="en">Cable</span></h3>
@@ -225,8 +246,8 @@
   <div class="wrap">
     <h2>Simple Byte Storage: Scripting <span style="font-size:.9rem;color:var(--muted);font-weight:400">(<span class="ru">необязательный аддон</span><span class="en">optional addon</span>)</span></h2>
     <p class="sub">
-      <span class="ru">Добавляет Логическую шину и Логический терминал: управляйте предметами сети на JavaScript. Скрипт видит соседние инвентари и сеть, работает в песочнице (Rhino, без доступа к Java-классам, с лимитами инструкций и времени).</span>
-      <span class="en">Adds a Logic Bus and a Logic Terminal so you can drive your network with JavaScript. Scripts see adjacent inventories and the network and run in a sandbox (Rhino, no Java class access, instruction and time limits).</span>
+      <span class="ru">Добавляет Логическую шину и Логический терминал: управляйте предметами сети на JavaScript. Скрипт видит соседние инвентари и сеть, умеет планировать крафты, управлять очередью и правилами запаса, пишет в журнал и работает в песочнице (Rhino, без доступа к Java-классам, с лимитами инструкций и времени).</span>
+      <span class="en">Adds a Logic Bus and a Logic Terminal so you can drive your network with JavaScript. Scripts see adjacent inventories and the network, can plan crafts, control the queue and stock rules, write to the journal, and run in a sandbox (Rhino, no Java class access, instruction and time limits).</span>
     </p>
 <pre><code>var chest = side("up");
 function tick() {
@@ -239,7 +260,7 @@ function tick() {
 }</code></pre>
     <p style="color:var(--muted);font-size:.93rem">
       <span class="ru">API:</span><span class="en">API:</span>
-      <code>net.count</code> <code>net.has</code> <code>net.list</code> <code>net.craft</code> <code>side(dir)</code> <code>pull</code> <code>push</code> <code>move</code> <code>log</code>
+      <code>net.count</code> <code>net.craft</code> <code>net.canCraft</code> <code>net.plan</code> <code>net.queue</code> <code>net.energy</code> <code>stock.set</code> <code>recipes.*</code> <code>journal.write</code> <code>alert</code> <code>side(dir)</code> <code>pull</code> <code>push</code> <code>move</code>
     </p>
   </div>
 </section>
@@ -268,8 +289,9 @@ function tick() {
   <div class="wrap">
     <h2><span class="ru">Ссылки</span><span class="en">Links</span></h2>
     <div class="grid g3">
-      <a class="card" href="https://github.com/Karatells/ByteStorage/releases"><h3>Releases</h3><p><span class="ru">Готовые jar-файлы и нотатки релизов.</span><span class="en">Ready-made jars and release notes.</span></p></a>
+      <a class="card" href="https://github.com/Karatells/ByteStorage/releases"><h3>Releases</h3><p><span class="ru">Готовые jar-файлы и заметки релизов.</span><span class="en">Ready-made jars and release notes.</span></p></a>
       <a class="card" href="docs/Home.html"><h3><span class="ru">Документация</span><span class="en">Documentation</span></h3><p><span class="ru">Полная документация по каждому блоку (на английском).</span><span class="en">Full documentation for every block.</span></p></a>
+      <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.2.0.md"><h3><span class="ru">Заметки релиза 1.2.0</span><span class="en">Release notes 1.2.0</span></h3><p><span class="ru">Что нового и известные ограничения.</span><span class="en">What is new and known limitations.</span></p></a>
       <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/CHANGELOG.md"><h3>Changelog</h3><p><span class="ru">История всех изменений.</span><span class="en">History of all changes.</span></p></a>
     </div>
   </div>
@@ -289,7 +311,7 @@ function tick() {
   var root=document.documentElement, btn=document.getElementById('langBtn');
   function set(l){root.setAttribute('data-lang',l);root.lang=l;btn.textContent=l==='ru'?'EN':'RU';try{localStorage.setItem('sbs-lang',l)}catch(e){}}
   var saved=null;try{saved=localStorage.getItem('sbs-lang')}catch(e){}
-  set(saved||((navigator.language||'').toLowerCase().match(/^(ru|uk|be)/)?'ru':'en'));
+  set(saved==='ru'?'ru':'en');
   btn.addEventListener('click',function(){set(root.getAttribute('data-lang')==='ru'?'en':'ru')});
 })();
 </script>

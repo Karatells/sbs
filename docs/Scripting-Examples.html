@@ -271,6 +271,78 @@ function tick() {
   if (ep) ep.push(&quot;minecraft:coal&quot;, 8);
 }
 </code></pre>
+<h2 id="17-journal-note-when-a-resource-runs-low-journal">17. Journal note when a resource runs low (journal)<a class="anchor" href="#17-journal-note-when-a-resource-runs-low-journal" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var warned = false;
+
+function tick() {
+  var iron = net.available(&quot;minecraft:iron_ingot&quot;);   // stored minus reserved
+  if (iron &lt; 64 &amp;&amp; !warned) {
+    journal.warn(&quot;Iron is low: &quot; + iron, &quot;minecraft:iron_ingot&quot;);
+    warned = true;
+  } else if (iron &gt;= 128) {
+    warned = false;
+  }
+}
+</code></pre>
+<h2 id="18-stock-rules-managed-by-a-script-stock">18. Stock rules managed by a script (stock)<a class="anchor" href="#18-stock-rules-managed-by-a-script-stock" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var wanted = {
+  &quot;minecraft:iron_ingot&quot;: 256,
+  &quot;minecraft:redstone&quot;: 128,
+  &quot;minecraft:glass&quot;: 64
+};
+
+function tick() {
+  for (var id in wanted) {
+    stock.set(id, wanted[id]);   // creates the rule, or updates the minimum
+  }
+}
+</code></pre>
+<h2 id="19-save-energy-pause-bulk-orders-when-the-network-is-low-on-power-queue-energy">19. Save energy: pause bulk orders when the network is low on power (queue, energy)<a class="anchor" href="#19-save-energy-pause-bulk-orders-when-the-network-is-low-on-power-queue-energy" title="Permanent link">#</a></h2>
+<pre><code class="language-js">function tick() {
+  var e = net.energy();
+  if (!e) return;
+  var q = net.queue();
+  for (var i = 0; i &lt; q.length; i++) {
+    if (q[i].id === &quot;minecraft:iron_block&quot;) {
+      if (e.percent &lt; 20) net.pause(q[i].id);
+      else if (e.percent &gt; 50) net.resume(q[i].id);
+    }
+  }
+}
+</code></pre>
+<h2 id="20-tell-the-player-why-a-craft-is-impossible-why-alert">20. Tell the player why a craft is impossible (why, alert)<a class="anchor" href="#20-tell-the-player-why-a-craft-is-impossible-why-alert" title="Permanent link">#</a></h2>
+<pre><code class="language-js">function tick() {
+  var why = net.why(&quot;minecraft:piston&quot;, 8);
+  if (why &amp;&amp; why.code === &quot;missing&quot;) {
+    alert(&quot;Piston: missing &quot; + why.count + &quot; x &quot; + why.id);
+  }
+}
+</code></pre>
+<h2 id="21-plan-before-ordering-plan">21. Plan before ordering (plan)<a class="anchor" href="#21-plan-before-ordering-plan" title="Permanent link">#</a></h2>
+<pre><code class="language-js">function tick() {
+  var p = net.plan(&quot;minecraft:hopper&quot;, 4);
+  if (p &amp;&amp; p.ok) {
+    for (var i = 0; i &lt; p.steps.length; i++) log(p.steps[i].id, &quot;x&quot; + p.steps[i].crafts);
+    net.craft(&quot;minecraft:hopper&quot;, 4);
+  }
+}
+</code></pre>
+<h2 id="22-recipe-settings-at-startup-recipes">22. Recipe settings at startup (recipes)<a class="anchor" href="#22-recipe-settings-at-startup-recipes" title="Permanent link">#</a></h2>
+<p>The top level runs once when the script is compiled, so it is a good place for one-time setup.</p>
+<pre><code class="language-js">recipes.block(&quot;minecraft:iron_block&quot;);        // never craft iron blocks automatically
+recipes.prefer(&quot;minecraft:oak_planks&quot;);       // use oak when a recipe accepts any planks
+recipes.skipUnpacking(true);
+
+function tick() {}
+</code></pre>
+<h2 id="23-journal-summary-of-the-order-queue-queue-journal">23. Journal summary of the order queue (queue, journal)<a class="anchor" href="#23-journal-summary-of-the-order-queue-queue-journal" title="Permanent link">#</a></h2>
+<pre><code class="language-js">function tick() {
+  var q = net.queue();
+  var total = 0;
+  for (var i = 0; i &lt; q.length; i++) total += q[i].crafts;
+  if (total &gt; 200) journal.write(&quot;Queue is long: &quot; + total + &quot; crafts&quot;);
+}
+</code></pre>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-Examples.md">docs/wiki/Scripting-Examples.md</a> in the mod repository.</p>

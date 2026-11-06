@@ -160,6 +160,8 @@
 <p>Cables carry the network over distance and cost no energy. Crafting 1 recipe gives 4 cables. Devices that touch each other connect without a cable.</p>
 <h2 id="re-scan-timing">Re-scan timing<a class="anchor" href="#re-scan-timing" title="Permanent link">#</a></h2>
 <p>The network re-scans every 20 ticks. After placing or breaking a block, give it up to a second to join or leave the network.</p>
+<h2 id="energy-interface">Energy Interface<a class="anchor" href="#energy-interface" title="Permanent link">#</a></h2>
+<p>A network block (recipe: Cable + Redstone + Gold Ingot, shapeless) with no GUI. Connect it to the network with cables and place it <strong>next to a machine with an energy buffer</strong>; every few ticks it charges the neighbouring machines with energy from the Controller's buffer (up to 1,000 FE/t per interface, only what the machine accepts). Network blocks next to it are not charged. It costs 1 FE/t of idle energy. The Controller always keeps a reserve (about 40 ticks of the network's own consumption, at least 500 FE) so that powering machines cannot turn the network offline. The Pattern Bus charges its own adjacent machines the same way.</p>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Network-and-Power.md">docs/wiki/Network-and-Power.md</a> in the mod repository.</p>
