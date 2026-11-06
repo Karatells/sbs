@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting — Simple Byte Storage</title>
+<meta name="description" content="Open it. The GUI shows the reason: no card, not enough resources, card busy or too small, network offline or full.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a class="cur" href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="troubleshooting">Troubleshooting<a class="anchor" href="#troubleshooting" title="Permanent link">#</a></h1>
+<h2 id="the-network-doesnt-work">The network doesn't work<a class="anchor" href="#the-network-doesnt-work" title="Permanent link">#</a></h2>
+<ul>
+<li>Is there <strong>exactly one controller</strong>, and is it <strong>powered</strong>? (<code>OFFLINE</code> = no energy, <code>CONFLICT</code> = two controllers.)</li>
+<li>Are all devices <strong>touching</strong> each other or linked by cables? Remember the 1-second re-scan.</li>
+<li>Did you connect through a block that is <em>not</em> a Simple Byte Storage node? Only Simple Byte Storage devices and cables carry the network.</li>
+</ul>
+<h2 id="items-dont-go-into-the-drive">Items don't go into the drive<a class="anchor" href="#items-dont-go-into-the-drive" title="Permanent link">#</a></h2>
+<ul>
+<li>Is a <strong>whitelist</strong> set on the drive? Empty accepts everything.</li>
+<li>Is the network full (<code>used / max bytes</code>)? Add cells.</li>
+<li>A higher-priority drive with a whitelist may be taking the items you expect elsewhere.</li>
+</ul>
+<h2 id="order-button-says-it-cant-craft">Order button says it can't craft<a class="anchor" href="#order-button-says-it-cant-craft" title="Permanent link">#</a></h2>
+<ul>
+<li>Missing base materials — the confirmation window lists them.</li>
+<li><em>No Assembler</em> / <em>no memory card in the Assembler</em>: crafting patterns need an Assembler with a buffer cell.</li>
+<li>Processing patterns need a <a href="Pattern-Bus.html">Pattern Bus</a> that <strong>holds the pattern</strong> and touches a machine.</li>
+</ul>
+<h2 id="assembler-is-stuck">Assembler is stuck<a class="anchor" href="#assembler-is-stuck" title="Permanent link">#</a></h2>
+<p>Open it. The GUI shows the reason: no card, not enough resources, card busy or too small, network offline or full.</p>
+<h2 id="pattern-bus-does-nothing">Pattern Bus does nothing<a class="anchor" href="#pattern-bus-does-nothing" title="Permanent link">#</a></h2>
+<ul>
+<li>Is the machine adjacent on a face with an item handler?</li>
+<li>Is the machine's input full or its output blocked?</li>
+<li>Is the network online and the pattern a <em>Processing</em> pattern?</li>
+</ul>
+<h2 id="wireless-terminal-wont-open">Wireless Terminal won't open<a class="anchor" href="#wireless-terminal-wont-open" title="Permanent link">#</a></h2>
+<p>Check energy (100 FE needed), that the Terminal's chunk is loaded, and that it still exists and is bound.</p>
+<h2 id="logic-bus-shows-error">Logic Bus shows <code>ERROR</code><a class="anchor" href="#logic-bus-shows-error" title="Permanent link">#</a></h2>
+<p>See the table on <a href="Scripting-API.html#errors">Scripting API → Errors</a>. Fix the script, <strong>Save</strong>, then <strong>Run</strong> again. An error always stops the bus.</p>
+<h2 id="logic-bus-is-running-but-nothing-happens">Logic Bus is <code>running</code> but nothing happens<a class="anchor" href="#logic-bus-is-running-but-nothing-happens" title="Permanent link">#</a></h2>
+<ul>
+<li>The network may be offline (the bus idles when offline).</li>
+<li><code>side("…")</code> returned <code>null</code>: wrong direction, or the neighbour has no inventory.</li>
+<li>The interval might be long: check the interval shown in the terminal (the server enforces <code>minInterval</code>).</li>
+<li><code>side(dir, id)</code> returned <code>null</code>: no bus has that ID (case-sensitive), or the buses with that ID have no inventory on that side. Compare with the ID list in the Logic Bus GUI or the terminal, and <code>buses(id)</code>.</li>
+<li>Use <code>log(…)</code> to see what the script sees.</li>
+</ul>
+<h2 id="build-problems">Build problems<a class="anchor" href="#build-problems" title="Permanent link">#</a></h2>
+<p>See <a href="Building-from-Source.html">Building from Source</a>. When opening an issue, attach the Gradle log and the output of <code>latest.log</code>.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Troubleshooting.md">docs/wiki/Troubleshooting.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

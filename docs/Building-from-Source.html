@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building from Source — Simple Byte Storage</title>
+<meta name="description" content="One repository, two Gradle projects:">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a class="cur" href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="building-from-source">Building from Source<a class="anchor" href="#building-from-source" title="Permanent link">#</a></h1>
+<h2 id="requirements">Requirements<a class="anchor" href="#requirements" title="Permanent link">#</a></h2>
+<ul>
+<li>JDK 17</li>
+<li>Internet access for Gradle (Forge/Minecraft dependencies)</li>
+</ul>
+<h2 id="layout">Layout<a class="anchor" href="#layout" title="Permanent link">#</a></h2>
+<p>One repository, two Gradle projects:</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Directory</th>
+<th>Mod id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core mod</td>
+<td>repository root</td>
+<td><code>simple_bytestorage</code></td>
+</tr>
+<tr>
+<td>Scripting addon</td>
+<td><code>scripting/</code></td>
+<td><code>simple_bytestorage_scripting</code></td>
+</tr>
+</tbody>
+</table>
+<p>The addon compiles against the core mod's classes (<code>compileOnly project(':').sourceSets.main.output</code>) and bundles Rhino 1.7.15 into its own jar. The core jar contains no Rhino.</p>
+<h2 id="build">Build<a class="anchor" href="#build" title="Permanent link">#</a></h2>
+<pre><code class="language-bash">./gradlew build --no-daemon
+</code></pre>
+<p>Output (re-obfuscated jars for the game):</p>
+<ul>
+<li><code>build/reobfJar/output.jar</code> — core mod</li>
+<li><code>scripting/build/reobfJar/output.jar</code> — scripting addon</li>
+</ul>
+<p>The files in <code>build/libs/</code> are the dev (deobfuscated) jars.</p>
+<p>To build only the addon: <code>./gradlew :scripting:build</code>.</p>
+<h2 id="versions">Versions<a class="anchor" href="#versions" title="Permanent link">#</a></h2>
+<p>Versions have four parts: <code>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;.&lt;build&gt;</code>, for example <code>1.0.1.1</code>. The version is set in each project's <code>build.gradle</code> and mirrored in each <code>mods.toml</code>. The <strong>fourth number is the build number and is increased before every push</strong>.</p>
+<h2 id="branches-and-releases">Branches and releases<a class="anchor" href="#branches-and-releases" title="Permanent link">#</a></h2>
+<ul>
+<li>Day-to-day development happens on the <strong><code>Development</code></strong> branch; <code>main</code> holds stable code.</li>
+<li>Every push to <code>main</code> or <code>Development</code> builds both jars and uploads them as workflow artifacts. <strong>No GitHub Release is created automatically.</strong></li>
+<li>A release is made only on request: <em>Actions → Release → Run workflow</em> (pick the branch) or by pushing a tag <code>v&lt;version&gt;</code>.</li>
+</ul>
+<h2 id="continuous-integration">Continuous integration<a class="anchor" href="#continuous-integration" title="Permanent link">#</a></h2>
+<p><code>.github/workflows/build.yml</code> builds on every push to <code>main</code> and <code>Development</code> and uploads separate artifacts (<code>simple_bytestorage-mod-jar</code>, <code>simple_bytestorage_scripting-addon-jar</code>, dev jars). <code>.github/workflows/release.yml</code> publishes a GitHub Release, manually only.</p>
+<h2 id="using-the-core-api-from-another-mod">Using the core API from another mod<a class="anchor" href="#using-the-core-api-from-another-mod" title="Permanent link">#</a></h2>
+<p><code>CraftingService.requestCraft(IGrid, ItemStack, int)</code> orders a craft. Nodes implement <code>IGridNode</code>; see <code>Logic Bus</code> in the addon for a complete example. The guide book accepts extra chapters via <code>GuideRegistry.register(...)</code> (see <a href="Guide-Book.html">Guide Book</a>).</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Building-from-Source.md">docs/wiki/Building-from-Source.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

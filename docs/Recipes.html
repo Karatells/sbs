@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recipes — Simple Byte Storage</title>
+<meta name="description" content="I = iron ingot, R = redstone, G = glass pane, D = diamond, C = chest, P = piston, T = crafting table.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a class="cur" href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="recipes">Recipes<a class="anchor" href="#recipes" title="Permanent link">#</a></h1>
+<p><code>I</code> = iron ingot, <code>R</code> = redstone, <code>G</code> = glass pane, <code>D</code> = diamond, <code>C</code> = chest, <code>P</code> = piston, <code>T</code> = crafting table.</p>
+<h2 id="network">Network<a class="anchor" href="#network" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Network Controller</td>
+<td>Shaped: <code>IRI / RDR / IRI</code></td>
+</tr>
+<tr>
+<td>Cable (×4)</td>
+<td>Shaped: <code>I R I</code> (one row)</td>
+</tr>
+<tr>
+<td>Drive</td>
+<td>Shaped: <code>III / ICI / IRI</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="storage-cells">Storage cells<a class="anchor" href="#storage-cells" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1k Cell</td>
+<td>Shaped: <code>GRG / R_R / III</code> (centre empty)</td>
+</tr>
+<tr>
+<td>4k Cell</td>
+<td>Shapeless: 1k Cell + 2 gold ingots + 2 redstone</td>
+</tr>
+<tr>
+<td>16k Cell</td>
+<td>Shapeless: 4k Cell + 2 diamonds + 2 redstone</td>
+</tr>
+<tr>
+<td>64k Cell</td>
+<td>Shapeless: 16k Cell + 2 diamonds + 2 emeralds</td>
+</tr>
+</tbody>
+</table>
+<h2 id="terminals">Terminals<a class="anchor" href="#terminals" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Terminal</td>
+<td>Shaped: <code>IGI / GRG / III</code></td>
+</tr>
+<tr>
+<td>Crafting Terminal</td>
+<td>Shapeless: Terminal + crafting table</td>
+</tr>
+<tr>
+<td>Pattern Terminal</td>
+<td>Shapeless: Terminal + book</td>
+</tr>
+<tr>
+<td>Pattern Encoding Terminal</td>
+<td>Shapeless: Terminal + book + redstone</td>
+</tr>
+<tr>
+<td>Wireless Terminal</td>
+<td>Shapeless: Terminal + ender pearl + diamond + redstone</td>
+</tr>
+<tr>
+<td>Recipe Library</td>
+<td>Shaped: <code>NDN / DSD / NDN</code> (N netherite ingot, D diamond block, S nether star)</td>
+</tr>
+<tr>
+<td>Insurance Card</td>
+<td>Shapeless: Speed Card + totem of undying + ender pearl + diamond</td>
+</tr>
+<tr>
+<td>Tool Card</td>
+<td>Shapeless: Speed Card + iron pickaxe + redstone + diamond</td>
+</tr>
+<tr>
+<td>Macro Card</td>
+<td>Shapeless: Speed Card + repeater + ender pearl + redstone</td>
+</tr>
+<tr>
+<td>Auto-Transfer Card</td>
+<td>Shaped: <code>RER / DCD / RGR</code> (R redstone, E ender pearl, D diamond, C Speed Card, G gold ingot)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="autocrafting">Autocrafting<a class="anchor" href="#autocrafting" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td>Shapeless: paper + redstone + iron nugget</td>
+</tr>
+<tr>
+<td>Assembler</td>
+<td>Shaped: <code>IPI / RTR / III</code></td>
+</tr>
+<tr>
+<td>Speed Card (×2)</td>
+<td>Shapeless: 2 redstone + nether quartz + iron ingot</td>
+</tr>
+<tr>
+<td>Pattern Bus</td>
+<td>Shaped: <code>IRI / RHR / IRI</code> (<code>H</code> = hopper)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="utility">Utility<a class="anchor" href="#utility" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I/O Bus</td>
+<td>Shapeless: Cable + hopper + redstone</td>
+</tr>
+<tr>
+<td>Guide Book</td>
+<td>Shapeless: book + Cable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="scripting-addon">Scripting addon<a class="anchor" href="#scripting-addon" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logic Bus</td>
+<td>Shapeless: I/O Bus + comparator + redstone</td>
+</tr>
+<tr>
+<td>Logic Terminal</td>
+<td>Shapeless: Terminal + comparator + book</td>
+</tr>
+</tbody>
+</table>
+<p>All items are also in the creative tabs (<em>Simple Byte Storage</em> and <em>Simple Byte Storage: Scripting</em>).</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Recipes.md">docs/wiki/Recipes.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

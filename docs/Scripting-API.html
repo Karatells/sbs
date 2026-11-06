@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripting API — Simple Byte Storage</title>
+<meta name="description" content="Scripts are JavaScript (Rhino, interpreter mode). Most of ES5 and a good part of ES6 work (var, function, regular expressions, JSON, Math, arrays, strings). If ">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a class="cur" href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="scripting-api">Scripting API<a class="anchor" href="#scripting-api" title="Permanent link">#</a></h1>
+<p>Scripts are JavaScript (Rhino, interpreter mode). Most of ES5 and a good part of ES6 work (<code>var</code>, <code>function</code>, regular expressions, <code>JSON</code>, <code>Math</code>, arrays, strings). If you hit an unsupported ES6 feature, use the plain ES5 form.</p>
+<p><strong>There is no access to Java.</strong> Scripts can only use the objects documented here.</p>
+<h2 id="conventions">Conventions<a class="anchor" href="#conventions" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Item ids</strong> are strings: <code>"minecraft:iron_ingot"</code>. NBT is ignored (items are matched by type). An unknown id throws <code>unknown item: &lt;id&gt;</code>.</li>
+<li><strong>Counts</strong> are integers. Optional counts default to "as many as possible"; negative or <code>NaN</code> values become <code>0</code>.</li>
+<li>Methods that move items return <strong>how many items were moved</strong>.</li>
+<li>Moving is limited by the per-run budgets (see <a href="Scripting-Administration.html#limits">Administration</a>).</li>
+</ul>
+<h2 id="globals">Globals<a class="anchor" href="#globals" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net</code></td>
+<td>The network (see below).</td>
+</tr>
+<tr>
+<td><code>side(dir)</code></td>
+<td>The inventory next to <strong>this</strong> bus, or <code>null</code>.</td>
+</tr>
+<tr>
+<td><code>side(dir, id)</code></td>
+<td>The inventories next to <strong>every bus with that ID</strong>, as one endpoint, or <code>null</code>.</td>
+</tr>
+<tr>
+<td><code>buses(id)</code></td>
+<td>How many buses of the network have that ID.</td>
+</tr>
+<tr>
+<td><code>busId</code></td>
+<td>The ID of this bus (<code>""</code> if none). Refreshed on every run.</td>
+</tr>
+<tr>
+<td><code>log(...)</code></td>
+<td>Writes a line to the terminal log (16 lines kept, 160 characters each). Arguments are joined by spaces.</td>
+</tr>
+<tr>
+<td><code>time()</code></td>
+<td>Game time in ticks.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="net"><code>net</code><a class="anchor" href="#net" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net.count(id)</code></td>
+<td>number</td>
+<td>Total amount of the item in the network.</td>
+</tr>
+<tr>
+<td><code>net.has(id, n)</code></td>
+<td>boolean</td>
+<td><code>true</code> if at least <code>n</code> (default 1) are stored.</td>
+</tr>
+<tr>
+<td><code>net.list()</code></td>
+<td>array</td>
+<td>Every stack: <code>[{slot, id, count}, …]</code> (max 512 entries).</td>
+</tr>
+<tr>
+<td><code>net.usedBytes()</code></td>
+<td>number</td>
+<td>Bytes in use.</td>
+</tr>
+<tr>
+<td><code>net.freeBytes()</code></td>
+<td>number</td>
+<td>Free bytes.</td>
+</tr>
+<tr>
+<td><code>net.craft(id, n)</code></td>
+<td>number</td>
+<td>Orders autocrafting of <code>n</code> items. Returns the number of <strong>crafts</strong> accepted into queues (0 = no pattern, missing ingredients, or no machine). Needs <a href="Autocrafting.html">Autocrafting</a> to be set up.</td>
+</tr>
+</tbody>
+</table>
+<p>If the bus has no network storage available, methods that need it throw <code>network is offline</code> (which stops the bus).</p>
+<h2 id="sidedir-and-sidedir-id"><code>side(dir)</code> and <code>side(dir, id)</code><a class="anchor" href="#sidedir-and-sidedir-id" title="Permanent link">#</a></h2>
+<p><code>dir</code> is one of <code>"down"</code>, <code>"up"</code>, <code>"north"</code>, <code>"south"</code>, <code>"west"</code>, <code>"east"</code>, relative to the Logic Bus the inventory is read from.</p>
+<ul>
+<li><code>side(dir)</code> — the neighbour of <strong>this</strong> bus on that side.</li>
+<li><code>side(dir, id)</code> — the neighbour on that side of <strong>every Logic Bus in the network whose ID is <code>id</code></strong> (this bus included, if it has that ID). All matching inventories are merged into <strong>one endpoint</strong>: slots are numbered one after another, <code>push</code> fills the inventories in turn (buses are ordered by position), <code>pull</code> and <code>list</code> cover all of them.</li>
+</ul>
+<p>Both return <code>null</code> if no matching inventory exists (no bus has that ID, or nothing with an inventory sits on that side). Network devices (cables, terminals, …) are not inventories.</p>
+<pre><code class="language-js">var own     = side(&quot;up&quot;);               // above this bus
+var furnace = side(&quot;north&quot;, &quot;smelters&quot;); // north of ALL buses called &quot;smelters&quot;
+</code></pre>
+<blockquote>
+<p>The inventory you get is the one the block exposes <strong>to the bus's face</strong>. Machines such as furnaces expose different slots on different faces (for example the top feeds input, the bottom gives output). Place the bus on the face you need.</p>
+</blockquote>
+<h2 id="busesid-and-busid"><code>buses(id)</code> and <code>busId</code><a class="anchor" href="#busesid-and-busid" title="Permanent link">#</a></h2>
+<pre><code class="language-js">log(&quot;I am&quot;, busId || &quot;(no id)&quot;);
+if (buses(&quot;smelters&quot;) === 0) log(&quot;no smelter buses!&quot;);
+</code></pre>
+<p><code>buses(id)</code> is a cheap way to check that a group exists. It counts buses in the script's own network.</p>
+<h3 id="endpoint">Endpoint<a class="anchor" href="#endpoint" title="Permanent link">#</a></h3>
+<p>An endpoint is the same object whether it comes from one bus or from a group.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ep.slots()</code></td>
+<td>number</td>
+<td>Number of slots.</td>
+</tr>
+<tr>
+<td><code>ep.list()</code></td>
+<td>array</td>
+<td>Non-empty slots: <code>[{slot, id, count}, …]</code>.</td>
+</tr>
+<tr>
+<td><code>ep.count(id)</code></td>
+<td>number</td>
+<td>How many of the item the inventory holds.</td>
+</tr>
+<tr>
+<td><code>ep.pull([id], [n])</code></td>
+<td>number</td>
+<td>Inventory → network. <code>id</code> omitted or <code>"*"</code> = any item.</td>
+</tr>
+<tr>
+<td><code>ep.push(id, [n])</code></td>
+<td>number</td>
+<td>Network → inventory. <code>id</code> is required.</td>
+</tr>
+<tr>
+<td><code>ep.move(other, [id], [n])</code></td>
+<td>number</td>
+<td>Inventory → another endpoint (directly, not through the network). <code>other</code> must come from <code>side()</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="budgets-per-run">Budgets per run<a class="anchor" href="#budgets-per-run" title="Permanent link">#</a></h2>
+<p>Every run of <code>tick()</code> gets a fresh budget:</p>
+<ul>
+<li><strong>Instructions</strong> and <strong>wall-clock time</strong></li>
+<li><strong>Items moved</strong></li>
+<li><strong>API calls</strong>: <code>side</code>, <code>buses</code>, <code>net.count/has/list/craft</code>, <code>ep.list/count/pull/push/move</code> each use one call. <code>ep.slots</code>, <code>net.usedBytes</code>, <code>net.freeBytes</code>, <code>log</code>, <code>time</code> are free.</li>
+<li><strong>Craft calls</strong>: at most 4 <code>net.craft</code> calls per run.</li>
+</ul>
+<p>Exceeding a budget stops the bus with an error such as <code>instruction limit exceeded</code>. Items moved are clamped silently; <code>pull</code>/<code>push</code> simply return a smaller number once the item budget is used.</p>
+<h2 id="removed-built-ins">Removed built-ins<a class="anchor" href="#removed-built-ins" title="Permanent link">#</a></h2>
+<p>To avoid one-call memory bombs, <code>String.prototype.repeat</code>, <code>padStart</code>, <code>padEnd</code> and <code>Array.prototype.fill</code> are removed.</p>
+<h2 id="errors">Errors<a class="anchor" href="#errors" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>script must define function tick()</code></td>
+<td>No <code>tick</code> function at top level.</td>
+</tr>
+<tr>
+<td><code>SyntaxError… (line N)</code></td>
+<td>The script doesn't parse.</td>
+</tr>
+<tr>
+<td><code>unknown item: x</code></td>
+<td>Bad item id.</td>
+</tr>
+<tr>
+<td><code>side(): expected down/up/north/south/west/east</code></td>
+<td>Bad direction.</td>
+</tr>
+<tr>
+<td><code>side(...)</code> returns <code>null</code> and later <code>Cannot call method … of null</code></td>
+<td>No bus has that ID, or nothing on that side. Check with <code>buses(id)</code> and <code>if (ep)</code>.</td>
+</tr>
+<tr>
+<td><code>move(): first argument must be an endpoint from side()</code></td>
+<td>Wrong argument.</td>
+</tr>
+<tr>
+<td><code>network is offline</code></td>
+<td>Network lost power or the bus is detached.</td>
+</tr>
+<tr>
+<td><code>net.craft is disabled by the server admin</code></td>
+<td><code>allowCrafting = false</code>.</td>
+</tr>
+<tr>
+<td><code>instruction limit exceeded</code> / <code>time limit exceeded</code></td>
+<td>Script used too much CPU.</td>
+</tr>
+<tr>
+<td><code>API call limit exceeded</code> / <code>craft call limit exceeded</code></td>
+<td>Too many calls in one run.</td>
+</tr>
+</tbody>
+</table>
+<p><code>try</code>/<code>catch</code> can handle ordinary script errors (like a bad item id). Budget violations <strong>cannot</strong> be caught.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-API.md">docs/wiki/Scripting-API.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

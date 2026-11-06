@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Downloads — Simple Byte Storage</title>
+<meta name="description" content="All releases: https://github.com/Karatells/ByteStorage/releases">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a class="cur" href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="downloads">Downloads<a class="anchor" href="#downloads" title="Permanent link">#</a></h1>
+<p><strong>Latest release:</strong> https://github.com/Karatells/ByteStorage/releases/latest
+All releases: https://github.com/Karatells/ByteStorage/releases</p>
+<h2 id="which-file-do-i-need">Which file do I need?<a class="anchor" href="#which-file-do-i-need" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Required?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>simple_bytestorage-&lt;version&gt;.jar</code></td>
+<td><strong>Yes</strong></td>
+<td>The main mod.</td>
+</tr>
+<tr>
+<td><code>simple_bytestorage_scripting-&lt;version&gt;.jar</code></td>
+<td>No</td>
+<td>The scripting addon (Logic Bus + Logic Terminal). Needs the main mod.</td>
+</tr>
+</tbody>
+</table>
+<p>Releases are published only for versions that are announced as releases. Builds of every commit are available only as GitHub Actions artifacts (for testers) and may be unstable.</p>
+<h2 id="requirements">Requirements<a class="anchor" href="#requirements" title="Permanent link">#</a></h2>
+<ul>
+<li>Minecraft <strong>1.20.1</strong></li>
+<li>Forge <strong>47.2.0</strong> or newer</li>
+<li>Java 17</li>
+<li>Optional: JEI (adds the "+" button that fills the Pattern Encoding Terminal)</li>
+</ul>
+<h2 id="installation">Installation<a class="anchor" href="#installation" title="Permanent link">#</a></h2>
+<ol>
+<li>Install Forge for Minecraft 1.20.1.</li>
+<li>Put <code>simple_bytestorage-&lt;version&gt;.jar</code> into the <code>mods</code> folder. Add the scripting jar there too if you want scripting.</li>
+<li>On a server, install the same jars on the server <strong>and</strong> on every client.</li>
+<li>Start the game, then craft the <strong>Guide Book</strong> (book + cable) for an in-game manual.</li>
+</ol>
+<h2 id="updating">Updating<a class="anchor" href="#updating" title="Permanent link">#</a></h2>
+<p>Replace the jar(s) with the newer version. Keep the main mod and the addon on the same version.</p>
+<p>Removing the scripting addon from a world deletes any placed Logic Buses and Logic Terminals.</p>
+<h2 id="versions">Versions<a class="anchor" href="#versions" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0.0</td>
+<td>First stable release.</td>
+</tr>
+</tbody>
+</table>
+<p>Version numbers have four parts (<code>1.0.1.1</code>); the last one is the build number.</p>
+<p>Version numbers have four parts (<code>1.0.1.1</code>); the last one is the build number.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Downloads.md">docs/wiki/Downloads.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

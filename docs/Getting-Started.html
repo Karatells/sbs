@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting Started — Simple Byte Storage</title>
+<meta name="description" content="This page builds a minimal working network.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a class="cur" href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="getting-started">Getting Started<a class="anchor" href="#getting-started" title="Permanent link">#</a></h1>
+<p>This page builds a minimal working network.</p>
+<h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" title="Permanent link">#</a></h2>
+<ul>
+<li>1 <strong>Network Controller</strong></li>
+<li>1 <strong>Drive</strong> and at least one <strong>Storage Cell</strong></li>
+<li>1 <strong>Terminal</strong></li>
+<li>A source of <strong>FE</strong> (Forge Energy) for the controller, from any energy mod</li>
+</ul>
+<p>See <a href="Recipes.html">Recipes</a> for how to craft everything.</p>
+<h2 id="steps">Steps<a class="anchor" href="#steps" title="Permanent link">#</a></h2>
+<ol>
+<li><strong>Place the Network Controller.</strong> It is the heart of the network.</li>
+<li><strong>Power it.</strong> Feed Forge Energy into the controller from any generator or cable of another mod. The controller buffers 100,000 FE and accepts up to 2,000 FE/t.</li>
+<li><strong>Place a Drive touching the controller</strong> (or connect it with <a href="Network-and-Power.html#cable">Cables</a>). Open it and insert Storage Cells (up to 10).</li>
+<li><strong>Place a Terminal touching the network.</strong> Right-click it. You now see the whole pool of items stored in your cells.</li>
+<li>Insert items by Shift-clicking them from your inventory.</li>
+</ol>
+<h2 id="how-blocks-join-the-network">How blocks join the network<a class="anchor" href="#how-blocks-join-the-network" title="Permanent link">#</a></h2>
+<p>Every Simple Byte Storage device is a <em>grid node</em>. Nodes connect to each other by <strong>touching</strong> (face to face), or through <strong>Cables</strong>. Every 20 ticks (1 second) the network is re-scanned starting from the controller (a breadth-first search over adjacent nodes). Anything not reachable from the controller is offline.</p>
+<p>There must be <strong>exactly one controller</strong> per connected network. Two controllers in one network put it into the <code>CONFLICT</code> state.</p>
+<h2 id="where-to-go-next">Where to go next<a class="anchor" href="#where-to-go-next" title="Permanent link">#</a></h2>
+<ul>
+<li>Want automatic crafting? Read <a href="Autocrafting.html">Autocrafting</a>.</li>
+<li>Want items moved automatically between chests and the network? See the <a href="IO-Bus.html">I/O Bus</a>, or the <a href="Scripting-Overview.html">Scripting addon</a> for full control.</li>
+<li>The in-game <a href="Guide-Book.html">Guide Book</a> summarises all of this.</li>
+</ul>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Getting-Started.md">docs/wiki/Getting-Started.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

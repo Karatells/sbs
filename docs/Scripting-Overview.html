@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripting Overview — Simple Byte Storage</title>
+<meta name="description" content="The addon bundles Rhino (a JavaScript engine for Java). Rhino is only inside the addon jar; the core mod never contains it.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a class="cur" href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="scripting-overview">Scripting Overview<a class="anchor" href="#scripting-overview" title="Permanent link">#</a></h1>
+<p><strong>Simple Byte Storage: Scripting</strong> is an <strong>optional addon</strong>, shipped as a separate jar built from the same repository. It requires Simple Byte Storage.</p>
+<ul>
+<li><strong>Not installed</strong> → the Logic Bus and Logic Terminal do not exist in the game at all.</li>
+<li><strong>Installed</strong> → two new blocks, a creative tab, a server config, and new chapters in the <a href="Guide-Book.html">Guide Book</a>.</li>
+</ul>
+<p>The addon bundles <strong>Rhino</strong> (a JavaScript engine for Java). Rhino is <em>only</em> inside the addon jar; the core mod never contains it.</p>
+<h2 id="blocks">Blocks<a class="anchor" href="#blocks" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Block</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Logic Bus</strong></td>
+<td>Runs one JavaScript script. Sees its six neighbouring inventories and the network. Has its own GUI (right-click) where its identifier is set.</td>
+</tr>
+<tr>
+<td><strong>Logic Terminal</strong></td>
+<td>Opens the script editor for every Logic Bus connected to the same network.</td>
+</tr>
+</tbody>
+</table>
+<p>Both are normal network nodes: they must connect to an online controller (touching or via cables).</p>
+<h2 id="workflow">Workflow<a class="anchor" href="#workflow" title="Permanent link">#</a></h2>
+<ol>
+<li>Place the Logic Terminal and one or more Logic Buses on the network.</li>
+<li>Put each Bus next to the inventory (chest, furnace, machine) it should control.</li>
+<li>(Optional) Right-click each Bus and give it an identifier (see <a href="#identifiers">Identifiers</a>).</li>
+<li>Right-click the Terminal. Pick a Bus from the list on the left.</li>
+<li>Write the script in the editor, then press <strong>Save</strong>.</li>
+<li>Press <strong>Run</strong>. The status line and the log below the editor show what happens.</li>
+</ol>
+<p>Buttons:</p>
+<table>
+<thead>
+<tr>
+<th>Button</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Save</td>
+<td>Stores the script on the bus. <strong>Saving stops the bus</strong>, press Run to start it.</td>
+</tr>
+<tr>
+<td>Run / Stop</td>
+<td>Starts or stops the script.</td>
+</tr>
+<tr>
+<td>Reload</td>
+<td>Discards edits and reloads the script stored on the bus.</td>
+</tr>
+<tr>
+<td>− / +</td>
+<td>Changes the run interval by 10 ticks.</td>
+</tr>
+</tbody>
+</table>
+<p>The terminal must be within ~12 blocks of the player for actions to be accepted. If <code>opsOnly</code> is on and you aren't allowed, the terminal is read-only.</p>
+<h2 id="identifiers">Identifiers<a class="anchor" href="#identifiers" title="Permanent link">#</a></h2>
+<p>Every Logic Bus can have an <strong>identifier</strong> (ID). A script always runs on one bus, but with an ID it can reach the inventories next to <strong>other</strong> buses of the same network, selected by name.</p>
+<ul>
+<li>Allowed characters: letters, digits, <code>_</code>, <code>-</code>, <code>.</code>. Maximum 32 characters. Anything else is removed. IDs are case-sensitive. An empty ID means "no ID".</li>
+<li><strong>IDs need not be unique.</strong> Several buses with the same ID form a <strong>group</strong>: <code>side("up", "smelters")</code> returns <strong>one endpoint</strong> that covers the inventories above <em>all</em> buses with the ID <code>smelters</code>.</li>
+<li>A script can only reach buses of <strong>its own network</strong>.</li>
+</ul>
+<h3 id="where-you-set-it-the-logic-bus-gui">Where you set it: the Logic Bus GUI<a class="anchor" href="#where-you-set-it-the-logic-bus-gui" title="Permanent link">#</a></h3>
+<p><strong>Right-click a Logic Bus</strong> to open <em>its own</em> GUI (the script editor is a different screen, the Logic Terminal). The ID belongs to <strong>that one bus</strong>:</p>
+<ul>
+<li><strong>ID of this bus</strong> field with <strong>Set</strong> (assign the typed ID) and <strong>Clear</strong> (remove the ID).</li>
+<li><strong>IDs in network</strong> list: every ID that already exists in this network, with the number of buses using it (<code>x3</code> = three buses). The ID of this bus is highlighted.<ul>
+<li><strong>Click</strong> an ID to copy it into the field.</li>
+<li><strong>Shift + click</strong> assigns it to this bus immediately. This is the fast way to give the same ID to many buses: open a bus, Shift-click the ID, close, next bus.</li>
+</ul>
+</li>
+<li>The status line shows the network state and the script status of this bus.</li>
+</ul>
+<p>Assigning IDs requires edit permission (see <code>opsOnly</code> in <a href="Scripting-Administration.html">Administration</a>).</p>
+<h3 id="in-the-logic-terminal">In the Logic Terminal<a class="anchor" href="#in-the-logic-terminal" title="Permanent link">#</a></h3>
+<p>The Logic Terminal shows the <strong>same list of IDs</strong> on its right-hand side (for convenience while writing scripts). Clicking an ID selects the first bus with that ID. In the bus list on the left, a bus with an ID is shown by its ID (in colour), otherwise by its coordinates; hover a row to see both. IDs are <strong>not</strong> edited in the terminal.</p>
+<p>Changing an ID does not stop the bus and doesn't need a re-save. The script sees the new value on its next run (<code>busId</code> is refreshed every run; <code>side(…, id)</code> looks buses up each call).</p>
+<h2 id="execution-model">Execution model<a class="anchor" href="#execution-model" title="Permanent link">#</a></h2>
+<pre><code class="language-js">// 1. The top level runs ONCE when the bus starts (compile + init).
+var chest = side(&quot;up&quot;);
+var counter = 0;
+
+// 2. tick() runs every &lt;interval&gt; ticks.
+function tick() {
+  counter++;
+}
+</code></pre>
+<ul>
+<li>A script <strong>must define <code>function tick()</code></strong>, otherwise the bus reports an error.</li>
+<li><strong>Global variables persist</strong> between runs, but are reset when the script is saved, the world reloads, or the bus is restarted (the top level runs again).</li>
+<li>The default interval is 20 ticks (1 s). The server enforces a minimum (default 10 ticks); max 1,200.</li>
+<li>A bus runs only while it is <strong>enabled</strong>, its network is <strong>online</strong>, and scripting is <strong>enabled</strong> in the config.</li>
+<li>Any error, or exceeding a limit, <strong>stops the bus</strong>, sets the status to <code>ERROR: &lt;reason&gt;</code> and writes it to the log.</li>
+</ul>
+<h2 id="status-values">Status values<a class="anchor" href="#status-values" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>(empty)</em></td>
+<td>Never started</td>
+</tr>
+<tr>
+<td><code>saved</code></td>
+<td>Script saved, bus stopped</td>
+</tr>
+<tr>
+<td><code>running</code></td>
+<td>Active</td>
+</tr>
+<tr>
+<td><code>stopped</code></td>
+<td>Stopped by the player</td>
+</tr>
+<tr>
+<td><code>ERROR: …</code></td>
+<td>Stopped by an error (syntax error, runtime error, limit exceeded) with line number where available</td>
+</tr>
+</tbody>
+</table>
+<h2 id="persistence">Persistence<a class="anchor" href="#persistence" title="Permanent link">#</a></h2>
+<p>Script text, identifier, enabled flag and interval are stored in the block entity's NBT. Script variables and the log are <strong>not</strong> persisted. After a world restart an enabled bus recompiles and continues.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-Overview.md">docs/wiki/Scripting-Overview.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

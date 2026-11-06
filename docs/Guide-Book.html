@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide Book — Simple Byte Storage</title>
+<meta name="description" content="The Simple Byte Storage Guide is an in-game manual. Craft it with a Book + Cable (shapeless), then right-click.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a class="cur" href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="guide-book">Guide Book<a class="anchor" href="#guide-book" title="Permanent link">#</a></h1>
+<p>The <strong>Simple Byte Storage Guide</strong> is an in-game manual. Craft it with a <strong>Book + Cable</strong> (shapeless), then right-click.</p>
+<ul>
+<li>Chapters on the left, text on the right. Scroll with the mouse wheel, PageUp/PageDown or the arrow keys.</li>
+<li>Available in English, Russian and Ukrainian (follows your game language).</li>
+<li><strong>One book for both mods.</strong> When the Scripting addon is installed, it appends its own chapters (Start, API, Examples, Admin) to the same book. Without the addon, those chapters don't appear.</li>
+</ul>
+<h2 id="for-addon-authors">For addon authors<a class="anchor" href="#for-addon-authors" title="Permanent link">#</a></h2>
+<p>Other mods can add chapters through the client-side registry:</p>
+<pre><code class="language-java">GuideRegistry.register(new GuideRegistry.Chapter(
+        &quot;my_chapter&quot;,          // unique id
+        200,                   // sort order (lower = higher in the list)
+        &quot;guide.mymod.title&quot;,   // lang key for the title
+        &quot;guide.mymod.body&quot;));  // lang key for the body (\n = paragraph, § codes supported)
+</code></pre>
+<p>Call it from <code>FMLClientSetupEvent</code> (inside <code>enqueueWork</code>).</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Guide-Book.md">docs/wiki/Guide-Book.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

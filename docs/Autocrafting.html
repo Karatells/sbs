@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autocrafting — Simple Byte Storage</title>
+<meta name="description" content="Simple Byte Storage has two kinds of crafts:">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a class="cur" href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="autocrafting">Autocrafting<a class="anchor" href="#autocrafting" title="Permanent link">#</a></h1>
+<p>Simple Byte Storage has two kinds of crafts:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Where it runs</th>
+<th>Pattern lives in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Crafting</strong> (crafting table recipes)</td>
+<td><a href="Assembler.html">Assembler</a></td>
+<td>Global network pattern list</td>
+</tr>
+<tr>
+<td><strong>Processing</strong> (furnaces, other machines)</td>
+<td><a href="Pattern-Bus.html">Pattern Bus</a> + a machine</td>
+<td>The Pattern Bus</td>
+</tr>
+</tbody>
+</table>
+<h2 id="patterns">Patterns<a class="anchor" href="#patterns" title="Permanent link">#</a></h2>
+<p>A <strong>Pattern</strong> item is blank or encoded. An encoded pattern stores its recipe in NBT and can be overwritten.</p>
+<h2 id="pattern-encoding-terminal">Pattern Encoding Terminal<a class="anchor" href="#pattern-encoding-terminal" title="Permanent link">#</a></h2>
+<ol>
+<li>Choose the mode with the mode button:<ul>
+<li><strong>Crafting</strong> — click items onto the 3×3 grid (they are <em>not</em> consumed). The vanilla recipe decides the result. Press <em>Encode</em>: the recipe is added straight to the network's global list. <strong>No Pattern item is needed.</strong></li>
+<li><strong>Processing</strong> — insert a blank Pattern, then set the inputs and the result by hand (ghost slots, with counts). The pattern is a physical item: put it into a <a href="Pattern-Bus.html">Pattern Bus</a>. It is <em>not</em> added to the global list.</li>
+</ul>
+</li>
+<li>Patterns are only needed for processing crafts (furnaces, crushers and other machines).</li>
+<li><em>Clear</em> empties the grid.</li>
+</ol>
+<p>With <strong>JEI</strong>, the "+" button on a recipe fills the encoder for you (see <a href="JEI-Integration.html">JEI Integration</a>).</p>
+<h2 id="ordering-from-any-terminal">Ordering from any terminal<a class="anchor" href="#ordering-from-any-terminal" title="Permanent link">#</a></h2>
+<p>You do not have to open the Pattern Terminal to order a craft: in the Terminal and the Crafting Terminal, click a dimmed (craftable, out of stock) item or Ctrl + click / middle-click an item in stock to open an order dialog. See <a href="Terminals.html">Terminals</a>.</p>
+<h2 id="pattern-terminal">Pattern Terminal<a class="anchor" href="#pattern-terminal" title="Permanent link">#</a></h2>
+<p>Shows the list of every pattern available to the network (global patterns plus patterns inside Pattern Buss).</p>
+<ul>
+<li><strong>Search</strong> and an <strong>All / Ready</strong> filter ("Ready" = all ingredients available).</li>
+<li>Hover a pattern to see each ingredient marked ✓ (in the network) or ✗ (missing). The list row also shows <em>Missing: <item></em>.</li>
+<li><strong>Order</strong>: left-click = 1 craft, Shift = 10, Ctrl = 64.</li>
+<li>A <strong>confirmation window</strong> shows the full plan, including sub-crafts and anything missing, before you confirm.</li>
+<li>The <strong>Queue tab</strong> lists running orders per pattern, how many machines work on them, and lets you <strong>cancel</strong>.</li>
+<li>Shift + left-click on × removes a global pattern.</li>
+</ul>
+<h2 id="sub-crafts">Sub-crafts<a class="anchor" href="#sub-crafts" title="Permanent link">#</a></h2>
+<p>If an ingredient is missing but another pattern in the network produces it, the planner schedules that craft first (recursively).</p>
+<table>
+<thead>
+<tr>
+<th>Limit</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Max sub-craft depth</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Max crafts in one order</td>
+<td>1,024</td>
+</tr>
+</tbody>
+</table>
+<p>Steps are ordered with dependencies first. If a plan has missing base materials the confirmation window lists them and the order can't be placed.</p>
+<h2 id="requirements">Requirements<a class="anchor" href="#requirements" title="Permanent link">#</a></h2>
+<ul>
+<li>Network online.</li>
+<li>For crafting patterns: at least one <a href="Assembler.html">Assembler</a> with a buffer cell.</li>
+<li>For processing patterns: a <a href="Pattern-Bus.html">Pattern Bus</a> holding the pattern, touching a machine.</li>
+</ul>
+<h2 id="learning-mode-pattern-bus">Learning mode (Pattern Bus)<a class="anchor" href="#learning-mode-pattern-bus" title="Permanent link">#</a></h2>
+<p>Instead of encoding a processing pattern by hand you can let the bus <strong>record</strong> it:
+1. Place the machine next to the Pattern Bus and make sure the bus has a free pattern slot.
+2. Open the bus and press <strong>Record a recipe</strong>. (Put fuel/energy into the machine first, otherwise it is recorded as an ingredient.)
+3. Put the ingredients into the machine yourself, once, and let it finish one cycle.
+4. When the result appears, the bus writes a processing pattern (what the machine consumed → what it produced) into a free slot. No blank pattern is needed.</p>
+<p>While recording the bus does not move items by itself. A pattern holds a single output item; if the machine makes several products, the largest gain is used. Machines that take all ingredients at once and machines that consume one item per cycle both work, because the pattern is based on what disappeared when the result appeared.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Autocrafting.md">docs/wiki/Autocrafting.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

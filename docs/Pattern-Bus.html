@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pattern Bus — Simple Byte Storage</title>
+<meta name="description" content="Runs processing patterns: crafts that happen in a machine such as a furnace, smoker, or any mod machine that exposes an item handler.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a class="cur" href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="pattern-bus">Pattern Bus<a class="anchor" href="#pattern-bus" title="Permanent link">#</a></h1>
+<p>Runs <strong>processing</strong> patterns: crafts that happen in a machine such as a furnace, smoker, or any mod machine that exposes an item handler.</p>
+<h2 id="setup">Setup<a class="anchor" href="#setup" title="Permanent link">#</a></h2>
+<ol>
+<li>Place the Pattern Bus <strong>touching the machine</strong> and connect it to the network.</li>
+<li>Put encoded <strong>processing</strong> patterns (made in the <a href="Autocrafting.html#pattern-encoding-terminal">Encoding Terminal</a>) into its <strong>9 slots</strong>.</li>
+<li>Order the craft from the <a href="Autocrafting.html#pattern-terminal">Pattern Terminal</a>.</li>
+</ol>
+<h2 id="what-it-does">What it does<a class="anchor" href="#what-it-does" title="Permanent link">#</a></h2>
+<p>For each craft the provider takes the inputs from the network, pushes them into the adjacent machine, and later extracts the expected outputs from <strong>any side</strong> of the machine and sends them to the network.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern slots</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Cycle</td>
+<td>every 10 ticks</td>
+</tr>
+<tr>
+<td>Pushes per cycle</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Jobs in flight</td>
+<td>up to 256 (in practice limited by what the machine accepts)</td>
+</tr>
+<tr>
+<td>Queue size</td>
+<td>1,024 crafts</td>
+</tr>
+</tbody>
+</table>
+<p>If several providers hold the same pattern, orders are balanced to the one with the least pending crafts.</p>
+<h2 id="tips">Tips<a class="anchor" href="#tips" title="Permanent link">#</a></h2>
+<ul>
+<li>The machine must expose an item handler (inventory capability) on the face that touches the bus.</li>
+<li><strong>Mind the face.</strong> Many machines expose different slots on different faces. A vanilla furnace takes input from the <strong>top</strong>, outputs from the bottom, and accepts only fuel from the sides, so put the Pattern Bus on top of a furnace.</li>
+<li>Make sure the machine is able to receive all inputs; a full machine slows the queue.</li>
+<li>The queue and its state are visible in the bus's GUI and in the Pattern Terminal's Queue tab.</li>
+</ul>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Pattern-Bus.md">docs/wiki/Pattern-Bus.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Network and Power — Simple Byte Storage</title>
+<meta name="description" content="The controller coordinates the network and supplies its power.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a class="cur" href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="network-and-power">Network and Power<a class="anchor" href="#network-and-power" title="Permanent link">#</a></h1>
+<h2 id="network-controller">Network Controller<a class="anchor" href="#network-controller" title="Permanent link">#</a></h2>
+<p>The controller coordinates the network and supplies its power.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Energy buffer</td>
+<td>100,000 FE</td>
+</tr>
+<tr>
+<td>Max receive</td>
+<td>2,000 FE/t</td>
+</tr>
+<tr>
+<td>Own consumption</td>
+<td>10 FE/t</td>
+</tr>
+</tbody>
+</table>
+<h3 id="grid-states">Grid states<a class="anchor" href="#grid-states" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ONLINE</code></td>
+<td>Network active, power stable. The controller face shows a bright cyan core.</td>
+</tr>
+<tr>
+<td><code>OFFLINE</code></td>
+<td>Not enough power. Devices stop working.</td>
+</tr>
+<tr>
+<td><code>CONFLICT</code></td>
+<td>More than one controller in the same connected network. Remove one.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="idle-energy-consumption">Idle energy consumption<a class="anchor" href="#idle-energy-consumption" title="Permanent link">#</a></h2>
+<p>Every device draws a small amount of FE per tick from the network.</p>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>FE/t</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Network Controller</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Terminal</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Crafting Terminal</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Pattern Terminal</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Pattern Encoding Terminal</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Assembler</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Pattern Bus</td>
+<td>2</td>
+</tr>
+<tr>
+<td>I/O Bus</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Drive</td>
+<td>2 + per-cell cost (1k: 1, 4k: 2, 16k: 3, 64k: 4)</td>
+</tr>
+<tr>
+<td>Cable</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Logic Bus <em>(addon)</em></td>
+<td>4 while running, 1 otherwise</td>
+</tr>
+<tr>
+<td>Logic Terminal <em>(addon)</em></td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cable">Cable<a class="anchor" href="#cable" title="Permanent link">#</a></h2>
+<p>Cables carry the network over distance and cost no energy. Crafting 1 recipe gives 4 cables. Devices that touch each other connect without a cable.</p>
+<h2 id="re-scan-timing">Re-scan timing<a class="anchor" href="#re-scan-timing" title="Permanent link">#</a></h2>
+<p>The network re-scans every 20 ticks. After placing or breaking a block, give it up to a second to join or leave the network.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Network-and-Power.md">docs/wiki/Network-and-Power.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

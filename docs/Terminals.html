@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminals — Simple Byte Storage</title>
+<meta name="description" content="Browse and withdraw items from the whole network.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a class="cur" href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="terminals">Terminals<a class="anchor" href="#terminals" title="Permanent link">#</a></h1>
+<h2 id="terminal">Terminal<a class="anchor" href="#terminal" title="Permanent link">#</a></h2>
+<p>Browse and withdraw items from the whole network.</p>
+<ul>
+<li><strong>Search box</strong> for quick filtering.</li>
+<li><strong>Scrolling</strong> through large item lists.</li>
+<li><strong>Byte usage bar</strong>: used / maximum bytes.</li>
+<li><strong>Shift-click</strong> moves whole stacks; stack splitting is supported.</li>
+<li>Insert items by Shift-clicking them from your inventory or clicking with a stack on the cursor.</li>
+<li><strong>Sorting</strong> (two buttons to the right of the window, shared by all terminals): by <em>name</em> or <em>count</em>, ascending (A-Z / 1-9) or descending (Z-A / 9-1).</li>
+<li><strong>Autocrafting from any terminal</strong> (Terminal and Crafting Terminal): items the network can craft but does not have appear dimmed, listed after everything that is in stock, with the word <strong>Craft</strong> instead of a count — click one to open the order dialog. For items in stock, <strong>Ctrl + click</strong> (or middle click) does the same. The window is the same as in the Pattern Terminal: it lists everything that will be crafted (sub-crafts included) and what is missing; pick an amount (±1/±10/±64) and press <em>Start</em>.</li>
+</ul>
+<h2 id="search-and-favorites">Search and favorites<a class="anchor" href="#search-and-favorites" title="Permanent link">#</a></h2>
+<p>The search box takes several words; <strong>all</strong> must match:</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>iron</code></td>
+<td>part of the item name</td>
+</tr>
+<tr>
+<td><code>@mod</code></td>
+<td>the item's mod id contains <code>mod</code></td>
+</tr>
+<tr>
+<td><code>#tag</code></td>
+<td>the item has a tag containing <code>tag</code> (e.g. <code>#ingots</code>)</td>
+</tr>
+<tr>
+<td><code>&gt;100</code> <code>&lt;100</code> <code>=100</code></td>
+<td>stored amount (craft-only items count as 0)</td>
+</tr>
+<tr>
+<td><code>$craftable</code></td>
+<td>the network can craft it</td>
+</tr>
+<tr>
+<td><code>$stock</code></td>
+<td>it is stored in the network</td>
+</tr>
+<tr>
+<td><code>$fav</code></td>
+<td>favorites only</td>
+</tr>
+</tbody>
+</table>
+<p>Example: <code>@minecraft #ingots &gt;64</code>. <strong>Alt + click</strong> an item to mark it as a favorite (gold corner); favorites are listed first inside their group. Favorites are stored on your computer (<code>config/simple_bytestorage_favorites.txt</code>). The list order is always: items in stock first, then craft-only items.</p>
+<h2 id="crafting-terminal">Crafting Terminal<a class="anchor" href="#crafting-terminal" title="Permanent link">#</a></h2>
+<p>A Terminal with a <strong>3×3 crafting grid</strong> and a result slot.</p>
+<ul>
+<li>Results follow the standard vanilla crafting recipes.</li>
+<li>Ingredients are taken from the network's virtual pool (1 item = 1 byte).</li>
+<li>The crafted result goes straight to your inventory.</li>
+</ul>
+<h2 id="pattern-terminal-and-pattern-encoding-terminal">Pattern Terminal and Pattern Encoding Terminal<a class="anchor" href="#pattern-terminal-and-pattern-encoding-terminal" title="Permanent link">#</a></h2>
+<p>These belong to autocrafting — see <a href="Autocrafting.html">Autocrafting</a>.</p>
+<h2 id="wireless-terminal">Wireless Terminal<a class="anchor" href="#wireless-terminal" title="Permanent link">#</a></h2>
+<p>Open a Terminal remotely — see <a href="Wireless-Terminal.html">Wireless Terminal</a>.</p>
+<h2 id="power">Power<a class="anchor" href="#power" title="Permanent link">#</a></h2>
+<p>Terminals need the network to be online (see <a href="Network-and-Power.html">Network and Power</a>).</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Terminals.md">docs/wiki/Terminals.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

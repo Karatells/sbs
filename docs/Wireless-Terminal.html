@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireless Terminal — Simple Byte Storage</title>
+<meta name="description" content="A handheld item that opens the network from a distance and, with an upgrade, moves items for you automatically.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a class="cur" href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="wireless-terminal">Wireless Terminal<a class="anchor" href="#wireless-terminal" title="Permanent link">#</a></h1>
+<p>A handheld item that opens the network from a distance and, with an upgrade, moves items for you automatically.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Energy capacity</td>
+<td>20,000 FE (item energy)</td>
+</tr>
+<tr>
+<td>Cost per opening</td>
+<td>100 FE</td>
+</tr>
+<tr>
+<td>Charging</td>
+<td>Automatically from the <a href="Network-Controller.html">Network Controller</a> while it sits in the controller's slot (50 FE/t)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usage">Usage<a class="anchor" href="#usage" title="Permanent link">#</a></h2>
+<ol>
+<li><strong>Bind and charge</strong>: put the terminal into the slot of the <a href="Network-Controller.html">Network Controller</a> GUI. It binds to that network and charges from the controller's buffer. Take it out when done.</li>
+<li><strong>Open</strong>: right-click in the air.</li>
+<li><strong>Settings</strong>: Shift + right-click in the air.</li>
+</ol>
+<p>The item shows its energy as a durability bar and in the tooltip. It also exposes the standard Forge item energy capability.</p>
+<h2 id="limits-and-messages">Limits and messages<a class="anchor" href="#limits-and-messages" title="Permanent link">#</a></h2>
+<ul>
+<li>The controller's <strong>chunk must be loaded</strong> (<code>Terminal is out of reach</code>).</li>
+<li>The network must be online (<code>The network is offline</code>).</li>
+<li>You need at least 100 FE (<code>Not enough energy: charge it in the Network Controller</code>).</li>
+<li>Not bound yet: <code>Not bound: place it in the Network Controller's slot</code>.</li>
+</ul>
+<h2 id="settings-and-upgrades">Settings and upgrades<a class="anchor" href="#settings-and-upgrades" title="Permanent link">#</a></h2>
+<p>Shift + right-click the terminal in the air to open its settings. There are three tabs:</p>
+<ul>
+<li><strong>Upgrades</strong> — 8 slots for cards; each kind of card can be installed once.</li>
+<li><strong>Transfer</strong> — Restock / Pickup switches, Whitelist / Blacklist, and an 18-slot ghost filter (click with an item to set, click empty-handed or Shift-click to clear; empty filter = everything). Works with the Auto-Transfer Card.</li>
+<li><strong>Macro</strong> — the macro name used by the Macro Card.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Effect</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Auto-Transfer Card</strong></td>
+<td><em>Restock</em>: the stack in your main/off hand is topped up from the network. <em>Pickup</em>: picked-up items go into the network (whatever does not fit stays a normal pickup). Filtered.</td>
+<td>2 FE per item</td>
+</tr>
+<tr>
+<td><strong>Insurance Card</strong></td>
+<td>When you die, the items you would drop are moved into the network (as far as the terminal's energy allows; the terminal itself too). When you respawn, they are taken back out; armor is re-equipped. If the network is unreachable they wait in it.</td>
+<td>2 FE per item</td>
+</tr>
+<tr>
+<td><strong>Tool Card</strong></td>
+<td>When a tool breaks, the same kind of item is taken from the network into the same hand.</td>
+<td>20 FE</td>
+</tr>
+<tr>
+<td><strong>Macro Card</strong></td>
+<td>A hotkey (default <strong>V</strong>, see Controls) runs once every Logic Bus whose identifier equals the macro name. Needs the <a href="Scripting-Overview.html">Scripting addon</a>.</td>
+<td>50 FE</td>
+</tr>
+</tbody>
+</table>
+<p>The terminal must be bound and anywhere in your inventory for cards to work. Recipes are in <a href="Recipes.html">Recipes</a>.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Wireless-Terminal.md">docs/wiki/Wireless-Terminal.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

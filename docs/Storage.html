@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storage — Simple Byte Storage</title>
+<meta name="description" content="A Drive holds up to 10 storage cells. The contents of all cells in all drives are merged into one virtual item pool for the whole network.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a class="cur" href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="storage">Storage<a class="anchor" href="#storage" title="Permanent link">#</a></h1>
+<h2 id="drive">Drive<a class="anchor" href="#drive" title="Permanent link">#</a></h2>
+<p>A <strong>Drive</strong> holds up to <strong>10 storage cells</strong>. The contents of all cells in all drives are merged into one virtual item pool for the whole network.</p>
+<h3 id="drive-settings">Drive settings<a class="anchor" href="#drive-settings" title="Permanent link">#</a></h3>
+<ul>
+<li><strong>Priority</strong> — when inserting, higher-priority drives are filled first. Hold Shift while changing it to step by ±10.</li>
+<li><strong>Whitelist</strong> (9 filter slots) — only items in the list are accepted. <strong>Empty = accepts everything.</strong></li>
+</ul>
+<p>Combine priority and whitelist to sort items into dedicated drives (for example, a whitelisted drive for ores with a high priority).</p>
+<h2 id="storage-cells">Storage Cells<a class="anchor" href="#storage-cells" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Cell</th>
+<th>Capacity (bytes = items)</th>
+<th>Crystal colour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1k</td>
+<td>1,024</td>
+<td>Green</td>
+</tr>
+<tr>
+<td>4k</td>
+<td>4,096</td>
+<td>Blue</td>
+</tr>
+<tr>
+<td>16k</td>
+<td>16,384</td>
+<td>Purple</td>
+</tr>
+<tr>
+<td>64k</td>
+<td>65,536</td>
+<td>Orange</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1 item = 1 byte</strong>, regardless of the item type or stack size. A stack of 64 cobblestone costs 64 bytes, and so does 64 different single items.</p>
+<p>Cell upgrades are crafted by combining the lower tier with extra materials — see <a href="Recipes.html#storage-cells">Recipes</a>.</p>
+<h2 id="cells-as-assembler-buffers">Cells as Assembler buffers<a class="anchor" href="#cells-as-assembler-buffers" title="Permanent link">#</a></h2>
+<p>Any storage cell can also be used as the buffer of an <a href="Assembler.html">Assembler</a>.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Storage.md">docs/wiki/Storage.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

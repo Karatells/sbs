@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assembler — Simple Byte Storage</title>
+<meta name="description" content="Executes crafting-table patterns for the network.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a class="cur" href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="assembler">Assembler<a class="anchor" href="#assembler" title="Permanent link">#</a></h1>
+<p>Executes crafting-table patterns for the network.</p>
+<h2 id="how-it-works">How it works<a class="anchor" href="#how-it-works" title="Permanent link">#</a></h2>
+<ol>
+<li>Insert any <strong>storage cell</strong> into the Assembler as its <strong>buffer</strong>.</li>
+<li>On an order, the Assembler copies the needed ingredients from the network into the buffer.</li>
+<li>It crafts, then returns the result (and any leftovers, such as buckets) to the network.</li>
+</ol>
+<p>All blocks must be connected to an online controller.</p>
+<h2 id="speed-cards">Speed cards<a class="anchor" href="#speed-cards" title="Permanent link">#</a></h2>
+<p>The Assembler has <strong>4 upgrade slots</strong> for <strong>Speed Cards</strong>.</p>
+<pre><code>ticks per craft = max(4, 40 / (1 + number_of_cards))
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Cards</th>
+<th>Ticks per craft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>40</td>
+</tr>
+<tr>
+<td>1</td>
+<td>20</td>
+</tr>
+<tr>
+<td>2</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>10</td>
+</tr>
+<tr>
+<td>4</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<h2 id="queue">Queue<a class="anchor" href="#queue" title="Permanent link">#</a></h2>
+<p>Each Assembler holds up to <strong>9,999</strong> pending crafts. When several Assemblers are available, new crafts are spread by the lowest current load.</p>
+<h2 id="status-messages">Status messages<a class="anchor" href="#status-messages" title="Permanent link">#</a></h2>
+<p>When it is waiting, the GUI says why:</p>
+<ul>
+<li>No buffer card</li>
+<li>Not enough resources in the network</li>
+<li>Buffer cell busy or too small</li>
+<li>Network offline</li>
+<li>Network full (cannot return results)</li>
+</ul>
+<p>If an order can't be routed, the Pattern Terminal tells you: <em>no Assembler</em> or <em>no memory card in the Assembler</em>.</p>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Assembler.md">docs/wiki/Assembler.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

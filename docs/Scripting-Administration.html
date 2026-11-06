@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripting Administration — Simple Byte Storage</title>
+<meta name="description" content="config/simple_bytestorage_scripting-common.toml, section scripting. The server&#x27;s values are what counts.">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a class="cur" href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="scripting-administration">Scripting Administration<a class="anchor" href="#scripting-administration" title="Permanent link">#</a></h1>
+<h2 id="config-file">Config file<a class="anchor" href="#config-file" title="Permanent link">#</a></h2>
+<p><code>config/simple_bytestorage_scripting-common.toml</code>, section <code>[scripting]</code>. The <strong>server's</strong> values are what counts.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Range</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td><code>true</code></td>
+<td></td>
+<td>Master switch. <code>false</code> stops every Logic Bus (the blocks stay in the world).</td>
+</tr>
+<tr>
+<td><code>opsOnly</code></td>
+<td><code>false</code></td>
+<td></td>
+<td><code>true</code> = only operators (permission level 2+) and the owner of a single-player/LAN world can save, run, stop or change the interval. Everyone else gets a read-only terminal.</td>
+</tr>
+<tr>
+<td><code>allowCrafting</code></td>
+<td><code>true</code></td>
+<td></td>
+<td>Allows <code>net.craft</code>.</td>
+</tr>
+<tr>
+<td><code>maxScriptLength</code></td>
+<td><code>8000</code></td>
+<td>100 – 30000</td>
+<td>Characters per script.</td>
+</tr>
+<tr>
+<td><code>minInterval</code></td>
+<td><code>10</code></td>
+<td>1 – 1200</td>
+<td>Minimum ticks between runs.</td>
+</tr>
+<tr>
+<td><code>maxInstructionsPerRun</code></td>
+<td><code>50000</code></td>
+<td>1000 – 5,000,000</td>
+<td>JS instruction budget per run.</td>
+</tr>
+<tr>
+<td><code>maxMillisPerRun</code></td>
+<td><code>20</code></td>
+<td>1 – 500</td>
+<td>Wall-clock budget per run.</td>
+</tr>
+<tr>
+<td><code>maxItemsPerRun</code></td>
+<td><code>256</code></td>
+<td>1 – 100,000</td>
+<td>Items a run may move.</td>
+</tr>
+<tr>
+<td><code>maxApiCallsPerRun</code></td>
+<td><code>200</code></td>
+<td>10 – 10,000</td>
+<td>API calls per run.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="limits"></a></p>
+<h3 id="limits">Limits<a class="anchor" href="#limits" title="Permanent link">#</a></h3>
+<p>All "per run" values apply to <strong>each</strong> run of <code>tick()</code> of <strong>each</strong> bus. A violation stops that bus with an error shown in the terminal. Buses run on the <strong>server thread</strong>, so keep <code>maxMillisPerRun</code> small on busy servers; total cost scales with the number of running buses.</p>
+<h2 id="security-model">Security model<a class="anchor" href="#security-model" title="Permanent link">#</a></h2>
+<p>What the sandbox does:</p>
+<ul>
+<li>Runs in Rhino's <strong>interpreter</strong> mode.</li>
+<li><strong>No Java access</strong>: a deny-all class filter is set, no <code>Packages</code>/<code>java</code> globals, and the API returns only plain JS values.</li>
+<li><strong>No</strong> file, network, or command access.</li>
+<li>Limits for instructions, time, items, API calls, interpreter stack depth, and craft orders.</li>
+<li>A script can only look up buses of <strong>its own network</strong> (<code>side(dir, id)</code>, <code>buses(id)</code>); it cannot reach other networks.</li>
+<li>Identifiers are sanitised on the server (letters, digits, <code>_ - .</code>, max 32).</li>
+<li>Budget errors derive from <code>Error</code>, so scripts cannot swallow them with <code>try</code>/<code>catch</code>.</li>
+<li>Known memory-amplifying built-ins (<code>String.prototype.repeat</code>, <code>padStart</code>, <code>padEnd</code>, <code>Array.prototype.fill</code>) are removed.</li>
+</ul>
+<p>What it does <strong>not</strong> do:</p>
+<ul>
+<li><strong>There is no memory limit.</strong> A malicious script can still allocate a lot of memory with ordinary code (for example by repeatedly doubling a string or growing an array) within the instruction budget.</li>
+<li>Any player with access to a Logic Terminal can <strong>read</strong> scripts, even in read-only mode.</li>
+</ul>
+<p><strong>Recommendation for public servers:</strong> set <code>opsOnly = true</code>, or don't install the addon at all.</p>
+<h2 id="permissions-summary">Permissions summary<a class="anchor" href="#permissions-summary" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th><code>opsOnly = false</code></th>
+<th><code>opsOnly = true</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read scripts and logs</td>
+<td>anyone using the terminal</td>
+<td>anyone using the terminal</td>
+</tr>
+<tr>
+<td>Save / run / stop / interval (terminal) and assign IDs (Logic Bus GUI)</td>
+<td>anyone</td>
+<td>operators (level 2+) and the single-player owner</td>
+</tr>
+</tbody>
+</table>
+<p>The server also verifies that the player is within ~12 blocks of the terminal and that the bus belongs to the terminal's network.</p>
+<h2 id="not-installing-removing-the-addon">Not installing / removing the addon<a class="anchor" href="#not-installing-removing-the-addon" title="Permanent link">#</a></h2>
+<ul>
+<li>Without the addon jar, the blocks and items simply don't exist, and nothing else changes.</li>
+<li>If you <strong>remove</strong> the addon from a world that already has Logic Buses, Forge will warn about missing registry entries and those blocks disappear. Remove them first if you care about the contents.</li>
+<li>Clients need the addon too (it adds blocks and a GUI); the network channel versions must match (the addon's network protocol changes between versions, so a client with a different addon version can't join).</li>
+</ul>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-Administration.md">docs/wiki/Scripting-Administration.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simple Byte Storage — Minecraft 1.20.1 Forge</title>
+<meta name="description" content="Simple Byte Storage — мод для Minecraft 1.20.1 (Forge): система хранения и автокрафта, где 1 предмет = 1 байт, а типов предметов можно хранить сколько угодно.">
+<meta property="og:title" content="Simple Byte Storage">
+<meta property="og:description" content="Хранение и автокрафт для Minecraft 1.20.1 (Forge). 1 предмет = 1 байт, без лимита типов.">
+<link rel="icon" href="assets/img/cell_16k.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><img class="px" src="assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="#idea"><span class="ru">Идея</span><span class="en">Idea</span></a>
+      <a href="#storage"><span class="ru">Хранение</span><span class="en">Storage</span></a>
+      <a href="#blocks"><span class="ru">Блоки</span><span class="en">Blocks</span></a>
+      <a href="#autocraft"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></a>
+      <a href="#wireless"><span class="ru">Беспроводной</span><span class="en">Wireless</span></a>
+      <a href="#scripting">Scripting</a>
+      <a href="#install"><span class="ru">Установка</span><span class="en">Install</span></a>
+    </nav>
+    <button class="lang" id="langBtn" aria-label="Language">EN</button>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <div class="wrap">
+    <div class="logo">
+      <img class="px" src="assets/img/cell_1k.png" alt="">
+      <img class="px" src="assets/img/cell_4k.png" alt="">
+      <img class="px" src="assets/img/cell_16k.png" alt="">
+      <img class="px" src="assets/img/cell_64k.png" alt="">
+    </div>
+    <h1>Simple <span>Byte</span> Storage</h1>
+    <p class="lead">
+      <span class="ru">Система хранения и автокрафта для Minecraft. Один предмет — один байт, и никакого лимита на количество типов предметов.</span>
+      <span class="en">A storage and autocrafting mod for Minecraft. One item is one byte, and there is no limit on the number of item types.</span>
+    </p>
+    <div class="badges">
+      <span class="badge">Minecraft <b>1.20.1</b></span>
+      <span class="badge">Forge <b>47.2.0+</b></span>
+      <span class="badge">Java <b>17</b></span>
+      <span class="badge"><span class="ru">Версия</span><span class="en">Version</span> <b>1.1.3</b></span>
+      <span class="badge">MIT</span>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/Karatells/ByteStorage/releases/latest"><span class="ru">⬇ Скачать</span><span class="en">⬇ Download</span></a>
+      <a class="btn" href="docs/Home.html"><span class="ru">📖 Документация</span><span class="en">📖 Documentation</span></a>
+      <a class="btn" href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<section id="idea">
+  <div class="wrap">
+    <h2><span class="ru">Идея мода</span><span class="en">The idea</span></h2>
+    <p class="sub">
+      <span class="ru">Во многих системах хранения ячейка ограничена не только числом предметов, но и числом уникальных типов. Здесь второго лимита нет.</span>
+      <span class="en">In many storage systems a cell is limited not only by the number of items but also by the number of unique types. Here the second limit does not exist.</span>
+    </p>
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ru">Без лимита типов</span><span class="en">No item-type limit</span></h3>
+        <p><span class="ru">В одну ячейку помещаются сотни разных предметов, пока не закончится её байтовая ёмкость.</span><span class="en">A single cell can hold hundreds of different items until its byte capacity runs out.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">1 предмет = 1 байт</span><span class="en">1 item = 1 byte</span></h3>
+        <p><span class="ru">Прозрачное правило: стак в 64 булыжника стоит 64 байта, как и 64 разных предмета по одной штуке.</span><span class="en">A simple rule: a stack of 64 cobblestone costs 64 bytes, and so do 64 different single items.</span></p>
+      </div>
+    </div>
+    <div class="formula">
+      <div class="eq">used_bytes = Σ item_count</div>
+      <div style="margin-top:6px;color:var(--muted)">
+        <span class="ru">Пример: ячейка 1k (1024 байта) вмещает 500 булыжника + 400 земли + 124 алмаза = ровно 1024 предмета.</span>
+        <span class="en">Example: a 1k cell (1,024 bytes) holds 500 cobblestone + 400 dirt + 124 diamonds = exactly 1,024 items.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="storage">
+  <div class="wrap">
+    <h2><span class="ru">Ячейки хранения</span><span class="en">Storage cells</span></h2>
+    <p class="sub">
+      <span class="ru">Картриджи с цветными кристаллами данных. Накопитель вмещает до 10 ячеек, а содержимое всех дисков объединяется в один виртуальный пул сети.</span>
+      <span class="en">Cartridges with colour-coded data crystals. A Drive holds up to 10 cells, and the contents of all cells merge into one virtual pool for the network.</span>
+    </p>
+    <div class="cells">
+      <div class="cell c1"><img class="px" src="assets/img/cell_1k.png" alt="1k"><div class="n">1k</div><div class="b">1 024 <span class="ru">байта</span><span class="en">bytes</span> · <span class="ru">зелёный</span><span class="en">green</span></div></div>
+      <div class="cell c4"><img class="px" src="assets/img/cell_4k.png" alt="4k"><div class="n">4k</div><div class="b">4 096 <span class="ru">байт</span><span class="en">bytes</span> · <span class="ru">синий</span><span class="en">blue</span></div></div>
+      <div class="cell c16"><img class="px" src="assets/img/cell_16k.png" alt="16k"><div class="n">16k</div><div class="b">16 384 <span class="ru">байта</span><span class="en">bytes</span> · <span class="ru">фиолетовый</span><span class="en">purple</span></div></div>
+      <div class="cell c64"><img class="px" src="assets/img/cell_64k.png" alt="64k"><div class="n">64k</div><div class="b">65 536 <span class="ru">байт</span><span class="en">bytes</span> · <span class="ru">оранжевый</span><span class="en">orange</span></div></div>
+    </div>
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card">
+        <h3><span class="ru">Приоритет</span><span class="en">Priority</span></h3>
+        <p><span class="ru">При вставке сначала заполняются накопители с более высоким приоритетом. Shift меняет шаг на ±10.</span><span class="en">On insert, higher-priority drives fill first. Hold Shift to step by ±10.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Белый список</span><span class="en">Whitelist</span></h3>
+        <p><span class="ru">9 фильтр-слотов на накопитель: пустой список принимает всё. Так можно сортировать, например, руды в отдельный диск.</span><span class="en">9 filter slots per drive: an empty list accepts everything. Use it to route, say, ores into a dedicated drive.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="blocks">
+  <div class="wrap">
+    <h2><span class="ru">Блоки сети</span><span class="en">Network blocks</span></h2>
+    <p class="sub">
+      <span class="ru">Устройства соединяются, просто касаясь друг друга или через кабели. В сети должен быть ровно один контроллер с энергией FE.</span>
+      <span class="en">Devices connect by touching each other or through cables. A network needs exactly one controller supplied with FE.</span>
+    </p>
+    <div class="grid g2">
+      <div class="block"><img class="px" src="assets/img/controller_front_online.png" alt=""><div>
+        <h3><span class="ru">Контроллер сети</span><span class="en">Network Controller</span></h3>
+        <p><span class="ru">Сердце сети. Буфер 100 000 FE, приём до 2 000 FE/т. Интерфейс с вкладками: обзор, хранилище, крафт, запас, рецепты (статистика, очередь, правила запаса).</span><span class="en">The heart of the network. 100,000 FE buffer, up to 2,000 FE/t input. GUI tabs for overview, storage, crafting queue, stock rules and recipes.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/drive_front.png" alt=""><div>
+        <h3><span class="ru">Накопитель</span><span class="en">Drive</span></h3>
+        <p><span class="ru">До 10 ячеек, приоритет и белый список. Все диски сливаются в общий пул.</span><span class="en">Up to 10 cells, with priority and a whitelist. All cells merge into one pool.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/terminal_front.png" alt=""><div>
+        <h3><span class="ru">Терминал</span><span class="en">Terminal</span></h3>
+        <p><span class="ru">Доступ ко всему пулу: поиск, прокрутка, индикатор байтов, Shift-клик, сортировка и заказ автокрафта прямо из списка.</span><span class="en">Access to the whole pool: search, scrolling, byte usage bar, Shift-click, sorting, and ordering crafts straight from the list.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/crafting_terminal_front.png" alt=""><div>
+        <h3><span class="ru">Терминал крафта</span><span class="en">Crafting Terminal</span></h3>
+        <p><span class="ru">Терминал с сеткой 3×3. Ингредиенты берутся из сети, результат идёт сразу в инвентарь.</span><span class="en">A Terminal with a 3×3 grid. Ingredients come from the network, the result goes straight to your inventory.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/io_bus.png" alt=""><div>
+        <h3><span class="ru">I/O-шина</span><span class="en">I/O Bus</span></h3>
+        <p><span class="ru">Импорт из соседнего инвентаря в сеть или экспорт с поддержанием нужного количества. 64 предмета за цикл, 9 фильтр-слотов.</span><span class="en">Imports from a neighbouring inventory or exports while keeping a target amount stocked. 64 items per cycle, 9 filter slots.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/cable.png" alt=""><div>
+        <h3><span class="ru">Кабель</span><span class="en">Cable</span></h3>
+        <p><span class="ru">Соединяет блоки, которые не стоят вплотную.</span><span class="en">Connects blocks that do not touch.</span></p>
+      </div></div>
+    </div>
+
+    <h3><span class="ru">Состояния сети</span><span class="en">Grid states</span></h3>
+    <div class="state"><img class="px" src="assets/img/controller_front_online.png" alt=""><span><b>ONLINE</b> — <span class="ru">сеть активна, питание стабильно</span><span class="en">network active, power stable</span></span></div>
+    <div class="state"><img class="px" src="assets/img/controller_front_offline.png" alt=""><span><b>OFFLINE</b> — <span class="ru">сеть обесточена</span><span class="en">network has no power</span></span></div>
+    <div class="state"><img class="px" src="assets/img/controller_front_conflict.png" alt=""><span><b>CONFLICT</b> — <span class="ru">два контроллера в одной сети</span><span class="en">two controllers in one network</span></span></div>
+  </div>
+</section>
+
+<section id="autocraft">
+  <div class="wrap">
+    <h2><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></h2>
+    <p class="sub">
+      <span class="ru">Два вида крафта: обычный (верстак) выполняет Асемблер, процессный (печи, другие машины) — Шина шаблонов.</span>
+      <span class="en">Two kinds of crafts: crafting-table recipes run in the Assembler, processing recipes (furnaces, other machines) run through a Pattern Bus.</span>
+    </p>
+    <div class="flow">
+      <span class="step"><span class="ru">Кодирование рецепта</span><span class="en">Encode recipe</span></span><span class="arr">→</span>
+      <span class="step"><span class="ru">Заказ в терминале</span><span class="en">Order in terminal</span></span><span class="arr">→</span>
+      <span class="step"><span class="ru">План с под-крафтами</span><span class="en">Plan with sub-crafts</span></span><span class="arr">→</span>
+      <span class="step"><span class="ru">Асемблер / Шина</span><span class="en">Assembler / Bus</span></span><span class="arr">→</span>
+      <span class="step"><span class="ru">Результат в сеть</span><span class="en">Result to network</span></span>
+    </div>
+    <div class="grid g2">
+      <div class="block"><img class="px" src="assets/img/pattern_encoding_terminal_front.png" alt=""><div>
+        <h3><span class="ru">Терминал кодирования</span><span class="en">Pattern Encoding Terminal</span></h3>
+        <p><span class="ru">Рецепты верстака записываются в сеть сразу, без шаблона. Для процессных крафтов нужен предмет «Шаблон». Есть кнопка «+» в JEI.</span><span class="en">Crafting-table recipes go straight into the network, no pattern item needed. Processing crafts use a physical Pattern. JEI “+” button supported.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/pattern_terminal_front.png" alt=""><div>
+        <h3><span class="ru">Терминал шаблонов</span><span class="en">Pattern Terminal</span></h3>
+        <p><span class="ru">Список всех рецептов сети, фильтр «Готовые», заказ ×1 / ×10 / ×64, окно подтверждения с планом и нехваткой.</span><span class="en">All network recipes, a “Ready” filter, orders ×1 / ×10 / ×64, and a confirmation window showing the plan and what is missing.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/assembler_front.png" alt=""><div>
+        <h3><span class="ru">Асемблер</span><span class="en">Assembler</span></h3>
+        <p><span class="ru">Использует любую ячейку как буфер. 4 слота Карт скорости (от 40 до 8 тиков на крафт), очередь до 9 999.</span><span class="en">Uses any cell as its buffer. 4 Speed Card slots (40 down to 8 ticks per craft), queue up to 9,999.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/pattern_provider.png" alt=""><div>
+        <h3><span class="ru">Шина шаблонов</span><span class="en">Pattern Bus</span></h3>
+        <p><span class="ru">9 слотов шаблонов, работает с печью или любой машиной с инвентарём. Есть режим обучения: прогоните рецепт вручную один раз.</span><span class="en">9 pattern slots, works with a furnace or any machine with an item handler. A learning mode records a recipe you run by hand once.</span></p>
+      </div></div>
+    </div>
+
+    <h3><span class="ru">Возможности последних версий</span><span class="en">Recent highlights</span></h3>
+    <div class="grid g3">
+      <div class="card"><img class="px ic" src="assets/img/recipe_library.png" alt=""><h3><span class="ru">Библиотека рецептов</span><span class="en">Recipe Library</span></h3><p><span class="ru">Улучшение контролера: сеть знает все рецепты верстака без записи шаблонов.</span><span class="en">A controller upgrade: the network knows every crafting-table recipe without recording patterns.</span></p></div>
+      <div class="card"><img class="px ic" src="assets/img/speed_card.png" alt=""><h3><span class="ru">Очередь и приоритеты</span><span class="en">Queue & priorities</span></h3><p><span class="ru">Прогресс, оценка времени, приоритет −9…+9, пауза и отмена заказов.</span><span class="en">Progress, ETA, priority −9…+9, pause and cancel for each order.</span></p></div>
+      <div class="card"><img class="px ic" src="assets/img/pattern_item.png" alt=""><h3><span class="ru">Правила запаса</span><span class="en">Stock rules</span></h3><p><span class="ru">До 8 правил «держать не менее N»: сеть сама заказывает нехватку.</span><span class="en">Up to 8 “keep at least N” rules: the network orders the shortfall by itself.</span></p></div>
+    </div>
+
+    <h3><span class="ru">Расширенный поиск в терминалах</span><span class="en">Advanced terminal search</span></h3>
+    <table>
+      <tr><th><span class="ru">Запрос</span><span class="en">Query</span></th><th><span class="ru">Значение</span><span class="en">Meaning</span></th></tr>
+      <tr><td><code>iron</code></td><td><span class="ru">часть названия предмета</span><span class="en">part of the item name</span></td></tr>
+      <tr><td><code>@mod</code></td><td><span class="ru">идентификатор мода содержит <code>mod</code></span><span class="en">mod id contains <code>mod</code></span></td></tr>
+      <tr><td><code>#tag</code></td><td><span class="ru">у предмета есть тег <code>tag</code></span><span class="en">item has a tag containing <code>tag</code></span></td></tr>
+      <tr><td><code>&gt;100</code> <code>&lt;100</code> <code>=100</code></td><td><span class="ru">количество на складе</span><span class="en">stored amount</span></td></tr>
+      <tr><td><code>$craftable</code> <code>$stock</code> <code>$fav</code></td><td><span class="ru">можно скрафтить / есть в сети / избранное (Alt + клик)</span><span class="en">craftable / in stock / favorites (Alt + click)</span></td></tr>
+    </table>
+    <p style="color:var(--muted);font-size:.93rem"><span class="ru">Несколько слов работают вместе, например:</span><span class="en">Several words combine, for example:</span> <code>@minecraft #ingots &gt;64</code></p>
+  </div>
+</section>
+
+<section id="wireless">
+  <div class="wrap">
+    <h2><span class="ru">Беспроводной терминал</span><span class="en">Wireless Terminal</span></h2>
+    <p class="sub">
+      <span class="ru">Портативный доступ к сети. Привязывается и заряжается в слоте контроллера (20 000 FE, 100 FE за открытие), открывается ПКМ в воздухе, настройки — Shift + ПКМ.</span>
+      <span class="en">Handheld network access. It binds and charges in the controller's slot (20,000 FE, 100 FE per opening); right-click in the air to open, Shift + right-click for settings.</span>
+    </p>
+    <div class="grid g4">
+      <div class="card"><img class="px ic" src="assets/img/auto_transfer_card.png" alt=""><h3><span class="ru">Карта автообмена</span><span class="en">Auto-Transfer Card</span></h3><p><span class="ru">Пополняет предметы в руках из сети и собирает подобранное в сеть.</span><span class="en">Restocks items in your hands from the network and sends pickups into it.</span></p></div>
+      <div class="card"><img class="px ic" src="assets/img/insurance_card.png" alt=""><h3><span class="ru">Карта страхования</span><span class="en">Insurance Card</span></h3><p><span class="ru">Вещи после смерти уходят в сеть и возвращаются при возрождении.</span><span class="en">Items you'd drop on death go into the network and come back on respawn.</span></p></div>
+      <div class="card"><img class="px ic" src="assets/img/tool_card.png" alt=""><h3><span class="ru">Карта инструментов</span><span class="en">Tool Card</span></h3><p><span class="ru">Сломанный инструмент автоматически заменяется таким же из сети.</span><span class="en">A broken tool is replaced with the same kind from the network.</span></p></div>
+      <div class="card"><img class="px ic" src="assets/img/macro_card.png" alt=""><h3><span class="ru">Карта макроса</span><span class="en">Macro Card</span></h3><p><span class="ru">Клавиша (по умолчанию V) запускает Логические шины по ID. Нужен аддон Scripting.</span><span class="en">A hotkey (V by default) runs Logic Buses by ID. Needs the Scripting addon.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="scripting">
+  <div class="wrap">
+    <h2>Simple Byte Storage: Scripting <span style="font-size:.9rem;color:var(--muted);font-weight:400">(<span class="ru">необязательный аддон</span><span class="en">optional addon</span>)</span></h2>
+    <p class="sub">
+      <span class="ru">Добавляет Логическую шину и Логический терминал: управляйте предметами сети на JavaScript. Скрипт видит соседние инвентари и сеть, работает в песочнице (Rhino, без доступа к Java-классам, с лимитами инструкций и времени).</span>
+      <span class="en">Adds a Logic Bus and a Logic Terminal so you can drive your network with JavaScript. Scripts see adjacent inventories and the network and run in a sandbox (Rhino, no Java class access, instruction and time limits).</span>
+    </p>
+<pre><code>var chest = side("up");
+function tick() {
+  if (!chest) return;
+  chest.pull("minecraft:iron_ingot");              // inventory -> network
+  if (net.count("minecraft:iron_ingot") &gt; 500) {
+    log("lots of iron");
+  }
+  if (net.count("minecraft:stick") &lt; 64) net.craft("minecraft:stick", 64);
+}</code></pre>
+    <p style="color:var(--muted);font-size:.93rem">
+      <span class="ru">API:</span><span class="en">API:</span>
+      <code>net.count</code> <code>net.has</code> <code>net.list</code> <code>net.craft</code> <code>side(dir)</code> <code>pull</code> <code>push</code> <code>move</code> <code>log</code>
+    </p>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <h2><span class="ru">Установка</span><span class="en">Installation</span></h2>
+    <p class="sub"><span class="ru">Нужны Minecraft 1.20.1, Forge 47.2.0+ и Java 17. JEI необязателен.</span><span class="en">Requires Minecraft 1.20.1, Forge 47.2.0+ and Java 17. JEI is optional.</span></p>
+    <ol class="steps">
+      <li><span class="ru">Установите Forge для Minecraft 1.20.1.</span><span class="en">Install Forge for Minecraft 1.20.1.</span></li>
+      <li><span class="ru">Скачайте <code>simple_bytestorage-&lt;версия&gt;.jar</code> со страницы <a href="https://github.com/Karatells/ByteStorage/releases/latest">Releases</a> и положите в папку <code>mods</code>. Для скриптов добавьте и <code>simple_bytestorage_scripting-&lt;версия&gt;.jar</code>.</span><span class="en">Download <code>simple_bytestorage-&lt;version&gt;.jar</code> from <a href="https://github.com/Karatells/ByteStorage/releases/latest">Releases</a> and drop it into <code>mods</code>. Add <code>simple_bytestorage_scripting-&lt;version&gt;.jar</code> too if you want scripting.</span></li>
+      <li><span class="ru">На сервере ставьте те же файлы на сервер <b>и</b> на каждого клиента, версии должны совпадать.</span><span class="en">On a server, install the same files on the server <b>and</b> every client; versions must match.</span></li>
+      <li><span class="ru">Скрафтите <b>Справочник</b> (книга + кабель): внутриигровое руководство.</span><span class="en">Craft the <b>Guide Book</b> (book + cable) for an in-game manual.</span> <img class="px" style="width:22px;height:22px;vertical-align:middle" src="assets/img/guide_book.png" alt=""></li>
+    </ol>
+
+    <h3><span class="ru">Первая сеть за пять минут</span><span class="en">Your first network in five minutes</span></h3>
+    <ol class="steps">
+      <li><span class="ru">Поставьте <b>Контроллер</b> и подайте на него FE от любого генератора.</span><span class="en">Place a <b>Controller</b> and feed it FE from any generator.</span></li>
+      <li><span class="ru">Рядом поставьте <b>Накопитель</b> и вставьте ячейки (до 10).</span><span class="en">Place a <b>Drive</b> next to it and insert cells (up to 10).</span></li>
+      <li><span class="ru">Поставьте <b>Терминал</b>, откройте его и Shift-кликом кладите предметы из инвентаря.</span><span class="en">Place a <b>Terminal</b>, open it, and Shift-click items from your inventory.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="links">
+  <div class="wrap">
+    <h2><span class="ru">Ссылки</span><span class="en">Links</span></h2>
+    <div class="grid g3">
+      <a class="card" href="https://github.com/Karatells/ByteStorage/releases"><h3>Releases</h3><p><span class="ru">Готовые jar-файлы и нотатки релизов.</span><span class="en">Ready-made jars and release notes.</span></p></a>
+      <a class="card" href="docs/Home.html"><h3><span class="ru">Документация</span><span class="en">Documentation</span></h3><p><span class="ru">Полная документация по каждому блоку (на английском).</span><span class="en">Full documentation for every block.</span></p></a>
+      <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/CHANGELOG.md"><h3>Changelog</h3><p><span class="ru">История всех изменений.</span><span class="en">History of all changes.</span></p></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+    <div><span class="ru">Не является официальным продуктом Mojang или Microsoft.</span><span class="en">Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('langBtn');
+  function set(l){root.setAttribute('data-lang',l);root.lang=l;btn.textContent=l==='ru'?'EN':'RU';try{localStorage.setItem('sbs-lang',l)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem('sbs-lang')}catch(e){}
+  set(saved||((navigator.language||'').toLowerCase().match(/^(ru|uk|be)/)?'ru':'en'));
+  btn.addEventListener('click',function(){set(root.getAttribute('data-lang')==='ru'?'en':'ru')});
+})();
+</script>
+</body>
+</html>

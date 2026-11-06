@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripting Examples — Simple Byte Storage</title>
+<meta name="description" content="Paste an example into the Logic Terminal, press Save, then Run. Examples marked (IDs) need buses with identifiers: right-click each bus, type the ID in its GUI ">
+<link rel="icon" href="../assets/img/cell_16k.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="px" src="../assets/img/cell_16k.png" alt=""> Simple Byte Storage</a>
+    <nav class="links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side" id="side"><a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-API.html">API</a>
+<a class="cur" href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a></aside>
+  <main class="prose">
+    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
+    <h1 id="scripting-examples">Scripting Examples<a class="anchor" href="#scripting-examples" title="Permanent link">#</a></h1>
+<p>Paste an example into the Logic Terminal, press <strong>Save</strong>, then <strong>Run</strong>. Examples marked <em>(IDs)</em> need buses with identifiers: right-click each bus, type the ID in its GUI and press <strong>Set</strong>. Directions (<code>"up"</code>, <code>"north"</code>, …) are relative to the Logic Bus; change them to match your build. Item ids are 1.20.1 ids.</p>
+<h2 id="1-import-everything-from-a-chest">1. Import everything from a chest<a class="anchor" href="#1-import-everything-from-a-chest" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var chest = side(&quot;up&quot;);
+
+function tick() {
+  if (chest) chest.pull();      // any item, as many as the budget allows
+}
+</code></pre>
+<h2 id="2-import-only-some-items">2. Import only some items<a class="anchor" href="#2-import-only-some-items" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var chest = side(&quot;up&quot;);
+var wanted = [&quot;minecraft:iron_ingot&quot;, &quot;minecraft:gold_ingot&quot;, &quot;minecraft:diamond&quot;];
+
+function tick() {
+  if (!chest) return;
+  for (var i = 0; i &lt; wanted.length; i++) {
+    chest.pull(wanted[i]);
+  }
+}
+</code></pre>
+<h2 id="3-keep-a-machine-stocked">3. Keep a machine stocked<a class="anchor" href="#3-keep-a-machine-stocked" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var machine = side(&quot;north&quot;);
+
+// Top up `id` in `ep` until it holds `amount`.
+function ensure(ep, id, amount) {
+  var have = ep.count(id);
+  return have &lt; amount ? ep.push(id, amount - have) : 0;
+}
+
+function tick() {
+  if (!machine) return;
+  ensure(machine, &quot;minecraft:coal&quot;, 16);
+}
+</code></pre>
+<h2 id="4-stock-keeper-with-autocrafting-and-a-cooldown">4. Stock keeper with autocrafting and a cooldown<a class="anchor" href="#4-stock-keeper-with-autocrafting-and-a-cooldown" title="Permanent link">#</a></h2>
+<p>Without a cooldown the script would order the same craft again and again while the first order is still running.</p>
+<pre><code class="language-js">var targets = [
+  { id: &quot;minecraft:stick&quot;,    min: 64,  batch: 64 },
+  { id: &quot;minecraft:torch&quot;,    min: 128, batch: 64 },
+  { id: &quot;minecraft:iron_block&quot;, min: 8, batch: 4 }
+];
+var lastOrder = {};            // id -&gt; game time of the last order
+var COOLDOWN = 20 * 60;        // 1 minute
+
+function tick() {
+  for (var i = 0; i &lt; targets.length; i++) {
+    var t = targets[i];
+    var last = lastOrder[t.id];
+    if (last !== undefined &amp;&amp; time() - last &lt; COOLDOWN) continue;
+    if (net.count(t.id) &lt; t.min) {
+      var crafts = net.craft(t.id, t.batch);
+      if (crafts &gt; 0) {
+        lastOrder[t.id] = time();
+        log(&quot;ordered&quot;, t.batch, t.id);
+      } else {
+        log(&quot;cannot craft&quot;, t.id);
+      }
+    }
+  }
+}
+</code></pre>
+<h2 id="5-sort-a-chest-ores-and-wood-to-separate-chests-the-rest-to-the-network">5. Sort a chest: ores and wood to separate chests, the rest to the network<a class="anchor" href="#5-sort-a-chest-ores-and-wood-to-separate-chests-the-rest-to-the-network" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var input = side(&quot;up&quot;);
+var ores  = side(&quot;west&quot;);
+var wood  = side(&quot;east&quot;);
+
+function tick() {
+  if (!input) return;
+  var stacks = input.list();
+  for (var i = 0; i &lt; stacks.length; i++) {
+    var id = stacks[i].id;
+    if (ores &amp;&amp; /_ore$|^minecraft:raw_/.test(id)) {
+      input.move(ores, id);
+    } else if (wood &amp;&amp; /_log$|_planks$/.test(id)) {
+      input.move(wood, id);
+    } else {
+      input.pull(id);          // everything else goes into the network
+    }
+  }
+}
+</code></pre>
+<h2 id="6-overflow-protection">6. Overflow protection<a class="anchor" href="#6-overflow-protection" title="Permanent link">#</a></h2>
+<p>When free space gets low, dump junk into an overflow chest so the network never fills up.</p>
+<pre><code class="language-js">var overflow = side(&quot;down&quot;);
+var junk = [&quot;minecraft:cobblestone&quot;, &quot;minecraft:dirt&quot;, &quot;minecraft:gravel&quot;,
+            &quot;minecraft:cobbled_deepslate&quot;, &quot;minecraft:rotten_flesh&quot;];
+var alarm = false;
+
+function tick() {
+  var low = net.freeBytes() &lt; 2000;
+  if (low !== alarm) {                 // log only when the state changes
+    alarm = low;
+    log(low ? &quot;LOW SPACE: &quot; + net.freeBytes() + &quot; bytes free&quot; : &quot;space OK&quot;);
+  }
+  if (!low || !overflow) return;
+  for (var i = 0; i &lt; junk.length; i++) {
+    overflow.push(junk[i], 256);
+  }
+}
+</code></pre>
+<h2 id="7-round-robin-feeding-of-two-machines">7. Round-robin feeding of two machines<a class="anchor" href="#7-round-robin-feeding-of-two-machines" title="Permanent link">#</a></h2>
+<p>Global variables survive between runs, so a counter can alternate targets.</p>
+<pre><code class="language-js">var machines = [side(&quot;east&quot;), side(&quot;west&quot;)];
+var turn = 0;
+
+function tick() {
+  var target = machines[turn % machines.length];
+  turn++;
+  if (target) target.push(&quot;minecraft:raw_iron&quot;, 8);
+}
+</code></pre>
+<h2 id="8-throughput-meter">8. Throughput meter<a class="anchor" href="#8-throughput-meter" title="Permanent link">#</a></h2>
+<p>Logs how many items per second flow into the network.</p>
+<pre><code class="language-js">var ITEM = &quot;minecraft:iron_ingot&quot;;
+var lastCount = null;
+var lastTime = 0;
+
+function tick() {
+  var now = net.count(ITEM);
+  var t = time();
+  if (lastCount !== null &amp;&amp; t &gt; lastTime) {
+    var perSecond = (now - lastCount) / ((t - lastTime) / 20);
+    log(ITEM, perSecond.toFixed(2) + &quot;/s&quot;);
+  }
+  lastCount = now;
+  lastTime = t;
+}
+</code></pre>
+<h2 id="9-balance-two-chests">9. Balance two chests<a class="anchor" href="#9-balance-two-chests" title="Permanent link">#</a></h2>
+<p>Evens out a specific item between two chests by moving items directly from the fuller one to the emptier one.</p>
+<pre><code class="language-js">var a = side(&quot;west&quot;);
+var b = side(&quot;east&quot;);
+var ID = &quot;minecraft:cobblestone&quot;;
+
+function tick() {
+  if (!a || !b) return;
+  var ca = a.count(ID), cb = b.count(ID);
+  var diff = Math.floor((ca - cb) / 2);
+  if (diff &gt; 0) a.move(b, ID, diff);
+  else if (diff &lt; 0) b.move(a, ID, -diff);
+}
+</code></pre>
+<h2 id="10-self-diagnosing-script">10. Self-diagnosing script<a class="anchor" href="#10-self-diagnosing-script" title="Permanent link">#</a></h2>
+<p>Wrap the work in <code>try</code>/<code>catch</code> to keep running through ordinary errors (such as a mistyped item id) and report them.</p>
+<pre><code class="language-js">var chest = side(&quot;up&quot;);
+
+function tick() {
+  try {
+    chest.pull(&quot;minecraft:iorn_ingot&quot;);   // typo: throws &quot;unknown item&quot;
+  } catch (e) {
+    log(&quot;problem:&quot;, e.message);
+  }
+}
+</code></pre>
+<p>Budget errors (instruction, time, call limits) cannot be caught, they stop the bus.</p>
+<hr />
+<h1 id="examples-with-identifiers">Examples with identifiers<a class="anchor" href="#examples-with-identifiers" title="Permanent link">#</a></h1>
+<h2 id="11-feed-a-group-of-furnaces-ids">11. Feed a group of furnaces (IDs)<a class="anchor" href="#11-feed-a-group-of-furnaces-ids" title="Permanent link">#</a></h2>
+<p>Give every bus that sits next to a furnace the ID <code>smelters</code>. <strong>One</strong> script on any bus (even one without the ID) feeds all of them. <code>push</code> fills them in order.</p>
+<pre><code class="language-js">function tick() {
+  var furnaces = side(&quot;north&quot;, &quot;smelters&quot;);   // north of every &quot;smelters&quot; bus
+  if (!furnaces) return;
+  furnaces.push(&quot;minecraft:raw_iron&quot;, 16);
+  furnaces.push(&quot;minecraft:coal&quot;, 8);
+}
+</code></pre>
+<h2 id="12-many-input-chests-many-output-chests-ids">12. Many input chests, many output chests (IDs)<a class="anchor" href="#12-many-input-chests-many-output-chests-ids" title="Permanent link">#</a></h2>
+<p>Buses with ID <code>inbox</code> have chests on top, buses with ID <code>outbox</code> have chests below.</p>
+<pre><code class="language-js">function tick() {
+  var inbox  = side(&quot;up&quot;, &quot;inbox&quot;);
+  var outbox = side(&quot;down&quot;, &quot;outbox&quot;);
+  if (inbox)  inbox.pull();                        // collect everything into the network
+  if (outbox) outbox.push(&quot;minecraft:cobblestone&quot;, 64);
+}
+</code></pre>
+<h2 id="13-sorting-by-group-ids">13. Sorting by group (IDs)<a class="anchor" href="#13-sorting-by-group-ids" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var sources = side(&quot;up&quot;, &quot;sort_in&quot;);
+var ores    = side(&quot;up&quot;, &quot;sort_ores&quot;);
+var wood    = side(&quot;up&quot;, &quot;sort_wood&quot;);
+
+function tick() {
+  if (!sources) return;
+  var stacks = sources.list();
+  for (var i = 0; i &lt; stacks.length; i++) {
+    var id = stacks[i].id;
+    if (ores &amp;&amp; /_ore$|^minecraft:raw_/.test(id))      sources.move(ores, id);
+    else if (wood &amp;&amp; /_log$|_planks$/.test(id))        sources.move(wood, id);
+  }
+}
+</code></pre>
+<h2 id="14-status-report-for-several-groups-ids">14. Status report for several groups (IDs)<a class="anchor" href="#14-status-report-for-several-groups-ids" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var groups = [&quot;smelters&quot;, &quot;inbox&quot;, &quot;outbox&quot;];
+
+function tick() {
+  var parts = [];
+  for (var i = 0; i &lt; groups.length; i++) {
+    parts.push(groups[i] + &quot;=&quot; + buses(groups[i]));
+  }
+  log(&quot;buses:&quot;, parts.join(&quot; &quot;));
+}
+</code></pre>
+<h2 id="15-one-script-behaviour-chosen-by-id-ids">15. One script, behaviour chosen by ID (IDs)<a class="anchor" href="#15-one-script-behaviour-chosen-by-id-ids" title="Permanent link">#</a></h2>
+<p>The same script text can be pasted into several buses; <code>busId</code> tells each one who it is.</p>
+<pre><code class="language-js">function tick() {
+  var me = side(&quot;up&quot;);
+  if (!me) return;
+  if (busId === &quot;importer&quot;)      me.pull();
+  else if (busId === &quot;coal&quot;)     me.push(&quot;minecraft:coal&quot;, 32);
+  else                           log(&quot;no role for&quot;, busId || &quot;(no id)&quot;);
+}
+</code></pre>
+<h2 id="16-fail-safe-group-access-ids">16. Fail-safe group access (IDs)<a class="anchor" href="#16-fail-safe-group-access-ids" title="Permanent link">#</a></h2>
+<pre><code class="language-js">function group(dir, id) {
+  var ep = side(dir, id);
+  if (!ep) log(&quot;group&quot;, id, &quot;not found on side&quot;, dir, &quot;(&quot; + buses(id) + &quot; buses)&quot;);
+  return ep;
+}
+
+function tick() {
+  var ep = group(&quot;up&quot;, &quot;furnaces&quot;);
+  if (ep) ep.push(&quot;minecraft:coal&quot;, 8);
+}
+</code></pre>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-Examples.md">docs/wiki/Scripting-Examples.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('side').classList.toggle('open')});
+</script>
+</body>
+</html>
