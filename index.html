@@ -252,7 +252,7 @@
       <span class="ru">Добавляет Логическую шину и Логический терминал: управляйте предметами сети на JavaScript. Скрипт видит соседние инвентари и сеть, умеет планировать крафты, управлять очередью и правилами запаса, пишет в журнал и работает в песочнице (Rhino, без доступа к Java-классам, с лимитами инструкций и времени).</span>
       <span class="en">Adds a Logic Bus and a Logic Terminal so you can drive your network with JavaScript. Scripts see adjacent inventories and the network, can plan crafts, control the queue and stock rules, write to the journal, and run in a sandbox (Rhino, no Java class access, instruction and time limits).</span>
     </p>
-<pre><code>var chest = side("up");
+<pre><code class="language-js">var chest = side("up");
 function tick() {
   if (!chest) return;
   chest.pull("minecraft:iron_ingot");              // inventory -> network
@@ -309,6 +309,7 @@ function tick() {
   </div>
 </footer>
 
+<script src="assets/vendor/highlight.min.js" defer></script>
 <script>
 (function(){
   var root=document.documentElement, btn=document.getElementById('langBtn');

@@ -123,3 +123,17 @@ footer .wrap > div{margin:4px 0}
 
 /* ---------- logo ---------- */
 .brandlogo{width:32px;height:32px;border-radius:6px}
+
+/* ---------- syntax highlighting (highlight.js tokens, site palette) ---------- */
+pre code.hljs{display:block}
+.hljs{color:#d6deeb}
+.hljs-comment,.hljs-quote{color:#6b7a90;font-style:italic}
+.hljs-keyword,.hljs-selector-tag,.hljs-doctag,.hljs-meta .hljs-keyword{color:#c792ea}
+.hljs-string,.hljs-regexp,.hljs-template-string,.hljs-addition{color:#7fdc9a}
+.hljs-number,.hljs-literal,.hljs-symbol,.hljs-bullet{color:#ffa94d}
+.hljs-title,.hljs-title.function_,.hljs-section{color:#82aaff}
+.hljs-title.class_,.hljs-type{color:#ffd479}
+.hljs-built_in,.hljs-attr,.hljs-property,.hljs-variable.language_{color:#27e0d0}
+.hljs-params,.hljs-variable,.hljs-subst{color:#d6deeb}
+.hljs-operator,.hljs-punctuation{color:#89a2bf}
+.hljs-meta,.hljs-deletion{color:#ff7b72}

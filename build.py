@@ -77,6 +77,7 @@ PAGE = """<!doctype html>
 </div>
 <footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="{repo}">github.com/Karatells/ByteStorage</a></div>
 <div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script src="../assets/vendor/highlight.min.js" defer></script>
 <script>
 document.getElementById('menuBtn').addEventListener('click',function(){{document.getElementById('side').classList.toggle('open')}});
 </script>
