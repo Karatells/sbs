@@ -123,4 +123,3 @@ footer .wrap > div{margin:4px 0}
 
 /* ---------- logo ---------- */
 .brandlogo{width:32px;height:32px;border-radius:6px}
-.hero .logo img.herologo{width:min(240px,60vw);height:auto;border-radius:18px;filter:none;box-shadow:0 0 0 1px var(--line),0 12px 48px rgba(39,224,208,.22)}
