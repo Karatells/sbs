@@ -137,3 +137,26 @@ pre code.hljs{display:block}
 .hljs-params,.hljs-variable,.hljs-subst{color:#d6deeb}
 .hljs-operator,.hljs-punctuation{color:#89a2bf}
 .hljs-meta,.hljs-deletion{color:#ff7b72}
+
+/* ---------- recipe grids ---------- */
+.rlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin:14px 0 6px}
+.recipe{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.prose .recipe h3{margin:0 0 12px;font-size:1.02rem}
+.rflow{display:flex;align-items:center;gap:14px;flex-wrap:nowrap}
+.rgrid{--s:52px;display:grid;gap:3px;padding:6px;background:#0b0f15;border:1px solid var(--line);border-radius:8px}
+.rarrow{color:var(--cyan);font-size:1.4rem}
+.slot{position:relative;width:52px;height:52px;border-radius:5px;background:#1b2330;border:1px solid #2b3648;display:flex;align-items:center;justify-content:center;flex:none}
+.slot.empty{background:#141a24;border-color:#202a39}
+.slot.big{width:62px;height:62px;border-color:var(--cyan);box-shadow:0 0 14px rgba(39,224,208,.18)}
+.slot img{width:32px;height:32px}
+.slot.big img{width:42px;height:42px}
+.slot.van{flex-direction:column;gap:2px;padding:3px}
+.slot.van i{display:block;width:16px;height:16px;border-radius:4px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.35)}
+.slot.van em{font-style:normal;font-size:.54rem;line-height:1.05;color:var(--muted);text-align:center;max-width:100%;overflow:hidden}
+.slot .cnt{position:absolute;right:3px;bottom:1px;font-size:.78rem;color:#fff;text-shadow:0 1px 2px #000}
+.rmeta{margin:12px 0 2px;font-size:.82rem;color:var(--muted)}
+.rtag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.72rem;font-weight:600;margin-right:4px;border:1px solid var(--line)}
+.rtag.shaped{color:var(--cyan);border-color:rgba(39,224,208,.4)}
+.rtag.shapeless{color:var(--orange);border-color:rgba(255,140,0,.4)}
+.rsum{margin:4px 0 0;font-size:.86rem;color:#a9b6c7}
+@media (max-width:420px){.rgrid{--s:44px}.slot{width:44px;height:44px}.slot.big{width:54px;height:54px}.slot.van em{font-size:.5rem}}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Recipes — Simple Byte Storage</title>
-<meta name="description" content="I = iron ingot, R = redstone, G = glass pane, D = diamond, C = chest, P = piston, T = crafting table.">
+<meta name="description" content="All crafting recipes of Simple Byte Storage, shown as crafting grids.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
@@ -48,175 +48,252 @@
 <a href="Building-from-Source.html">Building from Source</a></aside>
   <main class="prose">
     <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
-    <h1 id="recipes">Recipes<a class="anchor" href="#recipes" title="Permanent link">#</a></h1>
-<p><code>I</code> = iron ingot, <code>R</code> = redstone, <code>G</code> = glass pane, <code>D</code> = diamond, <code>C</code> = chest, <code>P</code> = piston, <code>T</code> = crafting table.</p>
-<h2 id="network">Network<a class="anchor" href="#network" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Recipe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Network Controller</td>
-<td>Shaped: <code>IRI / RDR / IRI</code></td>
-</tr>
-<tr>
-<td>Cable (×4)</td>
-<td>Shaped: <code>I R I</code> (one row)</td>
-</tr>
-<tr>
-<td>Drive</td>
-<td>Shaped: <code>III / ICI / IRI</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="storage-cells">Storage cells<a class="anchor" href="#storage-cells" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Recipe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1k Cell</td>
-<td>Shaped: <code>GRG / R_R / III</code> (centre empty)</td>
-</tr>
-<tr>
-<td>4k Cell</td>
-<td>Shapeless: 1k Cell + 2 gold ingots + 2 redstone</td>
-</tr>
-<tr>
-<td>16k Cell</td>
-<td>Shapeless: 4k Cell + 2 diamonds + 2 redstone</td>
-</tr>
-<tr>
-<td>64k Cell</td>
-<td>Shapeless: 16k Cell + 2 diamonds + 2 emeralds</td>
-</tr>
-</tbody>
-</table>
-<h2 id="terminals">Terminals<a class="anchor" href="#terminals" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Recipe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Terminal</td>
-<td>Shaped: <code>IGI / GRG / III</code></td>
-</tr>
-<tr>
-<td>Crafting Terminal</td>
-<td>Shapeless: Terminal + crafting table</td>
-</tr>
-<tr>
-<td>Pattern Terminal</td>
-<td>Shapeless: Terminal + book</td>
-</tr>
-<tr>
-<td>Pattern Encoding Terminal</td>
-<td>Shapeless: Terminal + book + redstone</td>
-</tr>
-<tr>
-<td>Wireless Terminal</td>
-<td>Shapeless: Terminal + ender pearl + diamond + redstone</td>
-</tr>
-<tr>
-<td>Recipe Library</td>
-<td>Shaped: <code>NDN / DSD / NDN</code> (N netherite ingot, D diamond block, S nether star)</td>
-</tr>
-<tr>
-<td>Insurance Card</td>
-<td>Shapeless: Speed Card + totem of undying + ender pearl + diamond</td>
-</tr>
-<tr>
-<td>Tool Card</td>
-<td>Shapeless: Speed Card + iron pickaxe + redstone + diamond</td>
-</tr>
-<tr>
-<td>Macro Card</td>
-<td>Shapeless: Speed Card + repeater + ender pearl + redstone</td>
-</tr>
-<tr>
-<td>Auto-Transfer Card</td>
-<td>Shaped: <code>RER / DCD / RGR</code> (R redstone, E ender pearl, D diamond, C Speed Card, G gold ingot)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="autocrafting">Autocrafting<a class="anchor" href="#autocrafting" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Recipe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pattern</td>
-<td>Shapeless: paper + redstone + iron nugget</td>
-</tr>
-<tr>
-<td>Assembler</td>
-<td>Shaped: <code>IPI / RTR / III</code></td>
-</tr>
-<tr>
-<td>Speed Card (×2)</td>
-<td>Shapeless: 2 redstone + nether quartz + iron ingot</td>
-</tr>
-<tr>
-<td>Pattern Bus</td>
-<td>Shaped: <code>IRI / RHR / IRI</code> (<code>H</code> = hopper)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="utility">Utility<a class="anchor" href="#utility" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Recipe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I/O Bus</td>
-<td>Shapeless: Cable + hopper + redstone</td>
-</tr>
-<tr>
-<td>Guide Book</td>
-<td>Shapeless: book + Cable</td>
-</tr>
-</tbody>
-</table>
-<h2 id="scripting-addon">Scripting addon<a class="anchor" href="#scripting-addon" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Recipe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Logic Bus</td>
-<td>Shapeless: I/O Bus + comparator + redstone</td>
-</tr>
-<tr>
-<td>Logic Terminal</td>
-<td>Shapeless: Terminal + comparator + book</td>
-</tr>
-</tbody>
-</table>
-<p>All items are also in the creative tabs (<em>Simple Byte Storage</em> and <em>Simple Byte Storage: Scripting</em>).</p>
+    <h1>Recipes</h1>
+<p>Every crafting recipe in Simple Byte Storage. Hover a slot to see the item name. Items from the mod use their real textures;
+items from vanilla Minecraft are shown as labelled tiles.</p>
+<h2 id="network">Network</h2>
+<div class="rlist"><div class="recipe" id="controller">
+  <h3>Network Controller</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Network Controller"><img class="px" src="../assets/img/controller_front_online.png" alt="Network Controller"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">4× Iron Ingot, 4× Redstone, Diamond</p>
+</div><div class="recipe" id="cable">
+  <h3>Cable</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Cable"><img class="px" src="../assets/img/cable.png" alt="Cable"><b class="cnt">4</b></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">2× Iron Ingot, Redstone</p>
+</div><div class="recipe" id="drive">
+  <h3>Drive</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Chest"><i style="background:#a8742f"></i><em>Chest</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Drive"><img class="px" src="../assets/img/drive_front.png" alt="Drive"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">7× Iron Ingot, Chest, Redstone</p>
+</div><div class="recipe" id="energy_port">
+  <h3>Energy Interface</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="Cable"><img class="px" src="../assets/img/cable.png" alt="Cable"></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Gold Ingot"><i style="background:#f2c94c"></i><em>Gold</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Energy Interface"><img class="px" src="../assets/img/energy_port.png" alt="Energy Interface"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Cable, Redstone, Gold Ingot</p>
+</div></div><h2 id="storage-cells">Storage cells</h2>
+<div class="rlist"><div class="recipe" id="cell_1k">
+  <h3>1k Byte Storage Cell</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Glass Pane"><i style="background:#a9d6e5"></i><em>Glass Pane</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Glass Pane"><i style="background:#a9d6e5"></i><em>Glass Pane</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot empty"></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="1k Byte Storage Cell"><img class="px" src="../assets/img/cell_1k.png" alt="1k Byte Storage Cell"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">2× Glass Pane, 3× Redstone, 3× Iron Ingot</p>
+</div><div class="recipe" id="cell_4k">
+  <h3>4k Byte Storage Cell</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="1k Byte Storage Cell"><img class="px" src="../assets/img/cell_1k.png" alt="1k Byte Storage Cell"></span><span class="slot van" title="Gold Ingot"><i style="background:#f2c94c"></i><em>Gold</em></span><span class="slot van" title="Gold Ingot"><i style="background:#f2c94c"></i><em>Gold</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot empty"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="4k Byte Storage Cell"><img class="px" src="../assets/img/cell_4k.png" alt="4k Byte Storage Cell"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">1k Byte Storage Cell, 2× Gold Ingot, 2× Redstone</p>
+</div><div class="recipe" id="cell_16k">
+  <h3>16k Byte Storage Cell</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="4k Byte Storage Cell"><img class="px" src="../assets/img/cell_4k.png" alt="4k Byte Storage Cell"></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot empty"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="16k Byte Storage Cell"><img class="px" src="../assets/img/cell_16k.png" alt="16k Byte Storage Cell"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">4k Byte Storage Cell, 2× Diamond, 2× Redstone</p>
+</div><div class="recipe" id="cell_64k">
+  <h3>64k Byte Storage Cell</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="16k Byte Storage Cell"><img class="px" src="../assets/img/cell_16k.png" alt="16k Byte Storage Cell"></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot van" title="Emerald"><i style="background:#2ecc71"></i><em>Emerald</em></span><span class="slot van" title="Emerald"><i style="background:#2ecc71"></i><em>Emerald</em></span><span class="slot empty"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="64k Byte Storage Cell"><img class="px" src="../assets/img/cell_64k.png" alt="64k Byte Storage Cell"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">16k Byte Storage Cell, 2× Diamond, 2× Emerald</p>
+</div></div><h2 id="terminals">Terminals</h2>
+<div class="rlist"><div class="recipe" id="terminal">
+  <h3>Terminal</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Glass Pane"><i style="background:#a9d6e5"></i><em>Glass Pane</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Glass Pane"><i style="background:#a9d6e5"></i><em>Glass Pane</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Glass Pane"><i style="background:#a9d6e5"></i><em>Glass Pane</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Terminal"><img class="px" src="../assets/img/terminal_front.png" alt="Terminal"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">5× Iron Ingot, 3× Glass Pane, Redstone</p>
+</div><div class="recipe" id="crafting_terminal">
+  <h3>Crafting Terminal</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(2,var(--s))"><span class="slot" title="Terminal"><img class="px" src="../assets/img/terminal_front.png" alt="Terminal"></span><span class="slot van" title="Crafting Table"><i style="background:#9c6b3a"></i><em>Crafting Table</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Crafting Terminal"><img class="px" src="../assets/img/crafting_terminal_front.png" alt="Crafting Terminal"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Terminal, Crafting Table</p>
+</div><div class="recipe" id="pattern_terminal">
+  <h3>Pattern Terminal</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(2,var(--s))"><span class="slot" title="Terminal"><img class="px" src="../assets/img/terminal_front.png" alt="Terminal"></span><span class="slot van" title="Book"><i style="background:#8a5a3c"></i><em>Book</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Pattern Terminal"><img class="px" src="../assets/img/pattern_terminal_front.png" alt="Pattern Terminal"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Terminal, Book</p>
+</div><div class="recipe" id="pattern_encoding_terminal">
+  <h3>Pattern Encoding Terminal</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="Terminal"><img class="px" src="../assets/img/terminal_front.png" alt="Terminal"></span><span class="slot van" title="Book"><i style="background:#8a5a3c"></i><em>Book</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Pattern Encoding Terminal"><img class="px" src="../assets/img/pattern_encoding_terminal_front.png" alt="Pattern Encoding Terminal"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Terminal, Book, Redstone</p>
+</div><div class="recipe" id="wireless_terminal">
+  <h3>Wireless Terminal</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="Terminal"><img class="px" src="../assets/img/terminal_front.png" alt="Terminal"></span><span class="slot van" title="Ender Pearl"><i style="background:#1f8a70"></i><em>Ender Pearl</em></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot empty"></span><span class="slot empty"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Wireless Terminal"><img class="px" src="../assets/img/wireless_terminal.png" alt="Wireless Terminal"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Terminal, Ender Pearl, Diamond, Redstone</p>
+</div></div><h2 id="cards-and-upgrades">Cards and upgrades</h2>
+<div class="rlist"><div class="recipe" id="speed_card">
+  <h3>Speed Card</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Quartz"><i style="background:#eee8dc"></i><em>Quartz</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot empty"></span><span class="slot empty"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Speed Card"><img class="px" src="../assets/img/speed_card.png" alt="Speed Card"><b class="cnt">2</b></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">2× Redstone, Quartz, Iron Ingot</p>
+</div><div class="recipe" id="recipe_library">
+  <h3>Recipe Library</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Netherite Ingot"><i style="background:#5a4a4f"></i><em>Netherite</em></span><span class="slot van" title="Diamond Block"><i style="background:#3bc9bd"></i><em>Diamond Blk</em></span><span class="slot van" title="Netherite Ingot"><i style="background:#5a4a4f"></i><em>Netherite</em></span><span class="slot van" title="Diamond Block"><i style="background:#3bc9bd"></i><em>Diamond Blk</em></span><span class="slot van" title="Nether Star"><i style="background:#f7f3c2"></i><em>Nether Star</em></span><span class="slot van" title="Diamond Block"><i style="background:#3bc9bd"></i><em>Diamond Blk</em></span><span class="slot van" title="Netherite Ingot"><i style="background:#5a4a4f"></i><em>Netherite</em></span><span class="slot van" title="Diamond Block"><i style="background:#3bc9bd"></i><em>Diamond Blk</em></span><span class="slot van" title="Netherite Ingot"><i style="background:#5a4a4f"></i><em>Netherite</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Recipe Library"><img class="px" src="../assets/img/recipe_library.png" alt="Recipe Library"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">4× Netherite Ingot, 4× Diamond Block, Nether Star</p>
+</div><div class="recipe" id="auto_transfer_card">
+  <h3>Auto-Transfer Card</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Ender Pearl"><i style="background:#1f8a70"></i><em>Ender Pearl</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot" title="Speed Card"><img class="px" src="../assets/img/speed_card.png" alt="Speed Card"></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Gold Ingot"><i style="background:#f2c94c"></i><em>Gold</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Auto-Transfer Card"><img class="px" src="../assets/img/auto_transfer_card.png" alt="Auto-Transfer Card"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">4× Redstone, Ender Pearl, 2× Diamond, Speed Card, Gold Ingot</p>
+</div><div class="recipe" id="insurance_card">
+  <h3>Insurance Card</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="Speed Card"><img class="px" src="../assets/img/speed_card.png" alt="Speed Card"></span><span class="slot van" title="Totem Of Undying"><i style="background:#e6c84a"></i><em>Totem</em></span><span class="slot van" title="Ender Pearl"><i style="background:#1f8a70"></i><em>Ender Pearl</em></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot empty"></span><span class="slot empty"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Insurance Card"><img class="px" src="../assets/img/insurance_card.png" alt="Insurance Card"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Speed Card, Totem Of Undying, Ender Pearl, Diamond</p>
+</div><div class="recipe" id="tool_card">
+  <h3>Tool Card</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="Speed Card"><img class="px" src="../assets/img/speed_card.png" alt="Speed Card"></span><span class="slot van" title="Iron Pickaxe"><i style="background:#c9ced6"></i><em>Iron Pickaxe</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Diamond"><i style="background:#4fe3d8"></i><em>Diamond</em></span><span class="slot empty"></span><span class="slot empty"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Tool Card"><img class="px" src="../assets/img/tool_card.png" alt="Tool Card"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Speed Card, Iron Pickaxe, Redstone, Diamond</p>
+</div><div class="recipe" id="macro_card">
+  <h3>Macro Card</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="Speed Card"><img class="px" src="../assets/img/speed_card.png" alt="Speed Card"></span><span class="slot van" title="Repeater"><i style="background:#b9b9b9"></i><em>Repeater</em></span><span class="slot van" title="Ender Pearl"><i style="background:#1f8a70"></i><em>Ender Pearl</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot empty"></span><span class="slot empty"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Macro Card"><img class="px" src="../assets/img/macro_card.png" alt="Macro Card"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Speed Card, Repeater, Ender Pearl, Redstone</p>
+</div></div><h2 id="autocrafting">Autocrafting</h2>
+<div class="rlist"><div class="recipe" id="pattern">
+  <h3>Crafting Pattern</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Paper"><i style="background:#f4f1e8"></i><em>Paper</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Nugget"><i style="background:#aeb4bd"></i><em>Nugget</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Crafting Pattern"><img class="px" src="../assets/img/pattern_item.png" alt="Crafting Pattern"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Paper, Redstone, Iron Nugget</p>
+</div><div class="recipe" id="assembler">
+  <h3>Assembler</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Piston"><i style="background:#b08d57"></i><em>Piston</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Crafting Table"><i style="background:#9c6b3a"></i><em>Crafting Table</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Assembler"><img class="px" src="../assets/img/assembler_front.png" alt="Assembler"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">5× Iron Ingot, Piston, 2× Redstone, Crafting Table</p>
+</div><div class="recipe" id="pattern_provider">
+  <h3>Pattern Bus</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Hopper"><i style="background:#5b5f66"></i><em>Hopper</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span><span class="slot van" title="Iron Ingot"><i style="background:#c9ced6"></i><em>Iron</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Pattern Bus"><img class="px" src="../assets/img/pattern_provider.png" alt="Pattern Bus"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shaped">Shaped</span> Place exactly as shown</p>
+  <p class="rsum">4× Iron Ingot, 4× Redstone, Hopper</p>
+</div></div><h2 id="utility">Utility</h2>
+<div class="rlist"><div class="recipe" id="io_bus">
+  <h3>I/O Bus</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="Cable"><img class="px" src="../assets/img/cable.png" alt="Cable"></span><span class="slot van" title="Hopper"><i style="background:#5b5f66"></i><em>Hopper</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="I/O Bus"><img class="px" src="../assets/img/io_bus.png" alt="I/O Bus"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Cable, Hopper, Redstone</p>
+</div><div class="recipe" id="guide_book">
+  <h3>Simple Byte Storage Guide</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(2,var(--s))"><span class="slot van" title="Book"><i style="background:#8a5a3c"></i><em>Book</em></span><span class="slot" title="Cable"><img class="px" src="../assets/img/cable.png" alt="Cable"></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Simple Byte Storage Guide"><img class="px" src="../assets/img/guide_book.png" alt="Simple Byte Storage Guide"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Book, Cable</p>
+</div></div><h2 id="scripting-addon">Scripting addon</h2>
+<div class="rlist"><div class="recipe" id="logic_bus">
+  <h3>Logic Bus</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="I/O Bus"><img class="px" src="../assets/img/io_bus.png" alt="I/O Bus"></span><span class="slot van" title="Comparator"><i style="background:#b9b9b9"></i><em>Compar.</em></span><span class="slot van" title="Redstone"><i style="background:#e5383b"></i><em>Redstone</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Logic Bus"><img class="px" src="../assets/img/logic_bus.png" alt="Logic Bus"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">I/O Bus, Comparator, Redstone</p>
+</div><div class="recipe" id="logic_terminal">
+  <h3>Logic Terminal</h3>
+  <div class="rflow">
+    <div class="rgrid" style="grid-template-columns:repeat(3,var(--s))"><span class="slot" title="Terminal"><img class="px" src="../assets/img/terminal_front.png" alt="Terminal"></span><span class="slot van" title="Comparator"><i style="background:#b9b9b9"></i><em>Compar.</em></span><span class="slot van" title="Book"><i style="background:#8a5a3c"></i><em>Book</em></span></div>
+    <span class="rarrow">➜</span>
+    <span class="slot big" title="Logic Terminal"><img class="px" src="../assets/img/logic_terminal.png" alt="Logic Terminal"></span>
+  </div>
+  <p class="rmeta"><span class="rtag shapeless">Shapeless</span> Any arrangement works</p>
+  <p class="rsum">Terminal, Comparator, Book</p>
+</div></div>
+<p>All items are also available in the creative tabs <em>Simple Byte Storage</em> and <em>Simple Byte Storage: Scripting</em>.</p>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Recipes.md">docs/wiki/Recipes.md</a> in the mod repository.</p>

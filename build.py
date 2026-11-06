@@ -2,8 +2,8 @@
 """Build the documentation pages (docs/*.html) from the Markdown wiki in wiki-src/.
 
 Usage:
-    python3 build.py                       # uses ./wiki-src
-    python3 build.py /path/to/ByteStorage/docs/wiki   # refresh from the mod repo first
+    python3 build.py                          # uses ./wiki-src and ./data-src
+    python3 build.py /path/to/ByteStorage     # refresh wiki + recipes from the mod repo first
 
 Needs the `markdown` package (pip install markdown). The landing page (index.html)
 is hand-written and is not touched by this script.
@@ -18,10 +18,24 @@ SRC = ROOT / "wiki-src"
 OUT = ROOT / "docs"
 REPO = "https://github.com/Karatells/ByteStorage"
 
+sys.path.insert(0, str(ROOT))
+import recipes  # noqa: E402  (local module; path added explicitly so `python3 -I` works)
+
 if len(sys.argv) > 1:
-    new = Path(sys.argv[1])
-    for f in new.glob("*.md"):
+    arg = Path(sys.argv[1])
+    wiki = arg / "docs" / "wiki" if (arg / "docs" / "wiki").is_dir() else arg   # mod repo root or wiki dir
+    for f in wiki.glob("*.md"):
         shutil.copy(f, SRC / f.name)
+    if wiki != arg:                                                            # refresh recipe data from the mod repo
+        pairs = [(arg / "src/main/resources/data/simple_bytestorage/recipes", ROOT / "data-src/recipes"),
+                 (arg / "scripting/src/main/resources/data/simple_bytestorage_scripting/recipes", ROOT / "data-src/recipes-scripting")]
+        for src, dst in pairs:
+            if src.is_dir():
+                shutil.rmtree(dst, ignore_errors=True); shutil.copytree(src, dst)
+        for src, dst in [(arg / "src/main/resources/assets/simple_bytestorage/lang/en_us.json", "en_us.json"),
+                         (arg / "scripting/src/main/resources/assets/simple_bytestorage_scripting/lang/en_us.json", "scripting_en_us.json")]:
+            if src.is_file():
+                shutil.copy(src, ROOT / "data-src/lang" / dst)
 
 # ---- sidebar from the wiki's own _Sidebar.md -------------------------------
 groups, cur = [], None
@@ -106,6 +120,9 @@ for old in OUT.glob("*.html"):
     old.unlink()
 
 for slug in sorted(slugs):
+    if slug == "Recipes":        # generated from the mod's recipe JSON, with crafting-grid pictures
+        (OUT / "Recipes.html").write_text(recipes.render(PAGE, sidebar(slug), REPO), encoding="utf-8")
+        continue
     text = (SRC / f"{slug}.md").read_text(encoding="utf-8")
     # GitHub accepts 2-3 space nested lists; Python-Markdown needs 4
     src = re.sub(r"^( {2,3})(?=([-*]|\d+\.) )", "    ", text, flags=re.M)
