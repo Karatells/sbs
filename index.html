@@ -20,6 +20,7 @@
     <a class="brand" href="#top"><img class="brandlogo" src="assets/logo-256.png" alt="" width="32" height="32"> Simple Byte Storage</a>
     <nav class="links">
       <a href="#new"><span class="ru">Новое</span><span class="en">New</span></a>
+      <a href="#gallery"><span class="ru">Галерея</span><span class="en">Gallery</span></a>
       <a href="#worldgen"><span class="ru">Ресурсы</span><span class="en">Worldgen</span></a>
       <a href="#storage"><span class="ru">Хранение</span><span class="en">Storage</span></a>
       <a href="#blocks"><span class="ru">Блоки</span><span class="en">Blocks</span></a>
@@ -117,6 +118,68 @@
     </p>
   </div>
 </section>
+
+<section id="gallery">
+  <div class="wrap">
+    <h2><span class="ru">Галерея скриншотов</span><span class="en">Screenshot gallery</span></h2>
+    <p class="sub">
+      <span class="ru">Все 30 внутриигровых кадров Simple Byte Storage 1.3.0: рабочая база, биом Кремниевый разлом, руды и каждый интерфейс мода. Нажмите на любой снимок для полноэкранного просмотра.</span>
+      <span class="en">All 30 in-game screenshots of Simple Byte Storage 1.3.0: a full working network, the Silicon Rift biome, ores, and every GUI screen. Click any image to view fullscreen.</span>
+    </p>
+    <div class="gal-tabs" id="galTabs" role="tablist">
+      <button class="gal-tab active" data-cat="all"><span class="ru">Все (30)</span><span class="en">All (30)</span></button>
+      <button class="gal-tab" data-cat="world"><span class="ru">Мир и блоки (6)</span><span class="en">World &amp; Blocks (6)</span></button>
+      <button class="gal-tab" data-cat="controller"><span class="ru">Контроллер (7)</span><span class="en">Controller (7)</span></button>
+      <button class="gal-tab" data-cat="storage"><span class="ru">Хранение и терминалы (6)</span><span class="en">Storage &amp; Terminals (6)</span></button>
+      <button class="gal-tab" data-cat="autocraft"><span class="ru">Автокрафт и шины (6)</span><span class="en">Autocrafting &amp; Buses (6)</span></button>
+      <button class="gal-tab" data-cat="network"><span class="ru">Сеть и утилиты (5)</span><span class="en">Network &amp; Tools (5)</span></button>
+    </div>
+    <div class="gallery" id="galleryGrid">
+      <button class="gitem" data-cat="world" data-src="assets/screenshots/01_network_base_overview.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/01_network_base_overview.png" alt="Full network base"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Общий план базы</span><span class="en">Full network base</span><small><span class="ru">Все устройства сети 1.3.0 в работе</span><span class="en">All 1.3.0 network blocks running together</span></small></div></button>
+      <button class="gitem" data-cat="world" data-src="assets/screenshots/02_network_closeup_left.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/02_network_closeup_left.png" alt="Power and autocrafting bay"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Энергия и автокрафт</span><span class="en">Power &amp; autocrafting bay</span><small><span class="ru">Конденсатор, Ассемблер, Сопроцессор, шины</span><span class="en">Capacitor, Assembler, Co-Processor &amp; buses</span></small></div></button>
+      <button class="gitem" data-cat="world" data-src="assets/screenshots/03_network_closeup_right.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/03_network_closeup_right.png" alt="Terminals and quantum bay"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Терминалы и квантовый узел</span><span class="en">Terminals &amp; quantum bay</span><small><span class="ru">Терминалы, Верстак, Безопасность, Монитор, Ретранслятор</span><span class="en">Terminals, Workbench, Security, Display &amp; Relay</span></small></div></button>
+      <button class="gitem" data-cat="world" data-src="assets/screenshots/04_controller_states.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/04_controller_states.png" alt="Controller grid states"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Состояния Контроллера</span><span class="en">Controller states</span><small>ONLINE · OFFLINE · CONFLICT</small></div></button>
+      <button class="gitem" data-cat="world" data-src="assets/screenshots/05_biome_silicon_rift.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/05_biome_silicon_rift.png" alt="Silicon Rift biome"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Биом «Кремниевый разлом»</span><span class="en">Silicon Rift biome</span><small><span class="ru">Силикатная корка, квантовый кварц, контурные цветы</span><span class="en">Silicate Crust, Quantum Clusters &amp; Circuit Blooms</span></small></div></button>
+      <button class="gitem" data-cat="world" data-src="assets/screenshots/06_worldgen_ores_and_blocks.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/06_worldgen_ores_and_blocks.png" alt="Ores and worldgen blocks"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Руды и блоки 1.3.0</span><span class="en">1.3.0 Ores &amp; world blocks</span><small><span class="ru">Байтит, сланец, блок Байтита, ресурсы разлома</span><span class="en">Bytite Ore, Deepslate Ore, Bytite Block &amp; Rift blocks</span></small></div></button>
+
+      <button class="gitem" data-cat="controller" data-src="assets/screenshots/07_gui_controller_overview.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/07_gui_controller_overview.png" alt="Controller Overview"><span class="gcat"><span class="ru">Контроллер</span><span class="en">Controller</span></span></div><div class="gcap"><span class="ru">Контроллер — Обзор</span><span class="en">Controller — Overview</span><small><span class="ru">Статус, энергия, слоты Беспроводного терминала и Библиотеки</span><span class="en">Status, energy, Wireless &amp; Recipe Library slots</span></small></div></button>
+      <button class="gitem" data-cat="controller" data-src="assets/screenshots/08_gui_controller_storage.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/08_gui_controller_storage.png" alt="Controller Storage"><span class="gcat"><span class="ru">Контроллер</span><span class="en">Controller</span></span></div><div class="gcap"><span class="ru">Контроллер — Склад</span><span class="en">Controller — Storage</span><small><span class="ru">Загрузка дисков, типы и топ предметов</span><span class="en">Disk usage bar, item types &amp; top items</span></small></div></button>
+      <button class="gitem" data-cat="controller" data-src="assets/screenshots/09_gui_controller_crafting.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/09_gui_controller_crafting.png" alt="Controller Crafting"><span class="gcat"><span class="ru">Контроллер</span><span class="en">Controller</span></span></div><div class="gcap"><span class="ru">Контроллер — Крафт</span><span class="en">Controller — Crafting</span><small><span class="ru">Шаблоны, ассемблеры, очередь и приоритеты</span><span class="en">Patterns, Assemblers, queue &amp; priorities</span></small></div></button>
+      <button class="gitem" data-cat="controller" data-src="assets/screenshots/10_gui_controller_recipes.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/10_gui_controller_recipes.png" alt="Controller Recipes"><span class="gcat"><span class="ru">Контроллер</span><span class="en">Controller</span></span></div><div class="gcap"><span class="ru">Контроллер — Рецепты</span><span class="en">Controller — Recipes</span><small><span class="ru">Чёрный список, предпочтения и пропуск распаковки</span><span class="en">Blacklist, preferred ingredients &amp; skip unpacking</span></small></div></button>
+      <button class="gitem" data-cat="controller" data-src="assets/screenshots/11_gui_controller_stock.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/11_gui_controller_stock.png" alt="Controller Stock"><span class="gcat"><span class="ru">Контроллер</span><span class="en">Controller</span></span></div><div class="gcap"><span class="ru">Контроллер — Запас</span><span class="en">Controller — Stock</span><small><span class="ru">Правила запаса и расписание запуска</span><span class="en">Auto-stock rules &amp; schedule selector</span></small></div></button>
+      <button class="gitem" data-cat="controller" data-src="assets/screenshots/12_gui_controller_journal.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/12_gui_controller_journal.png" alt="Controller Journal"><span class="gcat"><span class="ru">Контроллер</span><span class="en">Controller</span></span></div><div class="gcap"><span class="ru">Контроллер — Журнал</span><span class="en">Controller — Journal</span><small><span class="ru">События автокрафта, скриптов и предупреждения</span><span class="en">Autocrafting, script &amp; alert event log</span></small></div></button>
+      <button class="gitem" data-cat="controller" data-src="assets/screenshots/13_gui_controller_graphs.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/13_gui_controller_graphs.png" alt="Controller Graphs"><span class="gcat"><span class="ru">Контроллер</span><span class="en">Controller</span></span></div><div class="gcap"><span class="ru">Контроллер — Графики</span><span class="en">Controller — Graphs</span><small><span class="ru">История предметов и энергии (сохраняется в NBT)</span><span class="en">Item &amp; energy history graphs (persisted in NBT)</span></small></div></button>
+
+      <button class="gitem" data-cat="storage" data-src="assets/screenshots/14_gui_terminal.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/14_gui_terminal.png" alt="Terminal GUI"><span class="gcat"><span class="ru">Хранение</span><span class="en">Storage</span></span></div><div class="gcap"><span class="ru">Терминал</span><span class="en">Terminal</span><small><span class="ru">Поиск, сортировка, сохранённые запросы и крафт-слоты</span><span class="en">Search, sorting, saved queries &amp; craftable items</span></small></div></button>
+      <button class="gitem" data-cat="storage" data-src="assets/screenshots/15_gui_crafting_terminal.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/15_gui_crafting_terminal.png" alt="Crafting Terminal GUI"><span class="gcat"><span class="ru">Хранение</span><span class="en">Storage</span></span></div><div class="gcap"><span class="ru">Терминал крафта</span><span class="en">Crafting Terminal</span><small><span class="ru">Встроенная сетка 3×3 с доступом к пулу сети</span><span class="en">Built-in 3×3 grid pulling directly from storage</span></small></div></button>
+      <button class="gitem" data-cat="storage" data-src="assets/screenshots/16_gui_drive.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/16_gui_drive.png" alt="Drive GUI"><span class="gcat"><span class="ru">Хранение</span><span class="en">Storage</span></span></div><div class="gcap"><span class="ru">Накопитель</span><span class="en">Drive</span><small><span class="ru">Ячейки 1k–1M, жидкостные 1k–64k, Void-карта и приоритет</span><span class="en">1k–1M item cells, 1k–64k fluid cells, Void Card &amp; priority</span></small></div></button>
+      <button class="gitem" data-cat="storage" data-src="assets/screenshots/17_gui_cell_workbench.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/17_gui_cell_workbench.png" alt="Cell Workbench GUI"><span class="gcat"><span class="ru">Хранение</span><span class="en">Storage</span></span></div><div class="gcap"><span class="ru">Верстак ячеек</span><span class="en">Cell Workbench</span><small><span class="ru">Индивидуальный NBT-фильтр на 9 слотов</span><span class="en">Per-cell 9-slot Allow/Deny NBT filter</span></small></div></button>
+      <button class="gitem" data-cat="storage" data-src="assets/screenshots/18_gui_storage_bus.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/18_gui_storage_bus.png" alt="Storage Bus GUI"><span class="gcat"><span class="ru">Хранение</span><span class="en">Storage</span></span></div><div class="gcap"><span class="ru">Шина хранения</span><span class="en">Storage Bus</span><small><span class="ru">Подключение внешних сундуков с приоритетом и фильтром</span><span class="en">External chest integration with priority &amp; filter</span></small></div></button>
+      <button class="gitem" data-cat="storage" data-src="assets/screenshots/19_gui_archiver.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/19_gui_archiver.png" alt="Byte Archiver GUI"><span class="gcat"><span class="ru">Хранение</span><span class="en">Storage</span></span></div><div class="gcap"><span class="ru">Байтовый архиватор</span><span class="en">Byte Archiver</span><small><span class="ru">Сжатие массовых предметов 64:1 в Data Blob</span><span class="en">Compresses bulk stock 64:1 into Data Blobs</span></small></div></button>
+
+      <button class="gitem" data-cat="autocraft" data-src="assets/screenshots/20_gui_pattern_encoding_terminal.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/20_gui_pattern_encoding_terminal.png" alt="Pattern Encoding Terminal"><span class="gcat"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></span></div><div class="gcap"><span class="ru">Терминал кодирования</span><span class="en">Pattern Encoding Terminal</span><small><span class="ru">Режимы «Верстак» и «Процесс» + кнопка JEI</span><span class="en">Crafting &amp; Processing modes with JEI fill</span></small></div></button>
+      <button class="gitem" data-cat="autocraft" data-src="assets/screenshots/21_gui_pattern_terminal.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/21_gui_pattern_terminal.png" alt="Pattern Terminal"><span class="gcat"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></span></div><div class="gcap"><span class="ru">Терминал шаблонов</span><span class="en">Pattern Terminal</span><small><span class="ru">Все рецепты сети, фильтр «Готовые» и вкладка очереди</span><span class="en">All network recipes, Ready filter &amp; Queue tab</span></small></div></button>
+      <button class="gitem" data-cat="autocraft" data-src="assets/screenshots/22_gui_assembler.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/22_gui_assembler.png" alt="Assembler GUI"><span class="gcat"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></span></div><div class="gcap"><span class="ru">Ассемблер</span><span class="en">Assembler</span><small><span class="ru">Буферная ячейка и 4 Карты ускорения</span><span class="en">Buffer cell and 4 Speed Cards installed</span></small></div></button>
+      <button class="gitem" data-cat="autocraft" data-src="assets/screenshots/23_gui_pattern_bus.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/23_gui_pattern_bus.png" alt="Pattern Bus GUI"><span class="gcat"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></span></div><div class="gcap"><span class="ru">Шина шаблонов</span><span class="en">Pattern Bus</span><small><span class="ru">9 слотов, Blocking Mode и режим обучения</span><span class="en">9 slots, Blocking Mode &amp; Learning mode</span></small></div></button>
+      <button class="gitem" data-cat="autocraft" data-src="assets/screenshots/24_gui_io_bus.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/24_gui_io_bus.png" alt="I/O Bus GUI"><span class="gcat"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></span></div><div class="gcap"><span class="ru">I/O-шина</span><span class="en">I/O Bus</span><small><span class="ru">Карты ускорения, Allow/Deny и редстоун-контроль</span><span class="en">Speed Cards, Allow/Deny &amp; Redstone control</span></small></div></button>
+      <button class="gitem" data-cat="autocraft" data-src="assets/screenshots/25_gui_fluid_io_bus.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/25_gui_fluid_io_bus.png" alt="Fluid I/O Bus GUI"><span class="gcat"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></span></div><div class="gcap"><span class="ru">Жидкостная I/O-шина</span><span class="en">Fluid I/O Bus</span><small><span class="ru">Импорт/экспорт жидкостей 1 000 mB за цикл</span><span class="en">Fluid import/export at 1,000 mB per cycle</span></small></div></button>
+
+      <button class="gitem" data-cat="network" data-src="assets/screenshots/26_gui_quantum_relay.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/26_gui_quantum_relay.png" alt="Quantum Relay GUI"><span class="gcat"><span class="ru">Сеть</span><span class="en">Network</span></span></div><div class="gcap"><span class="ru">Квантовый ретранслятор</span><span class="en">Quantum Relay</span><small><span class="ru">Связанный Запутанный кристалл и счётчик узлов</span><span class="en">Paired Entangled Crystal &amp; linked relay count</span></small></div></button>
+      <button class="gitem" data-cat="network" data-src="assets/screenshots/27_gui_security_terminal.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/27_gui_security_terminal.png" alt="Security Terminal GUI"><span class="gcat"><span class="ru">Сеть</span><span class="en">Network</span></span></div><div class="gcap"><span class="ru">Терминал безопасности</span><span class="en">Security Terminal</span><small><span class="ru">Владелец сети и переключатель Locked / Public</span><span class="en">Network owner &amp; Locked / Public toggle</span></small></div></button>
+      <button class="gitem" data-cat="network" data-src="assets/screenshots/28_gui_network_display.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/28_gui_network_display.png" alt="Network Display GUI"><span class="gcat"><span class="ru">Сеть</span><span class="en">Network</span></span></div><div class="gcap"><span class="ru">Монитор сети</span><span class="en">Network Display</span><small><span class="ru">6 строк текста, управляемых из скриптов</span><span class="en">6 script-driven status lines</span></small></div></button>
+      <button class="gitem" data-cat="network" data-src="assets/screenshots/29_gui_wireless_settings.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/29_gui_wireless_settings.png" alt="Wireless Settings GUI"><span class="gcat"><span class="ru">Сеть</span><span class="en">Network</span></span></div><div class="gcap"><span class="ru">Беспроводной терминал</span><span class="en">Wireless Terminal Settings</span><small><span class="ru">Установленные карты улучшений и вкладки</span><span class="en">Installed upgrade cards &amp; tabs</span></small></div></button>
+      <button class="gitem" data-cat="network" data-src="assets/screenshots/30_gui_guide_book.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/30_gui_guide_book.png" alt="Guide Book GUI"><span class="gcat"><span class="ru">Сеть</span><span class="en">Network</span></span></div><div class="gcap"><span class="ru">Книга-справочник</span><span class="en">In-game Guide Book</span><small><span class="ru">Полное руководство прямо в игре</span><span class="en">Built-in manual for every feature</span></small></div></button>
+    </div>
+  </div>
+</section>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+  <div class="lb-stage"><img class="lb-img" id="lbImg" src="" alt=""></div>
+  <div class="lb-bar"><span class="lb-title" id="lbTitle"></span><span class="lb-count" id="lbCount"></span></div>
+</div>
 
 <section id="idea">
   <div class="wrap">
@@ -430,6 +493,70 @@ function onAlert(ev) {
   var saved=null;try{saved=localStorage.getItem('sbs-lang')}catch(e){}
   set(saved==='ru'?'ru':'en');
   btn.addEventListener('click',function(){set(root.getAttribute('data-lang')==='ru'?'en':'ru')});
+
+  // Gallery category filter + Lightbox
+  var tabs=document.querySelectorAll('#galTabs .gal-tab');
+  var items=Array.prototype.slice.call(document.querySelectorAll('#galleryGrid .gitem'));
+  var visible=items.slice(), curIdx=0;
+  var lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'),
+      lbTitle=document.getElementById('lbTitle'), lbCount=document.getElementById('lbCount');
+
+  function applyFilter(cat){
+    visible=[];
+    items.forEach(function(el){
+      var show=(cat==='all'||el.getAttribute('data-cat')===cat);
+      el.classList.toggle('hidden',!show);
+      if(show)visible.push(el);
+    });
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){x.classList.remove('active')});
+      t.classList.add('active');
+      applyFilter(t.getAttribute('data-cat'));
+    });
+  });
+
+  function showLb(idx){
+    if(!visible.length)return;
+    curIdx=(idx+visible.length)%visible.length;
+    var el=visible[curIdx];
+    lbImg.src=el.getAttribute('data-src');
+    var lang=root.getAttribute('data-lang')==='ru'?'ru':'en';
+    var cap=el.querySelector('.gcap > .'+lang);
+    lbTitle.textContent=cap?cap.textContent:el.querySelector('img').alt;
+    lbCount.textContent=(curIdx+1)+' / '+visible.length;
+    lb.classList.add('open');
+    document.body.classList.add('no-scroll');
+  }
+  function closeLb(){
+    lb.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+  }
+  items.forEach(function(el){
+    el.addEventListener('click',function(){
+      var i=visible.indexOf(el);
+      if(i>=0)showLb(i);
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click',closeLb);
+  document.getElementById('lbPrev').addEventListener('click',function(){showLb(curIdx-1)});
+  document.getElementById('lbNext').addEventListener('click',function(){showLb(curIdx+1)});
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')closeLb();
+    else if(e.key==='ArrowLeft')showLb(curIdx-1);
+    else if(e.key==='ArrowRight')showLb(curIdx+1);
+  });
+  var touchX=null;
+  lb.addEventListener('touchstart',function(e){if(e.touches.length===1)touchX=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){
+    if(touchX===null)return;
+    var dx=e.changedTouches[0].clientX-touchX;
+    touchX=null;
+    if(Math.abs(dx)>45)showLb(curIdx+(dx<0?1:-1));
+  },{passive:true});
 })();
 </script>
 </body>

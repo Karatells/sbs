@@ -71,18 +71,22 @@ PAGE = """<!doctype html>
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="../index.html"><img class="brandlogo" src="../assets/logo-256.png" alt="" width="32" height="32"> Simple Byte Storage</a>
-    <nav class="links">
+    <nav class="links doc-links">
       <a href="../index.html">Home</a>
       <a href="Home.html">Documentation</a>
       <a href="{repo}/releases/latest">Download</a>
       <a href="{repo}">GitHub</a>
     </nav>
+    <button class="lang nav-menu-btn" id="menuBtn" aria-label="Documentation menu" aria-expanded="false">☰ Pages</button>
   </div>
 </header>
+<div class="side-backdrop" id="sideBackdrop"></div>
 <div class="wrap doc">
-  <aside class="side" id="side">{sidebar}</aside>
+  <aside class="side" id="side">
+    <div class="side-head"><span>Documentation</span><button class="side-close" id="sideClose" aria-label="Close">✕</button></div>
+    {sidebar}
+  </aside>
   <main class="prose">
-    <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
     {body}
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
@@ -93,7 +97,20 @@ PAGE = """<!doctype html>
 <div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
 <script src="../assets/vendor/highlight.min.js" defer></script>
 <script>
-document.getElementById('menuBtn').addEventListener('click',function(){{document.getElementById('side').classList.toggle('open')}});
+(function(){{
+  var side=document.getElementById('side'), bd=document.getElementById('sideBackdrop'),
+      btn=document.getElementById('menuBtn'), closeBtn=document.getElementById('sideClose');
+  function setOpen(v){{
+    side.classList.toggle('open',v);
+    bd.classList.toggle('open',v);
+    document.body.classList.toggle('no-scroll',v);
+    btn.setAttribute('aria-expanded',v?'true':'false');
+  }}
+  btn.addEventListener('click',function(){{setOpen(!side.classList.contains('open'))}});
+  bd.addEventListener('click',function(){{setOpen(false)}});
+  closeBtn.addEventListener('click',function(){{setOpen(false)}});
+  document.addEventListener('keydown',function(e){{if(e.key==='Escape')setOpen(false)}});
+}})();
 </script>
 </body>
 </html>
