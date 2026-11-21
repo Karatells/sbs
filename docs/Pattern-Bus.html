@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -53,13 +54,17 @@
 <h2 id="setup">Setup<a class="anchor" href="#setup" title="Permanent link">#</a></h2>
 <ol>
 <li>Place the Pattern Bus <strong>touching the machine</strong> and connect it to the network.</li>
-<li>Put encoded <strong>processing</strong> patterns (made in the <a href="Autocrafting.html#pattern-encoding-terminal">Encoding Terminal</a>) into its <strong>9 slots</strong>.</li>
-<li>Order the craft from the <a href="Autocrafting.html#pattern-terminal">Pattern Terminal</a>.</li>
+<li>Put encoded <strong>processing</strong> patterns (made in the <a href="Autocrafting.html#pattern-encoding-terminal">Encoding Terminal</a>) into its <strong>9 slots</strong>, or record one with <a href="Autocrafting.html#learning-mode-pattern-bus">Learning Mode</a>.</li>
+<li>Order the craft from the <a href="Autocrafting.html#pattern-terminal">Pattern Terminal</a> or any Terminal.</li>
 </ol>
 <h2 id="what-it-does">What it does<a class="anchor" href="#what-it-does" title="Permanent link">#</a></h2>
-<p>For each craft the provider takes the inputs from the network, pushes them into the adjacent machine, and later extracts the expected outputs from <strong>any side</strong> of the machine and sends them to the network.</p>
+<p>For each craft the bus takes the inputs from the network, pushes them into the adjacent machine, and later extracts the expected outputs from <strong>any side</strong> of the machine and sends them to the network.</p>
+<h3 id="blocking-mode">Blocking Mode<a class="anchor" href="#blocking-mode" title="Permanent link">#</a></h3>
+<p>Toggle <strong>Block: ON / OFF</strong> in the Pattern Bus GUI. When enabled, the bus will <strong>not</strong> push the next craft's ingredients while the adjacent machine still contains non-output items — essential for machines that mix recipes if multiple sets of ingredients are inserted at once.</p>
 <h3 id="powering-the-machine">Powering the machine<a class="anchor" href="#powering-the-machine" title="Permanent link">#</a></h3>
 <p>The bus also <strong>charges</strong> adjacent machines that have an energy buffer (electric furnace, crusher, ...) with the network's energy (up to 1,000 FE/t, only as much as the machine accepts). The network always keeps a reserve for its own consumption, so machines cannot black it out. To power a machine that has no Pattern Bus next to it, use the <a href="Network-and-Power.html#energy-interface">Energy Interface</a>.</p>
+<h3 id="stuck-detection">Stuck detection<a class="anchor" href="#stuck-detection" title="Permanent link">#</a></h3>
+<p>If a Pattern Bus waits for ingredients for more than <strong>30 seconds</strong>, or finds no adjacent machine willing to accept inputs for more than <strong>60 seconds</strong>, it logs a <strong>Stuck</strong> entry in the Controller's Journal, sends a chat warning to Wireless Terminal holders, and triggers <code>onAlert(e)</code> in scripts.</p>
 <table>
 <thead>
 <tr>
@@ -90,7 +95,7 @@
 </tr>
 </tbody>
 </table>
-<p>If several providers hold the same pattern, orders are balanced to the one with the least pending crafts.</p>
+<p>If several buses hold the same pattern, orders are balanced to the one with the least pending crafts.</p>
 <h2 id="tips">Tips<a class="anchor" href="#tips" title="Permanent link">#</a></h2>
 <ul>
 <li>The machine must expose an item handler (inventory capability) on the face that touches the bus.</li>

@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -50,28 +51,29 @@
     <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
     <h1 id="simple-byte-storage">Simple Byte Storage<a class="anchor" href="#simple-byte-storage" title="Permanent link">#</a></h1>
 <p><strong>Simple Byte Storage</strong> is a storage and autocrafting mod for <strong>Minecraft 1.20.1 (Forge 47.2+)</strong>.</p>
-<p>Its core idea is simple: <strong>1 item = 1 byte</strong>. There is no limit on the number of <em>different</em> item types in your network, only on the total number of items (bytes) your storage cells can hold.</p>
-<p>An optional addon, <strong>Simple Byte Storage: Scripting</strong>, adds a Logic Bus and a Logic Terminal that run JavaScript to move items around your network.</p>
+<p>Its core idea is simple: <strong>1 item = 1 byte</strong>. There is no limit on the number of <em>different</em> item types in your network, only on the total number of items (bytes) your storage cells can hold. The same rule extends to fluids (<strong>1,000 mB = 1 byte</strong>, unlimited fluid types).</p>
+<p>An optional addon, <strong>Simple Byte Storage: Scripting</strong>, adds a Logic Bus and a Logic Terminal with a full JavaScript code editor to automate inventories, autocrafting, redstone, persistent storage, and Network Displays.</p>
 <h2 id="contents">Contents<a class="anchor" href="#contents" title="Permanent link">#</a></h2>
 <p><strong>Getting started</strong>
-- <a href="Downloads.html">Downloads</a> — releases, requirements, installation
+- <a href="Downloads.html">Downloads</a> — releases, requirements, installation, version history
 - <a href="Getting-Started.html">Getting Started</a> — your first network in five minutes
-- <a href="Recipes.html">Recipes</a> — every crafting recipe</p>
+- <a href="Worldgen.html">World &amp; Materials</a> — Bytite Ore, Silicon Rift resources, progression, advancements
+- <a href="Recipes.html">Recipes</a> — every crafting, smelting, and blasting recipe</p>
 <p><strong>Core mod</strong>
-- <a href="Network-and-Power.html">Network and Power</a> — controller, cables, energy, grid states
-- <a href="Storage.html">Storage</a> — drives, cells, priority, whitelist
-- <a href="Terminals.html">Terminals</a> — Terminal, Crafting Terminal
-- <a href="Network-Controller.html">Network Controller GUI</a> — stats screen and wireless slot
-- <a href="Wireless-Terminal.html">Wireless Terminal</a> — binding, charging, Auto-Transfer upgrade
-- <a href="Autocrafting.html">Autocrafting</a> — patterns, encoding, ordering, sub-crafts, queue
-- <a href="Assembler.html">Assembler</a> — crafting-table patterns, speed cards
-- <a href="Pattern-Bus.html">Pattern Bus</a> — machine (processing) crafts
-- <a href="IO-Bus.html">I/O Bus</a>
+- <a href="Network-and-Power.html">Network and Power</a> — controller, cables, Energy Interface, Capacitor, Eco Mode, Quantum Relay, Security Terminal, Network Analyzer, Network Display
+- <a href="Storage.html">Storage</a> — drives, 1k–1M cells, Fluid Byte Cells, Cell Workbench, Void/Lock cards, Storage Bus, Byte Archiver
+- <a href="Terminals.html">Terminals</a> — Terminal, Crafting Terminal, search syntax, saved searches, tooltips, Max button
+- <a href="Network-Controller.html">Network Controller GUI</a> — 7 tabs (Overview, Storage, Crafting, Recipes, Stock, Journal, Graphs)
+- <a href="Wireless-Terminal.html">Wireless Terminal</a> — binding, charging, Auto-Transfer, Insurance, Tool, Macro cards
+- <a href="Autocrafting.html">Autocrafting</a> — patterns, encoding, ordering, sub-craft tree, resource reservation, Crafting Co-Processor
+- <a href="Assembler.html">Assembler</a> — crafting-table patterns, Speed Cards, Crafting Co-Processors
+- <a href="Pattern-Bus.html">Pattern Bus</a> — machine crafts, learning mode, Blocking Mode, stuck detection
+- <a href="IO-Bus.html">I/O Bus</a> — item import/export, Speed Cards, Allow/Deny filter, redstone control
 - <a href="JEI-Integration.html">JEI Integration</a>
 - <a href="Guide-Book.html">Guide Book</a> — the in-game manual</p>
 <p><strong>Scripting addon</strong>
-- <a href="Scripting-Overview.html">Scripting Overview</a>
-- <a href="Scripting-API.html">Scripting API</a>
+- <a href="Scripting-Overview.html">Scripting Overview</a> — Logic Bus, Logic Terminal, code editor, identifiers
+- <a href="Scripting-API.html">Scripting API</a> — <code>net</code>, <code>stock</code>, <code>recipes</code>, <code>journal</code>, <code>store</code>, <code>redstone</code>, <code>display</code>, events
 - <a href="Scripting-Examples.html">Scripting Examples</a>
 - <a href="Scripting-Administration.html">Scripting Administration</a> — config, security model, limits</p>
 <p><strong>Other</strong>
@@ -87,6 +89,10 @@
 </thead>
 <tbody>
 <tr>
+<td>Current version</td>
+<td><strong>1.3.0</strong></td>
+</tr>
+<tr>
 <td>Minecraft / Loader</td>
 <td>1.20.1 / Forge 47.2.0+</td>
 </tr>
@@ -100,7 +106,7 @@
 </tr>
 <tr>
 <td>Storage model</td>
-<td>1 item = 1 byte, unlimited item types</td>
+<td>1 item = 1 byte (1,000 mB = 1 byte for fluids), unlimited types</td>
 </tr>
 <tr>
 <td>Languages</td>

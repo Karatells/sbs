@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -135,7 +136,13 @@
 - cannot be taken out by terminals, I/O Buses or the Wireless Terminal (the terminal simply shows less available);
 - are not counted when a <em>new</em> order is planned, so two orders can no longer both rely on the same iron;
 - are still used by the Assemblers and Pattern Buses for crafting, and the reservation shrinks as they take the items.</p>
-<p>Cancelling an order releases what is left of its reservation; when the whole craft queue is empty all reservations are cleared automatically. Reservations are not saved: after a world reload they are gone, while the queue itself remains. Intermediate items (e.g. sticks made for a pickaxe) are not reserved while they sit in the storage.</p>
+<p>Cancelling an order releases what is left of its reservation; when the whole craft queue is empty all reservations are cleared automatically. Reservations are saved with the Controller, so they survive world reloads together with the queue (a reservation whose order no longer exists is dropped as soon as the queue is empty). Intermediate items (e.g. sticks made for a pickaxe) are not reserved while they sit in the storage.</p>
+<h2 id="crafting-co-processor-blocking-mode">Crafting Co-Processor &amp; Blocking Mode<a class="anchor" href="#crafting-co-processor-blocking-mode" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Crafting Co-Processor (<code>crafting_coprocessor</code>)</strong>: each co-processor on the network reduces Assembler craft time alongside Speed Cards (costs 8 FE/t).</li>
+<li><strong>Pattern Bus Blocking Mode</strong>: toggle <strong>Block: ON/OFF</strong> in the Pattern Bus GUI to prevent pushing the next craft's ingredients while the adjacent machine still contains input items.</li>
+<li><strong>Crafting Plan Tree</strong>: the order confirmation dialog highlights sub-craft hierarchy (<code>├</code>, <code>└</code>, <code>▶</code>) for easier inspection.</li>
+</ul>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Autocrafting.md">docs/wiki/Autocrafting.md</a> in the mod repository.</p>

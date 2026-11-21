@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -59,28 +60,45 @@
 </thead>
 <tbody>
 <tr>
-<td>Cycle</td>
-<td>every 10 ticks</td>
+<td>Base cycle</td>
+<td>every 10 ticks (<code>max(2, 10 - 2 × speed_cards)</code>)</td>
 </tr>
 <tr>
 <td>Items per cycle</td>
-<td>64</td>
+<td><code>64 × (1 + speed_cards)</code> (64 up to 320)</td>
 </tr>
 <tr>
 <td>Filter slots</td>
 <td>9 (ghost slots)</td>
 </tr>
+<tr>
+<td>Upgrade slots</td>
+<td>4 (Speed Cards)</td>
+</tr>
+<tr>
+<td>Idle drain</td>
+<td>2 FE/t</td>
+</tr>
 </tbody>
 </table>
 <h2 id="modes-toggle-with-the-button">Modes (toggle with the button)<a class="anchor" href="#modes-toggle-with-the-button" title="Permanent link">#</a></h2>
 <h3 id="import">Import<a class="anchor" href="#import" title="Permanent link">#</a></h3>
-<p>Pulls items from the neighbouring inventory into the network. With the filter <strong>empty, everything is imported</strong>; otherwise only filtered items.</p>
+<p>Pulls items from the neighbouring inventory into the network. Supports an <strong>Allow / Deny</strong> toggle:
+- <strong>Allow (Whitelist)</strong>: only listed items are imported (empty filter = imports everything).
+- <strong>Deny (Blacklist)</strong>: imports everything <em>except</em> the listed items.</p>
 <h3 id="export">Export<a class="anchor" href="#export" title="Permanent link">#</a></h3>
-<p>Keeps the listed items stocked in the neighbouring inventory. The <strong>count in a filter slot is the amount to keep</strong>. The bus tops up from the network when the inventory has less than that.</p>
+<p>Keeps the listed items stocked in the neighbouring inventory. The <strong>count in a filter slot is the amount to keep</strong>. Left-click sets the stack count, right-click adds 1. The bus tops up from the network when the inventory has less than that.</p>
+<h2 id="speed-cards-redstone-control">Speed Cards &amp; Redstone Control<a class="anchor" href="#speed-cards-redstone-control" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Speed Cards (up to 4)</strong>: each card reduces the cycle interval by 2 ticks (10 → 8 → 6 → 4 → 2 ticks) and adds +64 items per cycle (64 → 128 → 192 → 256 → 320 items/cycle). Cards drop when the block is broken.</li>
+<li><strong>Redstone control</strong>: click the <code>RS</code> button to cycle between <strong>RS: Always</strong>, <strong>RS: High</strong> (active only with a redstone signal), and <strong>RS: Low</strong> (active only without a redstone signal).</li>
+</ul>
 <h2 id="notes">Notes<a class="anchor" href="#notes" title="Permanent link">#</a></h2>
 <ul>
 <li>The bus works on <strong>every adjacent inventory</strong> (not other network devices).</li>
-<li>The status line shows whether a machine/inventory is connected and the network is online.</li>
+<li>Automatically pauses when the network enters <strong>Eco Mode</strong> (Controller energy <code>&lt; 10%</code>).</li>
+<li>For fluids, use the <a href="Storage.html#fluid-storage">Fluid I/O Bus</a>.</li>
+<li>For connecting an external inventory directly as storage without moving items, use the <a href="Storage.html#storage-bus">Storage Bus</a>.</li>
 <li>For logic that goes beyond filters (thresholds, conditions, auto-crafting), see the <a href="Scripting-Overview.html">Scripting addon</a>.</li>
 </ul>
     <hr>

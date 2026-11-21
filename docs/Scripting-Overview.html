@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -145,8 +146,8 @@ function tick() {
 }
 </code></pre>
 <ul>
-<li>A script <strong>must define <code>function tick()</code></strong>, otherwise the bus reports an error.</li>
-<li><strong>Global variables persist</strong> between runs, but are reset when the script is saved, the world reloads, or the bus is restarted (the top level runs again).</li>
+<li>A script must define <strong><code>function tick()</code></strong> or at least one event handler (<strong><code>onCraft(e)</code></strong>, <strong><code>onLowStock(e)</code></strong>, <strong><code>onAlert(e)</code></strong>), otherwise the bus reports an error.</li>
+<li><strong>Global variables persist</strong> between runs, but are reset when the script is saved, the world reloads, or the bus is restarted (the top level runs again). For data that survives world reloads, use <strong><code>store.get</code> / <code>store.set</code></strong> (saved in the Logic Bus NBT).</li>
 <li>The default interval is 20 ticks (1 s). The server enforces a minimum (default 10 ticks); max 1,200.</li>
 <li>A bus runs only while it is <strong>enabled</strong>, its network is <strong>online</strong>, and scripting is <strong>enabled</strong> in the config.</li>
 <li>Any error, or exceeding a limit, <strong>stops the bus</strong>, sets the status to <code>ERROR: &lt;reason&gt;</code> and writes it to the log.</li>
@@ -184,6 +185,43 @@ function tick() {
 </table>
 <h2 id="persistence">Persistence<a class="anchor" href="#persistence" title="Permanent link">#</a></h2>
 <p>Script text, identifier, enabled flag and interval are stored in the block entity's NBT. Script variables and the log are <strong>not</strong> persisted. After a world restart an enabled bus recompiles and continues.</p>
+<h2 id="the-script-editor">The script editor<a class="anchor" href="#the-script-editor" title="Permanent link">#</a></h2>
+<p>The Logic Terminal editor highlights JavaScript syntax and has autocomplete.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+Space</td>
+<td>open suggestions</td>
+</tr>
+<tr>
+<td>Up / Down, Enter or Tab</td>
+<td>choose / accept a suggestion (Esc dismisses it)</td>
+</tr>
+<tr>
+<td>Tab / Shift+Tab</td>
+<td>indent / unindent (works on a selection)</td>
+</tr>
+<tr>
+<td>Ctrl+/</td>
+<td>comment or uncomment lines</td>
+</tr>
+<tr>
+<td>Ctrl+Z / Ctrl+Y</td>
+<td>undo / redo</td>
+</tr>
+<tr>
+<td>Ctrl+A, C, X, V</td>
+<td>select all, copy, cut, paste</td>
+</tr>
+</tbody>
+</table>
+<p>Suggestions cover <code>net</code>, <code>stock</code>, <code>recipes</code>, <code>journal</code>, the global functions and, inside quotes, item ids. Brackets and quotes close automatically.</p>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-Overview.md">docs/wiki/Scripting-Overview.md</a> in the mod repository.</p>

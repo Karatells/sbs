@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a class="cur" href="Network-and-Power.html">Network and Power</a>
@@ -131,6 +132,10 @@
 <td>3</td>
 </tr>
 <tr>
+<td>Crafting Co-Processor</td>
+<td>8</td>
+</tr>
+<tr>
 <td>Pattern Bus</td>
 <td>2</td>
 </tr>
@@ -139,8 +144,40 @@
 <td>2</td>
 </tr>
 <tr>
+<td>Fluid I/O Bus</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Storage Bus</td>
+<td>2</td>
+</tr>
+<tr>
 <td>Drive</td>
-<td>2 + per-cell cost (1k: 1, 4k: 2, 16k: 3, 64k: 4)</td>
+<td>2 + per-cell cost (<code>1k</code>: 1, <code>4k</code>: 2, <code>16k</code>: 3, <code>64k</code>: 4, <code>256k</code>: 6, <code>1M</code>: 8)</td>
+</tr>
+<tr>
+<td>Energy Interface</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Capacitor</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Byte Archiver</td>
+<td>10 while active, 1 when paused (+160 FE per 64:1 compression)</td>
+</tr>
+<tr>
+<td>Quantum Relay</td>
+<td>50 while linked, 5 when unlinked</td>
+</tr>
+<tr>
+<td>Security Terminal</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Network Display</td>
+<td>2</td>
 </tr>
 <tr>
 <td>Cable</td>
@@ -159,9 +196,35 @@
 <h2 id="cable">Cable<a class="anchor" href="#cable" title="Permanent link">#</a></h2>
 <p>Cables carry the network over distance and cost no energy. Crafting 1 recipe gives 4 cables. Devices that touch each other connect without a cable.</p>
 <h2 id="re-scan-timing">Re-scan timing<a class="anchor" href="#re-scan-timing" title="Permanent link">#</a></h2>
-<p>The network re-scans every 20 ticks. After placing or breaking a block, give it up to a second to join or leave the network.</p>
+<p>The network uses event-driven topology updates (<code>topologyDirty</code>) with a background safety scan every <strong>100 ticks</strong> (5 seconds). The scan only traverses loaded chunks so it never force-loads distant areas.</p>
 <h2 id="energy-interface">Energy Interface<a class="anchor" href="#energy-interface" title="Permanent link">#</a></h2>
-<p>A network block (recipe: Cable + Redstone + Gold Ingot, shapeless) with no GUI. Connect it to the network with cables and place it <strong>next to a machine with an energy buffer</strong>; every few ticks it charges the neighbouring machines with energy from the Controller's buffer (up to 1,000 FE/t per interface, only what the machine accepts). Network blocks next to it are not charged. It costs 1 FE/t of idle energy. The Controller always keeps a reserve (about 40 ticks of the network's own consumption, at least 500 FE) so that powering machines cannot turn the network offline. The Pattern Bus charges its own adjacent machines the same way.</p>
+<p>A network block with no GUI. Connect it to the network with cables and place it <strong>next to a machine with an energy buffer</strong>; every few ticks it charges the neighbouring machines with energy from the Controller's buffer (up to 1,000 FE/t per interface, only what the machine accepts). Network blocks next to it are not charged. It costs 1 FE/t of idle energy. The Controller always keeps a reserve (about 40 ticks of the network's own consumption, at least 500 FE) so that powering machines cannot turn the network offline. The Pattern Bus charges its own adjacent machines the same way.</p>
+<h2 id="capacitor">Capacitor<a class="anchor" href="#capacitor" title="Permanent link">#</a></h2>
+<p>A network block that stores up to <strong>500,000 FE</strong> as a reserve for the network. Connect it with cables, like any network block. Every 5 ticks it works with the Controller's buffer:
+- when the Controller is <strong>below 50%</strong> full, the Capacitor tops it up to 60% (up to 4,000 FE/t);
+- when the Controller is <strong>above 90%</strong> full, the Capacitor takes the surplus down to 85%, so incoming energy is not wasted.</p>
+<p>It also accepts energy directly from generators placed next to it (up to 2,000 FE/t) but never gives energy to anything except the Controller. Right-click it to see how much it holds. The stored energy is saved with the block. It costs 1 FE/t of idle energy. Several Capacitors work independently and add up.</p>
+<h2 id="eco-mode">Eco Mode<a class="anchor" href="#eco-mode" title="Permanent link">#</a></h2>
+<p>When the Controller's energy buffer drops <strong>below 10%</strong> (10,000 FE), the network enters <strong>Eco Mode</strong>: <strong>I/O Buses</strong>, <strong>Fluid I/O Buses</strong>, and <strong>Byte Archivers</strong> pause automatically while Terminals remain usable so you can still access your items and restore power.</p>
+<h2 id="quantum-relay-entangled-crystal">Quantum Relay &amp; Entangled Crystal<a class="anchor" href="#quantum-relay-entangled-crystal" title="Permanent link">#</a></h2>
+<p>Connect remote bases or different dimensions (Overworld, Nether, End) into a single network without laying cables:
+1. Hold <strong>2 or more Entangled Crystals (<code>entangled_crystal</code>)</strong> and <strong>Shift + Right-Click</strong> to pair them with a shared Link ID (UUID).
+2. Place <strong>Quantum Relays (<code>quantum_relay</code>)</strong> at each location and insert one paired crystal into each relay's GUI.
+3. Linked relays bridge both segments as one unified network during topology scans (50 FE/t idle per linked relay, 5 FE/t when unlinked). Both relay chunks must be loaded.</p>
+<h2 id="security-terminal">Security Terminal<a class="anchor" href="#security-terminal" title="Permanent link">#</a></h2>
+<p>Place a <strong>Security Terminal (<code>security_terminal</code>)</strong> anywhere on your network to protect terminal access on multiplayer servers:
+- The player who places the block is recorded as the <strong>Owner</strong> (server operators with permission level 2+ also retain access).
+- Open its GUI to toggle between <strong>Access: Locked</strong> (owner &amp; operators only) and <strong>Access: Public</strong>.
+- Costs 4 FE/t idle energy.</p>
+<h2 id="network-analyzer">Network Analyzer<a class="anchor" href="#network-analyzer" title="Permanent link">#</a></h2>
+<p>The <strong>Network Analyzer (<code>network_analyzer</code>)</strong> is a handheld diagnostic tool. Right-click any network block to print a live summary in chat:
+- Grid state (<code>ONLINE</code> / <code>OFFLINE</code> / <code>CONFLICT</code>)
+- Total connected nodes
+- Clicked node's idle drain and total network drain (FE/t)
+- Stored / max energy (FE)
+- Used / total storage capacity (bytes)</p>
+<h2 id="network-display">Network Display<a class="anchor" href="#network-display" title="Permanent link">#</a></h2>
+<p>The <strong>Network Display (<code>network_display</code>)</strong> is a network monitor block with <strong>6 text lines</strong> (up to 128 characters per line) controlled by scripts via <code>display.set(line, text)</code> and <code>display.clear()</code>. Right-click it to view the lines in a clean GUI. Costs 2 FE/t idle energy.</p>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Network-and-Power.md">docs/wiki/Network-and-Power.md</a> in the mod repository.</p>

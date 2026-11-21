@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simple Byte Storage — Minecraft 1.20.1 Forge</title>
-<meta name="description" content="Simple Byte Storage — мод для Minecraft 1.20.1 (Forge): система хранения и автокрафта, где 1 предмет = 1 байт, а типов предметов можно хранить сколько угодно.">
+<meta name="description" content="Simple Byte Storage — мод для Minecraft 1.20.1 (Forge): система хранения предметов и жидкостей, автокрафт, квантовая связь и скрипты, где 1 предмет = 1 байт без лимита типов.">
 <meta property="og:title" content="Simple Byte Storage">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://karatells.github.io/sbs/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:description" content="Хранение и автокрафт для Minecraft 1.20.1 (Forge). 1 предмет = 1 байт, без лимита типов.">
+<meta property="og:description" content="Хранение предметов и жидкостей, автокрафт, квантовая связь и скрипты для Minecraft 1.20.1 (Forge). 1 предмет = 1 байт, без лимита типов.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -20,7 +20,7 @@
     <a class="brand" href="#top"><img class="brandlogo" src="assets/logo-256.png" alt="" width="32" height="32"> Simple Byte Storage</a>
     <nav class="links">
       <a href="#new"><span class="ru">Новое</span><span class="en">New</span></a>
-      <a href="#idea"><span class="ru">Идея</span><span class="en">Idea</span></a>
+      <a href="#worldgen"><span class="ru">Ресурсы</span><span class="en">Worldgen</span></a>
       <a href="#storage"><span class="ru">Хранение</span><span class="en">Storage</span></a>
       <a href="#blocks"><span class="ru">Блоки</span><span class="en">Blocks</span></a>
       <a href="#autocraft"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></a>
@@ -37,26 +37,29 @@
 <div class="hero">
   <div class="wrap">
     <div class="logo">
-      <img class="px" src="assets/img/cell_1k.png" alt="">
-      <img class="px" src="assets/img/cell_4k.png" alt="">
-      <img class="px" src="assets/img/cell_16k.png" alt="">
-      <img class="px" src="assets/img/cell_64k.png" alt="">
+      <img class="px" src="assets/img/cell_1k.png" alt="1k">
+      <img class="px" src="assets/img/cell_4k.png" alt="4k">
+      <img class="px" src="assets/img/cell_16k.png" alt="16k">
+      <img class="px" src="assets/img/cell_64k.png" alt="64k">
+      <img class="px" src="assets/img/cell_256k.png" alt="256k">
+      <img class="px" src="assets/img/cell_1m.png" alt="1M">
     </div>
     <h1>Simple <span>Byte</span> Storage</h1>
     <p class="lead">
-      <span class="ru">Система хранения и автокрафта для Minecraft. Один предмет — один байт, и никакого лимита на количество типов предметов.</span>
-      <span class="en">A storage and autocrafting mod for Minecraft. One item is one byte, and there is no limit on the number of item types.</span>
+      <span class="ru">Система хранения предметов и жидкостей, автокрафт, квантовые сети и скрипты для Minecraft. Один предмет — один байт, и никакого лимита на количество типов.</span>
+      <span class="en">An item and fluid storage, autocrafting, quantum networking, and scripting mod for Minecraft. One item is one byte, with no limit on the number of item types.</span>
     </p>
     <div class="badges">
       <span class="badge">Minecraft <b>1.20.1</b></span>
       <span class="badge">Forge <b>47.2.0+</b></span>
       <span class="badge">Java <b>17</b></span>
-      <span class="badge"><span class="ru">Версия</span><span class="en">Version</span> <b>1.2.0</b></span>
+      <span class="badge"><span class="ru">Версия</span><span class="en">Version</span> <b>1.3.0</b></span>
       <span class="badge">MIT</span>
     </div>
     <div class="btns">
       <a class="btn primary" href="https://github.com/Karatells/ByteStorage/releases/latest"><span class="ru">⬇ Скачать</span><span class="en">⬇ Download</span></a>
       <a class="btn" href="docs/Home.html"><span class="ru">📖 Документация</span><span class="en">📖 Documentation</span></a>
+      <a class="btn" href="docs/Recipes.html"><span class="ru">🛠 Рецепты</span><span class="en">🛠 Recipes</span></a>
       <a class="btn" href="https://github.com/Karatells/ByteStorage">GitHub</a>
     </div>
   </div>
@@ -64,17 +67,54 @@
 
 <section id="new">
   <div class="wrap">
-    <h2><span class="ru">Новое в 1.2.0</span><span class="en">What's new in 1.2.0</span></h2>
-    <p class="sub"><span class="ru">Журнал автокрафта, резерв ресурсов, питание машин от сети, предупреждения о нехватке и намного более богатый API скриптов.</span><span class="en">An autocrafting journal, resource reservation, machine power from the network, shortage warnings and a much larger scripting API.</span></p>
+    <h2><span class="ru">Новое в 1.2.1 и 1.3.0</span><span class="en">What's new since 1.2.0 (1.2.1 &amp; 1.3.0)</span></h2>
+    <p class="sub">
+      <span class="ru">Собственная мирогенерация (Байтит и Кремниевый разлом), ячейки 256k и 1M, хранение жидкостей, квантовые ретрансляторы, Шина хранения, Архиватор, Верстак ячеек, Терминал безопасности, обновлённый интерфейс с графиками и мощный редактор скриптов.</span>
+      <span class="en">Dedicated worldgen (Bytite &amp; Silicon Rift), 256k and 1M cells, fluid storage, Quantum Relays, Storage Bus, Byte Archiver, Cell Workbench, Security Terminal, restyled GUIs with persisted graphs, and a full JavaScript code editor.</span>
+    </p>
     <div class="grid g3">
-      <div class="card"><h3><span class="ru">Вкладка «Журнал»</span><span class="en">Journal tab</span></h3><p><span class="ru">Последние события автокрафта: заказы, завершённые крафты, запуски на шинах, правила запаса, отмены и зависшие машины.</span><span class="en">Latest autocrafting events: orders, finished crafts, Pattern Bus starts, stock-rule orders and failures, cancellations and stuck machines.</span></p></div>
-      <div class="card"><h3><span class="ru">Резерв ресурсов</span><span class="en">Resource reservation</span></h3><p><span class="ru">Сырьё принятого заказа бронируется: терминалы, I/O-шины и беспроводной терминал его не заберут. Отмена снимает резерв.</span><span class="en">Raw materials of an accepted order are reserved: terminals, I/O buses and the Wireless Terminal cannot take them. Cancelling releases them.</span></p></div>
-      <div class="card"><h3><span class="ru">Питание машин</span><span class="en">Machine power</span></h3><p><span class="ru">Шина шаблонов и новый Энергоинтерфейс заряжают соседние машины энергией сети.</span><span class="en">The Pattern Bus and the new Energy Interface charge adjacent machines from network energy.</span></p></div>
-      <div class="card"><h3><span class="ru">Предупреждения о нехватке</span><span class="en">Shortage warnings</span></h3><p><span class="ru">Причина сбоя правила запаса видна в подсказке над красным «!», а после трёх неудач приходит сообщение в чат. Зависший Асемблер попадает в журнал.</span><span class="en">Stock-rule failure reasons show in a tooltip over the red “!”, with a chat message after 3 failures in a row. A stuck Assembler is logged and reported.</span></p></div>
-      <div class="card"><h3><span class="ru">API скриптов</span><span class="en">Scripting API</span></h3><p><span class="ru">Информация о сети, планирование, управление очередью, правила запаса, настройки рецептов, журнал и чат-оповещения.</span><span class="en">Network info, planning, order queue control, stock rules, recipe settings, the journal and chat alerts.</span></p></div>
-      <div class="card"><h3><span class="ru">API для аддонов</span><span class="en">Addon API</span></h3><p><span class="ru">Стабильный фасад <code>NetworkControl</code> для сторонних аддонов.</span><span class="en">A stable <code>NetworkControl</code> facade for third-party addons.</span></p></div>
+      <div class="card">
+        <h3><span class="ru">Байтит и Кремниевый разлом</span><span class="en">Bytite &amp; Silicon Rift worldgen</span></h3>
+        <p><span class="ru">Руда Байтит (Y = −48..+48), Силикатная корка, кластеры Квантового кварца и Контурный цветок. Новые материалы прогрессии: слиток Байтита, Логическая пластина, Квантовый кварц, Циановый люминофор.</span><span class="en">Bytite Ore (Y = −48..+48), Silicate Crust, Quantum Quartz Clusters, and Circuit Blooms. New progression materials: Bytite Ingot, Logic Wafer, Quantum Quartz, and Cyan Phosphor.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Ячейки 256k / 1M и жидкости</span><span class="en">256k / 1M cells &amp; fluid storage</span></h3>
+        <p><span class="ru">Ячейки до 1 048 576 байт, жидкостные байт-ячейки 1k–64k (1 000 mB = 1 байт без лимита типов жидкостей) и Жидкостная I/O-шина (1 000 mB за цикл).</span><span class="en">Item cells up to 1,048,576 bytes, 1k–64k Fluid Byte Cells (1,000 mB = 1 byte with unlimited fluid types), and the Fluid I/O Bus (1,000 mB/cycle).</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Квантовая связь между базами</span><span class="en">Cross-dimensional Quantum Relays</span></h3>
+        <p><span class="ru">Свяжите Запутанные кристаллы (Shift+ПКМ) и вставьте их в Квантовые ретрансляторы, чтобы объединить удалённые базы и разные измерения в единую сеть.</span><span class="en">Pair Entangled Crystals (Shift+RMB) and place them in Quantum Relays to bridge distant bases and dimensions into one unified network.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Шина хранения, Архиватор и Верстак</span><span class="en">Storage Bus, Archiver &amp; Workbench</span></h3>
+        <p><span class="ru">Подключайте сундуки напрямую через Storage Bus, сжимайте излишки 64:1 в Data Blob Архиватором, настраивайте NBT-фильтры ячеек на Верстаке и ставьте карты Void / Lock в Накопитель.</span><span class="en">Attach external chests with Storage Bus, compress bulk items 64:1 into Data Blobs with the Archiver, write per-cell NBT filters in the Cell Workbench, and slot Void / Lock cards into Drives.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Безопасность, Монитор и Эко-режим</span><span class="en">Security, Display, Analyzer &amp; Eco Mode</span></h3>
+        <p><span class="ru">Терминал безопасности защищает доступ в мультиплеере, Сканер сети диагностирует узлы, Конденсатор хранит 500 000 FE, а Эко-режим (&lt;10% заряда) бережёт терминалы.</span><span class="en">Security Terminal locks terminals to the owner, Network Analyzer inspects nodes, Capacitor stores 500,000 FE, and Eco Mode (&lt;10% energy) pauses buses while keeping terminals online.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Ускоренный автокрафт и новый GUI</span><span class="en">Faster autocrafting &amp; restyled GUIs</span></h3>
+        <p><span class="ru">Сопроцессор крафта, Blocking Mode у Шины шаблонов, древовидный план крафта, кнопка «Максимум», редизайн всех экранов, сохраняемые графики, расписание запаса и сохранённые поиски.</span><span class="en">Crafting Co-Processor, Pattern Bus Blocking Mode, hierarchical craft plan tree, “Max” order button, restyled screens, persisted Graphs tab, stock schedule, and saved searches.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Редактор кода и API скриптов</span><span class="en">Code editor &amp; Scripting API</span></h3>
+        <p><span class="ru">Подсветка синтаксиса и автодополнение в Логическом терминале, события <code>onCraft</code> / <code>onLowStock</code> / <code>onAlert</code>, <code>net.machines()</code>, <code>redstone.*</code>, персистентный <code>store.*</code> и <code>display.*</code>.</span><span class="en">Syntax highlighting &amp; autocomplete in Logic Terminal, <code>onCraft</code> / <code>onLowStock</code> / <code>onAlert</code> events, <code>net.machines()</code>, <code>redstone.*</code>, persistent <code>store.*</code>, and <code>display.*</code>.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Производительность и Достижения</span><span class="en">Performance &amp; Advancements</span></h3>
+        <p><span class="ru">Индекс <code>O(1)</code> и кэш ячеек с отложенной записью NBT, событийный BFS без прогрузки чанков и ветка из 5 внутриигровых достижений.</span><span class="en"><code>O(1)</code> cell index with cached inventories &amp; deferred NBT flushes, chunk-safe event-driven BFS topology, and 5 progression advancements.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Улучшенная I/O-шина</span><span class="en">Upgraded I/O Bus</span></h3>
+        <p><span class="ru">4 слота под Карты ускорения (до 320 предметов за 2 тика), переключатель Белый/Чёрный список для импорта и управление редстоуном (Всегда / Сигнал / Без сигнала).</span><span class="en">4 Speed Card slots (up to 320 items every 2 ticks), Allow/Deny import filter toggle, and Redstone control (Always / High / Low).</span></p>
+      </div>
     </div>
-    <p style="margin-top:18px"><a href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.2.0.md"><span class="ru">Полные заметки релиза →</span><span class="en">Full release notes →</span></a></p>
+    <p style="margin-top:18px">
+      <a href="docs/Worldgen.html"><span class="ru">Мирогенерация и ресурсы →</span><span class="en">World &amp; Materials guide →</span></a> ·
+      <a href="docs/Downloads.html#versions"><span class="ru">История версий →</span><span class="en">Version history →</span></a> ·
+      <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.2.1.md"><span class="ru">Заметки 1.2.1 →</span><span class="en">1.2.1 release notes →</span></a>
+    </p>
   </div>
 </section>
 
@@ -82,50 +122,96 @@
   <div class="wrap">
     <h2><span class="ru">Идея мода</span><span class="en">The idea</span></h2>
     <p class="sub">
-      <span class="ru">Во многих системах хранения ячейка ограничена не только числом предметов, но и числом уникальных типов. Здесь второго лимита нет.</span>
-      <span class="en">In many storage systems a cell is limited not only by the number of items but also by the number of unique types. Here the second limit does not exist.</span>
+      <span class="ru">Во многих системах хранения ячейка ограничена не только числом предметов, но и числом уникальных типов. Здесь второго лимита нет — ни для предметов, ни для жидкостей.</span>
+      <span class="en">In many storage systems a cell is limited not only by the number of items but also by the number of unique types. Here the second limit does not exist — neither for items nor for fluids.</span>
     </p>
     <div class="grid g2">
       <div class="card">
-        <h3><span class="ru">Без лимита типов</span><span class="en">No item-type limit</span></h3>
-        <p><span class="ru">В одну ячейку помещаются сотни разных предметов, пока не закончится её байтовая ёмкость.</span><span class="en">A single cell can hold hundreds of different items until its byte capacity runs out.</span></p>
+        <h3><span class="ru">Без лимита типов</span><span class="en">No type limit</span></h3>
+        <p><span class="ru">В одну ячейку помещаются сотни разных предметов (или любых жидкостей), пока не закончится её байтовая ёмкость.</span><span class="en">A single cell can hold hundreds of different items (or any number of fluid types) until its byte capacity runs out.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">1 предмет = 1 байт</span><span class="en">1 item = 1 byte</span></h3>
-        <p><span class="ru">Прозрачное правило: стак в 64 булыжника стоит 64 байта, как и 64 разных предмета по одной штуке.</span><span class="en">A simple rule: a stack of 64 cobblestone costs 64 bytes, and so do 64 different single items.</span></p>
+        <h3><span class="ru">1 предмет = 1 байт · 1 000 mB = 1 байт</span><span class="en">1 item = 1 byte · 1,000 mB = 1 byte</span></h3>
+        <p><span class="ru">Прозрачное правило: стак в 64 булыжника стоит 64 байта, как и 64 разных предмета по одной штуке. Одно ведро жидкости (1 000 mB) — ровно 1 байт.</span><span class="en">A transparent rule: a stack of 64 cobblestone costs 64 bytes, and so do 64 different single items. One bucket of fluid (1,000 mB) is exactly 1 byte.</span></p>
       </div>
     </div>
     <div class="formula">
-      <div class="eq">used_bytes = Σ item_count</div>
+      <div class="eq">used_bytes = Σ item_count &nbsp;|&nbsp; fluid_bytes = Σ fluid_mB / 1000</div>
       <div style="margin-top:6px;color:var(--muted)">
-        <span class="ru">Пример: ячейка 1k (1024 байта) вмещает 500 булыжника + 400 земли + 124 алмаза = ровно 1024 предмета.</span>
-        <span class="en">Example: a 1k cell (1,024 bytes) holds 500 cobblestone + 400 dirt + 124 diamonds = exactly 1,024 items.</span>
+        <span class="ru">Пример: ячейка 1k (1 024 байта) вмещает 500 булыжника + 400 земли + 124 алмаза = ровно 1 024 предмета. Ячейка 1M вмещает 1 048 576 любых предметов.</span>
+        <span class="en">Example: a 1k cell (1,024 bytes) holds 500 cobblestone + 400 dirt + 124 diamonds = exactly 1,024 items. A 1M cell holds 1,048,576 items of any kind.</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="worldgen">
+  <div class="wrap">
+    <h2><span class="ru">Ресурсы и мирогенерация</span><span class="en">Worldgen &amp; materials</span></h2>
+    <p class="sub">
+      <span class="ru">В 1.3.0 мод получил собственный базовый металл — Байтит — и ресурсы биома «Кремниевый разлом», встречающиеся в Обычном мире.</span>
+      <span class="en">Version 1.3.0 introduces a dedicated base metal — Bytite — along with Silicon Rift resources generating across the Overworld.</span>
+    </p>
+    <div class="grid g2">
+      <div class="block"><img class="px" src="assets/img/bytite_ore.png" alt="Bytite Ore"><div>
+        <h3><span class="ru">Байтитовая руда и слиток</span><span class="en">Bytite Ore &amp; Bytite Ingot</span></h3>
+        <p><span class="ru">Генерируется на высоте <code>Y = −48..+48</code> (камень и глубинный сланец, до 7 блоков в жиле). Добывается железной киркой, выпадает Необработанный байтит (работает Удача), плавится в печи или плавильне. Основа всех блоков и кабелей мода.</span><span class="en">Generates at <code>Y = −48..+48</code> (stone &amp; deepslate, veins up to 7). Needs an Iron Pickaxe, drops Raw Bytite (Fortune supported), and smelts/blasts into Bytite Ingots — the backbone of every recipe.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/silicate_crust.png" alt="Silicate Crust"><div>
+        <h3><span class="ru">Силикатная корка → Логическая пластина</span><span class="en">Silicate Crust → Logic Wafer</span></h3>
+        <p><span class="ru">Залежи на высоте <code>Y = 40..90</code> дают Кремниевую пыль, из которой крафтится Логическая пластина — процессор для Контроллера, Сопроцессора крафта, карт улучшений и аддона Scripting.</span><span class="en">Deposits at <code>Y = 40..90</code> drop Silicon Dust, crafted into Logic Wafers used in the Controller, Crafting Co-Processor, upgrade cards, and Scripting blocks.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/quantum_cluster.png" alt="Quantum Cluster"><div>
+        <h3><span class="ru">Кластер квантового кварца</span><span class="en">Quantum Quartz Cluster</span></h3>
+        <p><span class="ru">Светящиеся циановые кристаллы на поверхности (свет 7, железная кирка). Нужны для старших ячеек (<code>16k</code>–<code>1M</code>), Квантового ретранслятора, Запутанных кристаллов, Беспроводного терминала и Библиотеки рецептов.</span><span class="en">Glowing cyan surface crystals (light 7, Iron Pickaxe). Required for high-tier cells (<code>16k</code>–<code>1M</code>), Quantum Relays, Entangled Crystals, Wireless Terminal, and Recipe Library.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/circuit_bloom.png" alt="Circuit Bloom"><div>
+        <h3><span class="ru">Контурный цветок → Циановый люминофор</span><span class="en">Circuit Bloom → Cyan Phosphor</span></h3>
+        <p><span class="ru">Светящееся растение (свет 9), перерабатывается в 2 Циановых люминофора. Используется во всех блоках с дисплеями: терминалах, Мониторе сети, Терминале безопасности и Сканере сети.</span><span class="en">A glowing surface plant (light 9) crafted into 2 Cyan Phosphor. Used in every screen-bearing device: Terminals, Network Display, Security Terminal, and Network Analyzer.</span></p>
+      </div></div>
     </div>
   </div>
 </section>
 
 <section id="storage">
   <div class="wrap">
-    <h2><span class="ru">Ячейки хранения</span><span class="en">Storage cells</span></h2>
+    <h2><span class="ru">Ячейки хранения: предметы и жидкости</span><span class="en">Storage cells: items &amp; fluids</span></h2>
     <p class="sub">
-      <span class="ru">Картриджи с цветными кристаллами данных. Накопитель вмещает до 10 ячеек, а содержимое всех дисков объединяется в один виртуальный пул сети.</span>
-      <span class="en">Cartridges with colour-coded data crystals. A Drive holds up to 10 cells, and the contents of all cells merge into one virtual pool for the network.</span>
+      <span class="ru">Накопитель вмещает до 10 любых ячеек (предметных и жидкостных) плюс слот карты улучшения. Содержимое всех ячеек объединяется в общий пул сети.</span>
+      <span class="en">A Drive holds up to 10 cells (item and fluid cells alike) plus 1 upgrade card slot. All item cells merge into one virtual pool for the network.</span>
     </p>
-    <div class="cells">
-      <div class="cell c1"><img class="px" src="assets/img/cell_1k.png" alt="1k"><div class="n">1k</div><div class="b">1 024 <span class="ru">байта</span><span class="en">bytes</span> · <span class="ru">зелёный</span><span class="en">green</span></div></div>
-      <div class="cell c4"><img class="px" src="assets/img/cell_4k.png" alt="4k"><div class="n">4k</div><div class="b">4 096 <span class="ru">байт</span><span class="en">bytes</span> · <span class="ru">синий</span><span class="en">blue</span></div></div>
-      <div class="cell c16"><img class="px" src="assets/img/cell_16k.png" alt="16k"><div class="n">16k</div><div class="b">16 384 <span class="ru">байта</span><span class="en">bytes</span> · <span class="ru">фиолетовый</span><span class="en">purple</span></div></div>
-      <div class="cell c64"><img class="px" src="assets/img/cell_64k.png" alt="64k"><div class="n">64k</div><div class="b">65 536 <span class="ru">байт</span><span class="en">bytes</span> · <span class="ru">оранжевый</span><span class="en">orange</span></div></div>
+    <div class="cells compact">
+      <div class="cell c1"><img class="px" src="assets/img/cell_1k.png" alt="1k"><div class="n">1k</div><div class="b">1 024 <span class="ru">байта</span><span class="en">bytes</span> · 1 FE/t</div></div>
+      <div class="cell c4"><img class="px" src="assets/img/cell_4k.png" alt="4k"><div class="n">4k</div><div class="b">4 096 <span class="ru">байт</span><span class="en">bytes</span> · 2 FE/t</div></div>
+      <div class="cell c16"><img class="px" src="assets/img/cell_16k.png" alt="16k"><div class="n">16k</div><div class="b">16 384 <span class="ru">байта</span><span class="en">bytes</span> · 3 FE/t</div></div>
+      <div class="cell c64"><img class="px" src="assets/img/cell_64k.png" alt="64k"><div class="n">64k</div><div class="b">65 536 <span class="ru">байт</span><span class="en">bytes</span> · 4 FE/t</div></div>
+      <div class="cell c256"><img class="px" src="assets/img/cell_256k.png" alt="256k"><div class="n">256k</div><div class="b">262 144 <span class="ru">байта</span><span class="en">bytes</span> · 6 FE/t</div></div>
+      <div class="cell c1m"><img class="px" src="assets/img/cell_1m.png" alt="1M"><div class="n">1M</div><div class="b">1 048 576 <span class="ru">байт</span><span class="en">bytes</span> · 8 FE/t</div></div>
     </div>
-    <div class="grid g2" style="margin-top:20px">
+
+    <h3><span class="ru">Жидкостные байт-ячейки (1 000 mB = 1 байт)</span><span class="en">Fluid Byte Cells (1,000 mB = 1 byte)</span></h3>
+    <div class="cells">
+      <div class="cell c1"><img class="px" src="assets/img/fluid_cell_1k.png" alt="1k Fluid"><div class="n">1k Fluid</div><div class="b">1 024 000 mB</div></div>
+      <div class="cell c4"><img class="px" src="assets/img/fluid_cell_4k.png" alt="4k Fluid"><div class="n">4k Fluid</div><div class="b">4 096 000 mB</div></div>
+      <div class="cell c16"><img class="px" src="assets/img/fluid_cell_16k.png" alt="16k Fluid"><div class="n">16k Fluid</div><div class="b">16 384 000 mB</div></div>
+      <div class="cell c64"><img class="px" src="assets/img/fluid_cell_64k.png" alt="64k Fluid"><div class="n">64k Fluid</div><div class="b">65 536 000 mB</div></div>
+    </div>
+
+    <div class="grid g3" style="margin-top:20px">
       <div class="card">
-        <h3><span class="ru">Приоритет</span><span class="en">Priority</span></h3>
-        <p><span class="ru">При вставке сначала заполняются накопители с более высоким приоритетом. Shift меняет шаг на ±10.</span><span class="en">On insert, higher-priority drives fill first. Hold Shift to step by ±10.</span></p>
+        <img class="px ic" src="assets/img/cell_workbench.png" alt="">
+        <h3><span class="ru">Верстак ячеек</span><span class="en">Cell Workbench</span></h3>
+        <p><span class="ru">Записывает индивидуальный фильтр (9 слотов, Белый/Чёрный список) прямо в NBT самой байт-ячейки.</span><span class="en">Writes a 9-slot Allow/Deny filter directly into the storage cell's NBT so it travels with the cell.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Белый список</span><span class="en">Whitelist</span></h3>
-        <p><span class="ru">9 фильтр-слотов на накопитель: пустой список принимает всё. Так можно сортировать, например, руды в отдельный диск.</span><span class="en">9 filter slots per drive: an empty list accepts everything. Use it to route, say, ores into a dedicated drive.</span></p>
+        <img class="px ic" src="assets/img/void_card.png" alt="">
+        <h3><span class="ru">Карты Void и Lock</span><span class="en">Void &amp; Lock Cards</span></h3>
+        <p><span class="ru">Вставляются в слот улучшения Накопителя: <b>Void</b> уничтожает излишки при заполнении, <b>Lock</b> переводит диск в режим «только чтение».</span><span class="en">Slot into a Drive: <b>Void Overflow Card</b> destroys excess filtered items when full; <b>Lock Card</b> makes the drive read-only.</span></p>
+      </div>
+      <div class="card">
+        <img class="px ic" src="assets/img/archiver.png" alt="">
+        <h3><span class="ru">Архиватор и Data Blob</span><span class="en">Byte Archiver &amp; Data Blobs</span></h3>
+        <p><span class="ru">Сжимает массовые ресурсы (&gt;4 096 шт.) в соотношении <b>64:1</b> за 160 FE. ПКМ по Data Blob распаковывает 64 предмета обратно.</span><span class="en">Compresses bulk stock (&gt;4,096 items) at a <b>64:1</b> ratio for 160 FE. Right-click a Data Blob in hand to unpack 64 items.</span></p>
       </div>
     </div>
   </div>
@@ -133,44 +219,64 @@
 
 <section id="blocks">
   <div class="wrap">
-    <h2><span class="ru">Блоки сети</span><span class="en">Network blocks</span></h2>
+    <h2><span class="ru">Блоки и инструменты сети</span><span class="en">Network blocks &amp; tools</span></h2>
     <p class="sub">
-      <span class="ru">Устройства соединяются, просто касаясь друг друга или через кабели. В сети должен быть ровно один контроллер с энергией FE.</span>
-      <span class="en">Devices connect by touching each other or through cables. A network needs exactly one controller supplied with FE.</span>
+      <span class="ru">Устройства соединяются касанием, кабелями или через Квантовые ретрансляторы. В сети должен быть ровно один контроллер с питанием FE.</span>
+      <span class="en">Devices connect by touching, through cables, or across dimensions via Quantum Relays. A network needs exactly one FE-powered controller.</span>
     </p>
     <div class="grid g2">
       <div class="block"><img class="px" src="assets/img/controller_front_online.png" alt=""><div>
         <h3><span class="ru">Контроллер сети</span><span class="en">Network Controller</span></h3>
-        <p><span class="ru">Сердце сети. Буфер 100 000 FE, приём до 2 000 FE/т. Интерфейс с вкладками: обзор, склад, крафт, запас, рецепты и журнал событий.</span><span class="en">The heart of the network. 100,000 FE buffer, up to 2,000 FE/t input. GUI tabs for overview, storage, crafting queue, stock rules, recipes and an event journal.</span></p>
+        <p><span class="ru">Буфер 100 000 FE, приём до 2 000 FE/т. 7 вкладок слева: Обзор, Склад, Крафт, Рецепты, Запас (с расписанием), Журнал и сохраняемые Графики. При заряде &lt;10% включает Эко-режим.</span><span class="en">100,000 FE buffer, up to 2,000 FE/t input. 7 left-column tabs: Overview, Storage, Crafting, Recipes, Stock (with schedule), Journal, and persisted Graphs. Triggers Eco Mode below 10%.</span></p>
       </div></div>
       <div class="block"><img class="px" src="assets/img/drive_front.png" alt=""><div>
         <h3><span class="ru">Накопитель</span><span class="en">Drive</span></h3>
-        <p><span class="ru">До 10 ячеек, приоритет и белый список. Все диски сливаются в общий пул.</span><span class="en">Up to 10 cells, with priority and a whitelist. All cells merge into one pool.</span></p>
+        <p><span class="ru">До 10 предметных или жидкостных ячеек, приоритет вставки, 9 слотов фильтра и слот для карты Void / Lock.</span><span class="en">Up to 10 item or fluid cells, insert priority, 9 filter slots, and a Void / Lock upgrade card slot.</span></p>
       </div></div>
       <div class="block"><img class="px" src="assets/img/terminal_front.png" alt=""><div>
         <h3><span class="ru">Терминал</span><span class="en">Terminal</span></h3>
-        <p><span class="ru">Доступ ко всему пулу: поиск, прокрутка, индикатор байтов, Shift-клик, сортировка и заказ автокрафта прямо из списка.</span><span class="en">Access to the whole pool: search, scrolling, byte usage bar, Shift-click, sorting, and ordering crafts straight from the list.</span></p>
+        <p><span class="ru">Доступ ко всему пулу: расширенный поиск, 3 слота сохранённых поисков, избранное, сортировка, подсказки «зарезервировано / в производстве» и заказ автокрафта с кнопкой <b>Max</b>.</span><span class="en">Access to the whole pool: extended search, 3 saved search slots, favorites, sorting, reserved/in-production tooltips, and autocraft ordering with a <b>Max</b> button.</span></p>
       </div></div>
       <div class="block"><img class="px" src="assets/img/crafting_terminal_front.png" alt=""><div>
         <h3><span class="ru">Терминал крафта</span><span class="en">Crafting Terminal</span></h3>
         <p><span class="ru">Терминал с сеткой 3×3. Ингредиенты берутся из сети, результат идёт сразу в инвентарь.</span><span class="en">A Terminal with a 3×3 grid. Ingredients come from the network, the result goes straight to your inventory.</span></p>
       </div></div>
-      <div class="block"><img class="px" src="assets/img/io_bus.png" alt=""><div>
-        <h3><span class="ru">I/O-шина</span><span class="en">I/O Bus</span></h3>
-        <p><span class="ru">Импорт из соседнего инвентаря в сеть или экспорт с поддержанием нужного количества. 64 предмета за цикл, 9 фильтр-слотов.</span><span class="en">Imports from a neighbouring inventory or exports while keeping a target amount stocked. 64 items per cycle, 9 filter slots.</span></p>
+      <div class="block"><img class="px" src="assets/img/storage_bus.png" alt=""><div>
+        <h3><span class="ru">Шина хранения</span><span class="en">Storage Bus</span></h3>
+        <p><span class="ru">Подключает соседние сундуки, бочки и ящики к пулу сети без переноса в ячейки. Приоритет −999..+999 и фильтр Allow/Deny.</span><span class="en">Exposes adjacent chests, barrels, or drawers to the network pool without importing into cells. Priority −999..+999 and Allow/Deny filter.</span></p>
       </div></div>
-      <div class="block"><img class="px" src="assets/img/energy_port.png" alt=""><div>
-        <h3><span class="ru">Энергоинтерфейс</span><span class="en">Energy Interface</span></h3>
-        <p><span class="ru">Подключается кабелем и заряжает соседние машины с энергобуфером от энергии сети, до 1000 FE/т. Сеть оставляет запас, чтобы машины её не обесточили.</span><span class="en">Connects by cable and charges adjacent machines that have an energy buffer from network power, up to 1000 FE/t. The network keeps a reserve so machines cannot black it out.</span></p>
+      <div class="block"><img class="px" src="assets/img/io_bus.png" alt=""><div>
+        <h3><span class="ru">I/O-шина и Жидкостная I/O-шина</span><span class="en">I/O Bus &amp; Fluid I/O Bus</span></h3>
+        <p><span class="ru">Импорт/экспорт предметов (до 320 шт./2 тика с 4 Картами ускорения, Allow/Deny, редстоун-контроль) и жидкостей (1 000 mB за цикл).</span><span class="en">Import/export for items (up to 320 items/2 ticks with 4 Speed Cards, Allow/Deny, redstone control) and fluids (1,000 mB/cycle).</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/capacitor.png" alt=""><div>
+        <h3><span class="ru">Конденсатор и Энергоинтерфейс</span><span class="en">Capacitor &amp; Energy Interface</span></h3>
+        <p><span class="ru">Конденсатор хранит <b>500 000 FE</b> (подпитывает Контроллер ниже 50%, забирает излишки выше 90%). Энергоинтерфейс заряжает соседние машины до 1 000 FE/т.</span><span class="en">Capacitor buffers <b>500,000 FE</b> (refills Controller below 50%, absorbs surplus above 90%). Energy Interface charges adjacent machines up to 1,000 FE/t.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/quantum_relay.png" alt=""><div>
+        <h3><span class="ru">Квантовый ретранслятор</span><span class="en">Quantum Relay</span></h3>
+        <p><span class="ru">Объединяет удалённые сегменты сети и разные измерения через пару Запутанных кристаллов (50 FE/т в связанном состоянии).</span><span class="en">Bridges distant network segments and dimensions using paired Entangled Crystals (50 FE/t idle while linked).</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/security_terminal_front.png" alt=""><div>
+        <h3><span class="ru">Терминал безопасности</span><span class="en">Security Terminal</span></h3>
+        <p><span class="ru">Привязывается к владельцу при установке и позволяет переключать доступ к терминалам сети: <b>Locked</b> (только владелец и OP) или <b>Public</b>.</span><span class="en">Binds to the player who places it and toggles network terminal access between <b>Locked</b> (owner &amp; ops only) and <b>Public</b>.</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/network_display_front.png" alt=""><div>
+        <h3><span class="ru">Монитор сети и Сканер сети</span><span class="en">Network Display &amp; Analyzer</span></h3>
+        <p><span class="ru">Монитор выводит до 6 строк текста из скриптов (<code>display.set</code>). Ручной Сканер сети по ПКМ показывает состояние, узлы, расход FE/т и память.</span><span class="en">Network Display shows up to 6 script-driven text lines (<code>display.set</code>). Handheld Network Analyzer right-clicks any node to print live diagnostics.</span></p>
       </div></div>
       <div class="block"><img class="px" src="assets/img/cable.png" alt=""><div>
         <h3><span class="ru">Кабель</span><span class="en">Cable</span></h3>
-        <p><span class="ru">Соединяет блоки, которые не стоят вплотную.</span><span class="en">Connects blocks that do not touch.</span></p>
+        <p><span class="ru">Соединяет блоки сети на расстоянии без затрат энергии (0 FE/т).</span><span class="en">Connects network blocks over distance with zero idle energy drain (0 FE/t).</span></p>
+      </div></div>
+      <div class="block"><img class="px" src="assets/img/fluid_io_bus.png" alt=""><div>
+        <h3><span class="ru">Жидкостная I/O-шина</span><span class="en">Fluid I/O Bus</span></h3>
+        <p><span class="ru">Автоматически перекачивает до 1 000 mB каждые 10 тиков между баками/трубами и жидкостными ячейками в накопителях.</span><span class="en">Transfers up to 1,000 mB every 10 ticks between adjacent fluid tanks/pipes and Fluid Byte Cells in your Drives.</span></p>
       </div></div>
     </div>
 
     <h3><span class="ru">Состояния сети</span><span class="en">Grid states</span></h3>
-    <div class="state"><img class="px" src="assets/img/controller_front_online.png" alt=""><span><b>ONLINE</b> — <span class="ru">сеть активна, питание стабильно</span><span class="en">network active, power stable</span></span></div>
+    <div class="state"><img class="px" src="assets/img/controller_front_online.png" alt=""><span><b>ONLINE</b> — <span class="ru">сеть активна, питание стабильно (ниже 10% включается Eco Mode)</span><span class="en">network active, power stable (enters Eco Mode below 10%)</span></span></div>
     <div class="state"><img class="px" src="assets/img/controller_front_offline.png" alt=""><span><b>OFFLINE</b> — <span class="ru">сеть обесточена</span><span class="en">network has no power</span></span></div>
     <div class="state"><img class="px" src="assets/img/controller_front_conflict.png" alt=""><span><b>CONFLICT</b> — <span class="ru">два контроллера в одной сети</span><span class="en">two controllers in one network</span></span></div>
   </div>
@@ -180,14 +286,14 @@
   <div class="wrap">
     <h2><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></h2>
     <p class="sub">
-      <span class="ru">Два вида крафта: обычный (верстак) выполняет Асемблер, процессный (печи, другие машины) — Шина шаблонов.</span>
-      <span class="en">Two kinds of crafts: crafting-table recipes run in the Assembler, processing recipes (furnaces, other machines) run through a Pattern Bus.</span>
+      <span class="ru">Два вида крафта: обычный (верстак) выполняет Ассемблер с поддержкой Сопроцессоров, процессный (печи, машины модов) — Шина шаблонов с режимом блокировки и обучением.</span>
+      <span class="en">Two kinds of crafts: crafting-table recipes run in Assemblers (boosted by Co-Processors), and processing recipes (furnaces, mod machines) run through Pattern Buses with Blocking and Learning modes.</span>
     </p>
     <div class="flow">
-      <span class="step"><span class="ru">Кодирование рецепта</span><span class="en">Encode recipe</span></span><span class="arr">→</span>
-      <span class="step"><span class="ru">Заказ в терминале</span><span class="en">Order in terminal</span></span><span class="arr">→</span>
-      <span class="step"><span class="ru">План с под-крафтами</span><span class="en">Plan with sub-crafts</span></span><span class="arr">→</span>
-      <span class="step"><span class="ru">Асемблер / Шина</span><span class="en">Assembler / Bus</span></span><span class="arr">→</span>
+      <span class="step"><span class="ru">Кодирование / Обучение</span><span class="en">Encode / Learn</span></span><span class="arr">→</span>
+      <span class="step"><span class="ru">Заказ + кнопка Max</span><span class="en">Order + Max button</span></span><span class="arr">→</span>
+      <span class="step"><span class="ru">Дерево подкрафтов и резерв</span><span class="en">Sub-craft tree &amp; reserve</span></span><span class="arr">→</span>
+      <span class="step"><span class="ru">Ассемблер / Шина</span><span class="en">Assembler / Bus</span></span><span class="arr">→</span>
       <span class="step"><span class="ru">Результат в сеть</span><span class="en">Result to network</span></span>
     </div>
     <div class="grid g2">
@@ -197,26 +303,27 @@
       </div></div>
       <div class="block"><img class="px" src="assets/img/pattern_terminal_front.png" alt=""><div>
         <h3><span class="ru">Терминал шаблонов</span><span class="en">Pattern Terminal</span></h3>
-        <p><span class="ru">Список всех рецептов сети, фильтр «Готовые», заказ ×1 / ×10 / ×64, окно подтверждения с планом и нехваткой.</span><span class="en">All network recipes, a “Ready” filter, orders ×1 / ×10 / ×64, and a confirmation window showing the plan and what is missing.</span></p>
+        <p><span class="ru">Список всех рецептов, фильтр «Готовые», древовидное окно плана (<code>├</code>, <code>└</code>, <code>▶</code>), кнопка <b>Max: N</b> при нехватке и сохраняемый резерв ресурсов.</span><span class="en">All network recipes, “Ready” filter, hierarchical plan tree (<code>├</code>, <code>└</code>, <code>▶</code>), <b>Max: N</b> button when short on materials, and persisted resource reservations.</span></p>
       </div></div>
       <div class="block"><img class="px" src="assets/img/assembler_front.png" alt=""><div>
-        <h3><span class="ru">Асемблер</span><span class="en">Assembler</span></h3>
-        <p><span class="ru">Использует любую ячейку как буфер. 4 слота Карт скорости (от 40 до 8 тиков на крафт), очередь до 9 999.</span><span class="en">Uses any cell as its buffer. 4 Speed Card slots (40 down to 8 ticks per craft), queue up to 9,999.</span></p>
+        <h3><span class="ru">Ассемблер и Сопроцессор крафта</span><span class="en">Assembler &amp; Crafting Co-Processor</span></h3>
+        <p><span class="ru">Использует ячейку как буфер (очередь до 9 999). 4 слота Карт скорости и до 8 Сопроцессоров крафта в сети разгоняют крафт до 4 тиков: <code>40 / (1 + карты + сопроцессоры)</code>.</span><span class="en">Uses a cell as its buffer (queue up to 9,999). 4 Speed Cards plus up to 8 Crafting Co-Processors accelerate crafting down to 4 ticks: <code>40 / (1 + cards + coprocessors)</code>.</span></p>
       </div></div>
       <div class="block"><img class="px" src="assets/img/pattern_provider.png" alt=""><div>
         <h3><span class="ru">Шина шаблонов</span><span class="en">Pattern Bus</span></h3>
-        <p><span class="ru">9 слотов шаблонов, работает с печью или любой машиной с инвентарём. Есть режим обучения: прогоните рецепт вручную один раз.</span><span class="en">9 pattern slots, works with a furnace or any machine with an item handler. A learning mode records a recipe you run by hand once.</span></p>
+        <p><span class="ru">9 слотов, питание машин до 1 000 FE/т, режим обучения, <b>Blocking Mode</b> (ждёт освобождения машины) и обнаружение зависаний (30/60 с).</span><span class="en">9 pattern slots, up to 1,000 FE/t machine charging, learning mode, <b>Blocking Mode</b> (waits until machine inputs clear), and stuck detection (30s/60s).</span></p>
       </div></div>
     </div>
 
-    <h3><span class="ru">Возможности последних версий</span><span class="en">Recent highlights</span></h3>
-    <div class="grid g3">
-      <div class="card"><img class="px ic" src="assets/img/recipe_library.png" alt=""><h3><span class="ru">Библиотека рецептов</span><span class="en">Recipe Library</span></h3><p><span class="ru">Улучшение контролера: сеть знает все рецепты верстака без записи шаблонов.</span><span class="en">A controller upgrade: the network knows every crafting-table recipe without recording patterns.</span></p></div>
-      <div class="card"><img class="px ic" src="assets/img/speed_card.png" alt=""><h3><span class="ru">Очередь и приоритеты</span><span class="en">Queue & priorities</span></h3><p><span class="ru">Прогресс, оценка времени, приоритет −9…+9, пауза и отмена заказов.</span><span class="en">Progress, ETA, priority −9…+9, pause and cancel for each order.</span></p></div>
-      <div class="card"><img class="px ic" src="assets/img/pattern_item.png" alt=""><h3><span class="ru">Правила запаса</span><span class="en">Stock rules</span></h3><p><span class="ru">До 8 правил «держать не менее N»: сеть сама заказывает нехватку.</span><span class="en">Up to 8 “keep at least N” rules: the network orders the shortfall by itself.</span></p></div>
+    <h3><span class="ru">Управление производством</span><span class="en">Production control</span></h3>
+    <div class="grid g4">
+      <div class="card"><img class="px ic" src="assets/img/crafting_coprocessor.png" alt=""><h3><span class="ru">Сопроцессор крафта</span><span class="en">Crafting Co-Processor</span></h3><p><span class="ru">Сетевой ускоритель автокрафта: суммируется с Картами скорости во всех Ассемблерах сети (8 FE/т).</span><span class="en">Network-wide autocrafting accelerator: stacks with Speed Cards across all Assemblers (8 FE/t).</span></p></div>
+      <div class="card"><img class="px ic" src="assets/img/recipe_library.png" alt=""><h3><span class="ru">Библиотека рецептов</span><span class="en">Recipe Library</span></h3><p><span class="ru">Улучшение контроллера: сеть знает все рецепты верстака без записи шаблонов, с чёрным списком и предпочтениями.</span><span class="en">Controller upgrade: learns every crafting-table recipe automatically, with blacklist &amp; preferred variants.</span></p></div>
+      <div class="card"><img class="px ic" src="assets/img/speed_card.png" alt=""><h3><span class="ru">Очередь и приоритеты</span><span class="en">Queue &amp; priorities</span></h3><p><span class="ru">Прогресс, оценка времени (ETA), приоритет −9…+9, пауза, отмена и сохранение резервов после перезапуска.</span><span class="en">Progress, ETA, priority −9…+9, pause, cancel, and resource reservations that survive world reloads.</span></p></div>
+      <div class="card"><img class="px ic" src="assets/img/pattern_item.png" alt=""><h3><span class="ru">Запас по расписанию</span><span class="en">Scheduled stock rules</span></h3><p><span class="ru">До 8 правил «держать не менее N» с режимами: всегда, ночью, днём или при заряде &gt;50%.</span><span class="en">Up to 8 “keep at least N” rules scheduled always, at night, by day, or only while energy &gt;50%.</span></p></div>
     </div>
 
-    <h3><span class="ru">Расширенный поиск в терминалах</span><span class="en">Advanced terminal search</span></h3>
+    <h3><span class="ru">Расширенный поиск и сохранённые запросы</span><span class="en">Advanced terminal search &amp; saved queries</span></h3>
     <table>
       <tr><th><span class="ru">Запрос</span><span class="en">Query</span></th><th><span class="ru">Значение</span><span class="en">Meaning</span></th></tr>
       <tr><td><code>iron</code></td><td><span class="ru">часть названия предмета</span><span class="en">part of the item name</span></td></tr>
@@ -225,7 +332,7 @@
       <tr><td><code>&gt;100</code> <code>&lt;100</code> <code>=100</code></td><td><span class="ru">количество на складе</span><span class="en">stored amount</span></td></tr>
       <tr><td><code>$craftable</code> <code>$stock</code> <code>$fav</code></td><td><span class="ru">можно скрафтить / есть в сети / избранное (Alt + клик)</span><span class="en">craftable / in stock / favorites (Alt + click)</span></td></tr>
     </table>
-    <p style="color:var(--muted);font-size:.93rem"><span class="ru">Несколько слов работают вместе, например:</span><span class="en">Several words combine, for example:</span> <code>@minecraft #ingots &gt;64</code></p>
+    <p style="color:var(--muted);font-size:.93rem"><span class="ru">Слова комбинируются (например <code>@minecraft #ingots &gt;64</code>), а 3 слота под кнопками сортировки сохраняют частые запросы между сессиями.</span><span class="en">Words combine (e.g. <code>@minecraft #ingots &gt;64</code>), and 3 slots under the sort buttons save frequent queries across sessions.</span></p>
   </div>
 </section>
 
@@ -249,21 +356,25 @@
   <div class="wrap">
     <h2>Simple Byte Storage: Scripting <span style="font-size:.9rem;color:var(--muted);font-weight:400">(<span class="ru">необязательный аддон</span><span class="en">optional addon</span>)</span></h2>
     <p class="sub">
-      <span class="ru">Добавляет Логическую шину и Логический терминал: управляйте предметами сети на JavaScript. Скрипт видит соседние инвентари и сеть, умеет планировать крафты, управлять очередью и правилами запаса, пишет в журнал и работает в песочнице (Rhino, без доступа к Java-классам, с лимитами инструкций и времени).</span>
-      <span class="en">Adds a Logic Bus and a Logic Terminal so you can drive your network with JavaScript. Scripts see adjacent inventories and the network, can plan crafts, control the queue and stock rules, write to the journal, and run in a sandbox (Rhino, no Java class access, instruction and time limits).</span>
+      <span class="ru">Добавляет Логическую шину и Логический терминал с полноценным редактором кода (подсветка синтаксиса, номера строк, автодополнение API и ID предметов, undo/redo). Скрипты работают в усиленной песочнице Rhino, реагируют на события, управляют редстоуном, хранят данные в NBT и выводят текст на Монитор сети.</span>
+      <span class="en">Adds a Logic Bus and a Logic Terminal with a full code editor (syntax highlighting, line numbers, API &amp; item ID autocomplete, undo/redo). Scripts run in a hardened Rhino sandbox, react to events, control redstone, persist NBT data, and write to Network Displays.</span>
     </p>
-<pre><code class="language-js">var chest = side("up");
-function tick() {
-  if (!chest) return;
-  chest.pull("minecraft:iron_ingot");              // inventory -> network
-  if (net.count("minecraft:iron_ingot") &gt; 500) {
-    log("lots of iron");
-  }
-  if (net.count("minecraft:stick") &lt; 64) net.craft("minecraft:stick", 64);
+<pre><code class="language-js">function tick() {
+  var e = net.energy();
+  display.set(0, "Energy: " + e.percent + "% (" + e.stored + " FE)");
+  display.set(1, "Free bytes: " + net.freeBytes());
+  // Output redstone signal when energy drops below 30%
+  redstone.set("north", e.percent &lt; 30 ? 15 : 0);
+}
+
+function onAlert(ev) {
+  var hits = Number(store.get("alerts") || 0) + 1;
+  store.set("alerts", String(hits));
+  display.set(2, "Last alert (#" + hits + "): " + ev.text);
 }</code></pre>
     <p style="color:var(--muted);font-size:.93rem">
       <span class="ru">API:</span><span class="en">API:</span>
-      <code>net.count</code> <code>net.craft</code> <code>net.canCraft</code> <code>net.plan</code> <code>net.queue</code> <code>net.energy</code> <code>stock.set</code> <code>recipes.*</code> <code>journal.write</code> <code>alert</code> <code>side(dir)</code> <code>pull</code> <code>push</code> <code>move</code>
+      <code>net.*</code> <code>net.machines</code> <code>stock.*</code> <code>stock.mode</code> <code>recipes.*</code> <code>journal.*</code> <code>store.*</code> <code>redstone.*</code> <code>display.*</code> <code>onCraft</code> <code>onLowStock</code> <code>onAlert</code> <code>alert</code> <code>side(dir, id)</code>
     </p>
   </div>
 </section>
@@ -276,13 +387,13 @@ function tick() {
       <li><span class="ru">Установите Forge для Minecraft 1.20.1.</span><span class="en">Install Forge for Minecraft 1.20.1.</span></li>
       <li><span class="ru">Скачайте <code>simple_bytestorage-&lt;версия&gt;.jar</code> со страницы <a href="https://github.com/Karatells/ByteStorage/releases/latest">Releases</a> и положите в папку <code>mods</code>. Для скриптов добавьте и <code>simple_bytestorage_scripting-&lt;версия&gt;.jar</code>.</span><span class="en">Download <code>simple_bytestorage-&lt;version&gt;.jar</code> from <a href="https://github.com/Karatells/ByteStorage/releases/latest">Releases</a> and drop it into <code>mods</code>. Add <code>simple_bytestorage_scripting-&lt;version&gt;.jar</code> too if you want scripting.</span></li>
       <li><span class="ru">На сервере ставьте те же файлы на сервер <b>и</b> на каждого клиента, версии должны совпадать.</span><span class="en">On a server, install the same files on the server <b>and</b> every client; versions must match.</span></li>
-      <li><span class="ru">Скрафтите <b>Справочник</b> (книга + кабель): внутриигровое руководство.</span><span class="en">Craft the <b>Guide Book</b> (book + cable) for an in-game manual.</span> <img class="px" style="width:22px;height:22px;vertical-align:middle" src="assets/img/guide_book.png" alt=""></li>
+      <li><span class="ru">Добудьте <b>Байтитовую руду</b> (<code>Y = −48..+48</code>) и скрафтите <b>Справочник</b> (книга + кабель).</span><span class="en">Mine <b>Bytite Ore</b> (<code>Y = −48..+48</code>) and craft the <b>Guide Book</b> (book + cable).</span> <img class="px" style="width:22px;height:22px;vertical-align:middle" src="assets/img/guide_book.png" alt=""></li>
     </ol>
 
     <h3><span class="ru">Первая сеть за пять минут</span><span class="en">Your first network in five minutes</span></h3>
     <ol class="steps">
-      <li><span class="ru">Поставьте <b>Контроллер</b> и подайте на него FE от любого генератора.</span><span class="en">Place a <b>Controller</b> and feed it FE from any generator.</span></li>
-      <li><span class="ru">Рядом поставьте <b>Накопитель</b> и вставьте ячейки (до 10).</span><span class="en">Place a <b>Drive</b> next to it and insert cells (up to 10).</span></li>
+      <li><span class="ru">Поставьте <b>Контроллер</b> и подайте на него FE от любого генератора (по желанию добавьте <b>Конденсатор</b> на 500 000 FE).</span><span class="en">Place a <b>Controller</b> and feed it FE from any generator (optionally add a 500,000 FE <b>Capacitor</b>).</span></li>
+      <li><span class="ru">Рядом поставьте <b>Накопитель</b> и вставьте ячейки (до 10), или подключите существующие сундуки через <b>Шину хранения</b>.</span><span class="en">Place a <b>Drive</b> next to it and insert cells (up to 10), or link existing chests with a <b>Storage Bus</b>.</span></li>
       <li><span class="ru">Поставьте <b>Терминал</b>, откройте его и Shift-кликом кладите предметы из инвентаря.</span><span class="en">Place a <b>Terminal</b>, open it, and Shift-click items from your inventory.</span></li>
     </ol>
   </div>
@@ -293,9 +404,11 @@ function tick() {
     <h2><span class="ru">Ссылки</span><span class="en">Links</span></h2>
     <div class="grid g3">
       <a class="card" href="https://github.com/Karatells/ByteStorage/releases"><h3>Releases</h3><p><span class="ru">Готовые jar-файлы и заметки релизов.</span><span class="en">Ready-made jars and release notes.</span></p></a>
-      <a class="card" href="docs/Home.html"><h3><span class="ru">Документация</span><span class="en">Documentation</span></h3><p><span class="ru">Полная документация по каждому блоку (на английском).</span><span class="en">Full documentation for every block.</span></p></a>
-      <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.2.0.md"><h3><span class="ru">Заметки релиза 1.2.0</span><span class="en">Release notes 1.2.0</span></h3><p><span class="ru">Что нового и известные ограничения.</span><span class="en">What is new and known limitations.</span></p></a>
-      <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/CHANGELOG.md"><h3>Changelog</h3><p><span class="ru">История всех изменений.</span><span class="en">History of all changes.</span></p></a>
+      <a class="card" href="docs/Home.html"><h3><span class="ru">Документация</span><span class="en">Documentation</span></h3><p><span class="ru">Полная документация по каждому блоку и механике 1.3.0.</span><span class="en">Full documentation for every block and 1.3.0 mechanic.</span></p></a>
+      <a class="card" href="docs/Recipes.html"><h3><span class="ru">Рецепты</span><span class="en">Recipes</span></h3><p><span class="ru">Все 55 рецептов крафта, плавки и обжига с сетками.</span><span class="en">All 55 crafting, smelting, and blasting recipes with grids.</span></p></a>
+      <a class="card" href="docs/Worldgen.html"><h3><span class="ru">Мирогенерация</span><span class="en">World &amp; Materials</span></h3><p><span class="ru">Байтит, Кремниевый разлом, прогрессия и достижения.</span><span class="en">Bytite Ore, Silicon Rift resources, progression, and advancements.</span></p></a>
+      <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.2.1.md"><h3><span class="ru">Заметки релиза 1.2.1</span><span class="en">Release notes 1.2.1</span></h3><p><span class="ru">Подробности обновления 1.2.1.</span><span class="en">Details of the 1.2.1 update.</span></p></a>
+      <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/CHANGELOG.md"><h3>Changelog</h3><p><span class="ru">История всех изменений проекта.</span><span class="en">Full history of all project changes.</span></p></a>
     </div>
   </div>
 </section>

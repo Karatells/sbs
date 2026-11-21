@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -341,6 +342,50 @@ function tick() {}
   var total = 0;
   for (var i = 0; i &lt; q.length; i++) total += q[i].crafts;
   if (total &gt; 200) journal.write(&quot;Queue is long: &quot; + total + &quot; crafts&quot;);
+}
+</code></pre>
+<h2 id="24-react-to-finished-crafts-oncraft">24. React to finished crafts (onCraft)<a class="anchor" href="#24-react-to-finished-crafts-oncraft" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var made = 0;
+
+function onCraft(e) {
+  made += e.count;
+  if (made &gt;= 256) {
+    journal.write(&quot;Crafted &quot; + made + &quot; items&quot;);
+    made = 0;
+  }
+}
+</code></pre>
+<h2 id="25-alert-only-on-real-problems-onalert-onlowstock">25. Alert only on real problems (onAlert, onLowStock)<a class="anchor" href="#25-alert-only-on-real-problems-onalert-onlowstock" title="Permanent link">#</a></h2>
+<pre><code class="language-js">function onAlert(e) {
+  if (e.type === &quot;stuck&quot;) alert(&quot;Machine stuck on &quot; + e.id);
+}
+
+function onLowStock(e) {
+  journal.write(&quot;Auto-order: &quot; + e.count + &quot; x &quot; + e.id);
+}
+</code></pre>
+<h2 id="26-report-idle-blocked-machines-machines">26. Report idle-blocked machines (machines)<a class="anchor" href="#26-report-idle-blocked-machines-machines" title="Permanent link">#</a></h2>
+<pre><code class="language-js">var last = 0;
+
+function tick() {
+  var list = net.machines();
+  var blocked = 0;
+  for (var i = 0; i &lt; list.length; i++) {
+    if (list[i].pending &gt; 0 &amp;&amp; list[i].wait !== &quot;none&quot;) blocked++;
+  }
+  if (blocked !== last) {
+    if (blocked &gt; 0) journal.warn(blocked + &quot; machine(s) are blocked&quot;);
+    last = blocked;
+  }
+}
+</code></pre>
+<h2 id="27-switch-the-stock-schedule-by-power-level-stockmode">27. Switch the stock schedule by power level (stock.mode)<a class="anchor" href="#27-switch-the-stock-schedule-by-power-level-stockmode" title="Permanent link">#</a></h2>
+<pre><code class="language-js">function tick() {
+  var e = net.energy();
+  if (!e) return;
+  var mode = stock.mode().mode;
+  if (e.percent &lt; 20 &amp;&amp; mode !== &quot;night&quot;) stock.setMode(&quot;night&quot;);
+  else if (e.percent &gt; 80 &amp;&amp; mode !== &quot;always&quot;) stock.setMode(&quot;always&quot;);
 }
 </code></pre>
     <hr>

@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a class="cur" href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -52,12 +53,13 @@
 <p>This page builds a minimal working network.</p>
 <h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" title="Permanent link">#</a></h2>
 <ul>
+<li><strong>Bytite Ingots</strong> (smelted from <a href="Worldgen.html">Bytite Ore</a>, found between <code>Y = -48</code> and <code>+48</code>) and Overworld Rift materials</li>
 <li>1 <strong>Network Controller</strong></li>
 <li>1 <strong>Drive</strong> and at least one <strong>Storage Cell</strong></li>
 <li>1 <strong>Terminal</strong></li>
 <li>A source of <strong>FE</strong> (Forge Energy) for the controller, from any energy mod</li>
 </ul>
-<p>See <a href="Recipes.html">Recipes</a> for how to craft everything.</p>
+<p>See <a href="Worldgen.html">World &amp; Materials</a> for gathering resources and <a href="Recipes.html">Recipes</a> for how to craft everything.</p>
 <h2 id="steps">Steps<a class="anchor" href="#steps" title="Permanent link">#</a></h2>
 <ol>
 <li><strong>Place the Network Controller.</strong> It is the heart of the network.</li>
@@ -67,13 +69,14 @@
 <li>Insert items by Shift-clicking them from your inventory.</li>
 </ol>
 <h2 id="how-blocks-join-the-network">How blocks join the network<a class="anchor" href="#how-blocks-join-the-network" title="Permanent link">#</a></h2>
-<p>Every Simple Byte Storage device is a <em>grid node</em>. Nodes connect to each other by <strong>touching</strong> (face to face), or through <strong>Cables</strong>. Every 20 ticks (1 second) the network is re-scanned starting from the controller (a breadth-first search over adjacent nodes). Anything not reachable from the controller is offline.</p>
+<p>Every Simple Byte Storage device is a <em>grid node</em>. Nodes connect to each other by <strong>touching</strong> (face to face), through <strong>Cables</strong>, or across long distances and dimensions via linked <a href="Network-and-Power.html#quantum-relay-entangled-crystal">Quantum Relays</a>. Network topology updates immediately when blocks change (and runs a background scan every 100 ticks without force-loading unloaded chunks). Anything not reachable from the controller is offline.</p>
 <p>There must be <strong>exactly one controller</strong> per connected network. Two controllers in one network put it into the <code>CONFLICT</code> state.</p>
 <h2 id="where-to-go-next">Where to go next<a class="anchor" href="#where-to-go-next" title="Permanent link">#</a></h2>
 <ul>
+<li>Want to connect existing chests or drawers? Place a <a href="Storage.html#storage-bus">Storage Bus</a> next to them.</li>
 <li>Want automatic crafting? Read <a href="Autocrafting.html">Autocrafting</a>.</li>
-<li>Want items moved automatically between chests and the network? See the <a href="IO-Bus.html">I/O Bus</a>, or the <a href="Scripting-Overview.html">Scripting addon</a> for full control.</li>
-<li>The in-game <a href="Guide-Book.html">Guide Book</a> summarises all of this.</li>
+<li>Want items or fluids moved automatically? See the <a href="IO-Bus.html">I/O Bus</a>, <a href="Storage.html#fluid-storage">Fluid Storage</a>, or the <a href="Scripting-Overview.html">Scripting addon</a> for full control.</li>
+<li>Follow the 5 built-in <a href="Worldgen.html#advancements">Advancements</a> or read the in-game <a href="Guide-Book.html">Guide Book</a>.</li>
 </ul>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from

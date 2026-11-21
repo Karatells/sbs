@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Storage — Simple Byte Storage</title>
-<meta name="description" content="A Drive holds up to 10 storage cells. The contents of all cells in all drives are merged into one virtual item pool for the whole network.">
+<meta name="description" content="A Drive holds up to 10 storage cells (both item Byte Storage Cells and Fluid Byte Cells). The contents of all item cells in all drives are merged into one virtu">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -50,49 +51,121 @@
     <button class="lang menu-btn" id="menuBtn">☰ Pages</button>
     <h1 id="storage">Storage<a class="anchor" href="#storage" title="Permanent link">#</a></h1>
 <h2 id="drive">Drive<a class="anchor" href="#drive" title="Permanent link">#</a></h2>
-<p>A <strong>Drive</strong> holds up to <strong>10 storage cells</strong>. The contents of all cells in all drives are merged into one virtual item pool for the whole network.</p>
+<p>A <strong>Drive</strong> holds up to <strong>10 storage cells</strong> (both item Byte Storage Cells and Fluid Byte Cells). The contents of all item cells in all drives are merged into one virtual item pool for the whole network.</p>
 <h3 id="drive-settings">Drive settings<a class="anchor" href="#drive-settings" title="Permanent link">#</a></h3>
 <ul>
-<li><strong>Priority</strong> — when inserting, higher-priority drives are filled first. Hold Shift while changing it to step by ±10.</li>
+<li><strong>Priority</strong> — when inserting, higher-priority drives are filled first (and extraction drains lower-priority drives first). Hold Shift while changing it to step by ±10.</li>
 <li><strong>Whitelist</strong> (9 filter slots) — only items in the list are accepted. <strong>Empty = accepts everything.</strong></li>
+<li><strong>Upgrade slot</strong> (1 slot) — accepts a <strong>Void Overflow Card</strong> or a <strong>Lock Card</strong> (see below).</li>
 </ul>
 <p>Combine priority and whitelist to sort items into dedicated drives (for example, a whitelisted drive for ores with a high priority).</p>
-<h2 id="storage-cells">Storage Cells<a class="anchor" href="#storage-cells" title="Permanent link">#</a></h2>
+<h2 id="byte-storage-cells">Byte Storage Cells<a class="anchor" href="#byte-storage-cells" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
 <th>Cell</th>
 <th>Capacity (bytes = items)</th>
 <th>Crystal colour</th>
+<th>Idle drain</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1k</td>
+<td><code>1k</code></td>
 <td>1,024</td>
 <td>Green</td>
+<td>1 FE/t</td>
 </tr>
 <tr>
-<td>4k</td>
+<td><code>4k</code></td>
 <td>4,096</td>
 <td>Blue</td>
+<td>2 FE/t</td>
 </tr>
 <tr>
-<td>16k</td>
+<td><code>16k</code></td>
 <td>16,384</td>
 <td>Purple</td>
+<td>3 FE/t</td>
 </tr>
 <tr>
-<td>64k</td>
+<td><code>64k</code></td>
 <td>65,536</td>
 <td>Orange</td>
+<td>4 FE/t</td>
+</tr>
+<tr>
+<td><code>256k</code></td>
+<td>262,144</td>
+<td>Cyan</td>
+<td>6 FE/t</td>
+</tr>
+<tr>
+<td><code>1M</code></td>
+<td>1,048,576</td>
+<td>Red</td>
+<td>8 FE/t</td>
 </tr>
 </tbody>
 </table>
 <p><strong>1 item = 1 byte</strong>, regardless of the item type or stack size. A stack of 64 cobblestone costs 64 bytes, and so does 64 different single items.</p>
 <p>Cell upgrades are crafted by combining the lower tier with extra materials — see <a href="Recipes.html#storage-cells">Recipes</a>.</p>
 <h2 id="cells-as-assembler-buffers">Cells as Assembler buffers<a class="anchor" href="#cells-as-assembler-buffers" title="Permanent link">#</a></h2>
-<p>Any storage cell can also be used as the buffer of an <a href="Assembler.html">Assembler</a>.</p>
+<p>Any item Byte Storage Cell can also be used as the buffer of an <a href="Assembler.html">Assembler</a>.</p>
+<h2 id="cell-workbench-drive-upgrade-cards">Cell Workbench &amp; Drive Upgrade Cards<a class="anchor" href="#cell-workbench-drive-upgrade-cards" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Cell Workbench (<code>cell_workbench</code>)</strong>: insert a Byte Storage Cell and configure up to <strong>9 filter slots</strong> in <strong>Allow</strong> (whitelist) or <strong>Deny</strong> (blacklist) mode, plus a <strong>Clear</strong> button. The filter is written directly into the cell's NBT (<code>CellFilter</code> / <code>CellBlacklist</code>), so it travels with the cell across drives.</li>
+<li><strong>Void Overflow Card (<code>void_card</code>)</strong>: insert into a Drive's upgrade slot; when the drive is full, excess incoming items matching its filter are destroyed instead of backing up farms or buses.</li>
+<li><strong>Lock Card (<code>lock_card</code>)</strong>: insert into a Drive's upgrade slot to make the drive <strong>read-only</strong> (allows extraction, blocks new insertions — handy before migrating or retiring a drive).</li>
+</ul>
+<h2 id="storage-bus">Storage Bus<a class="anchor" href="#storage-bus" title="Permanent link">#</a></h2>
+<p>The <strong>Storage Bus (<code>storage_bus</code>)</strong> connects adjacent external inventories (chests, barrels, mod drawers) directly to the virtual network pool without copying their contents into storage cells.
+- Supports <strong>Priority</strong> (<code>-999</code> to <code>+999</code>, Shift = ±10).
+- Supports a <strong>9-slot filter</strong> in <strong>Allow</strong> (whitelist) or <strong>Deny</strong> (blacklist) mode (empty = all items).
+- Costs <strong>2 FE/t</strong> idle energy.</p>
+<h2 id="byte-archiver-data-blobs">Byte Archiver &amp; Data Blobs<a class="anchor" href="#byte-archiver-data-blobs" title="Permanent link">#</a></h2>
+<p>The <strong>Byte Archiver (<code>archiver</code>)</strong> automatically compresses large bulk stacks in your network to save bytes:
+- Every second, if any stackable, non-NBT item (<code>maxStackSize &gt;= 16</code>) exceeds <strong>4,096</strong> items in stock (at least <code>4,096 + 64</code>), the Archiver compresses <strong>64 items into 1 Data Blob (<code>data_blob</code>)</strong> — a <strong>64:1</strong> byte reduction.
+- Each compression costs <strong>160 FE</strong> from the Controller.
+- Idle drain is <strong>10 FE/t</strong> while active (1 FE/t when paused in its GUI). Pauses automatically in <strong>Eco Mode (<code>&lt;10%</code>)</strong>.
+- Right-click a <strong>Data Blob</strong> in your hand to unpack it back into 64 items.</p>
+<h2 id="fluid-storage">Fluid Storage<a class="anchor" href="#fluid-storage" title="Permanent link">#</a></h2>
+<p>Simple Byte Storage extends its type-unlimited model to fluids: <strong>1,000 mB = 1 byte</strong>, with <strong>no limit on fluid types</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Fluid Cell</th>
+<th>Capacity (mB)</th>
+<th>Equivalent bytes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1k</code> Fluid Byte Cell</td>
+<td>1,024,000 mB</td>
+<td>1,024</td>
+</tr>
+<tr>
+<td><code>4k</code> Fluid Byte Cell</td>
+<td>4,096,000 mB</td>
+<td>4,096</td>
+</tr>
+<tr>
+<td><code>16k</code> Fluid Byte Cell</td>
+<td>16,384,000 mB</td>
+<td>16,384</td>
+</tr>
+<tr>
+<td><code>64k</code> Fluid Byte Cell</td>
+<td>65,536,000 mB</td>
+<td>65,536</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Insert Fluid Byte Cells directly into any <strong>Drive</strong>.</li>
+<li>Use a <strong>Fluid I/O Bus (<code>fluid_io_bus</code>)</strong> next to tanks, pipes, or fluid machines to <strong>Import</strong> or <strong>Export</strong> up to <strong>1,000 mB every 10 ticks</strong> (2 FE/t idle; pauses in Eco Mode).</li>
+</ul>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Storage.md">docs/wiki/Storage.md</a> in the mod repository.</p>

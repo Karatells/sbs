@@ -75,8 +75,8 @@ function tick() {
 }
 ```
 
-- A script **must define `function tick()`**, otherwise the bus reports an error.
-- **Global variables persist** between runs, but are reset when the script is saved, the world reloads, or the bus is restarted (the top level runs again).
+- A script must define **`function tick()`** or at least one event handler (**`onCraft(e)`**, **`onLowStock(e)`**, **`onAlert(e)`**), otherwise the bus reports an error.
+- **Global variables persist** between runs, but are reset when the script is saved, the world reloads, or the bus is restarted (the top level runs again). For data that survives world reloads, use **`store.get` / `store.set`** (saved in the Logic Bus NBT).
 - The default interval is 20 ticks (1 s). The server enforces a minimum (default 10 ticks); max 1,200.
 - A bus runs only while it is **enabled**, its network is **online**, and scripting is **enabled** in the config.
 - Any error, or exceeding a limit, **stops the bus**, sets the status to `ERROR: <reason>` and writes it to the log.
@@ -94,3 +94,18 @@ function tick() {
 ## Persistence
 
 Script text, identifier, enabled flag and interval are stored in the block entity's NBT. Script variables and the log are **not** persisted. After a world restart an enabled bus recompiles and continues.
+
+## The script editor
+
+The Logic Terminal editor highlights JavaScript syntax and has autocomplete.
+
+| Key | Action |
+|---|---|
+| Ctrl+Space | open suggestions |
+| Up / Down, Enter or Tab | choose / accept a suggestion (Esc dismisses it) |
+| Tab / Shift+Tab | indent / unindent (works on a selection) |
+| Ctrl+/ | comment or uncomment lines |
+| Ctrl+Z / Ctrl+Y | undo / redo |
+| Ctrl+A, C, X, V | select all, copy, cut, paste |
+
+Suggestions cover `net`, `stock`, `recipes`, `journal`, the global functions and, inside quotes, item ids. Brackets and quotes close automatically.

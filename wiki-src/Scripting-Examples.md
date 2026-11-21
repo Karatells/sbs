@@ -376,3 +376,59 @@ function tick() {
   if (total > 200) journal.write("Queue is long: " + total + " crafts");
 }
 ```
+
+## 24. React to finished crafts (onCraft)
+
+```js
+var made = 0;
+
+function onCraft(e) {
+  made += e.count;
+  if (made >= 256) {
+    journal.write("Crafted " + made + " items");
+    made = 0;
+  }
+}
+```
+
+## 25. Alert only on real problems (onAlert, onLowStock)
+
+```js
+function onAlert(e) {
+  if (e.type === "stuck") alert("Machine stuck on " + e.id);
+}
+
+function onLowStock(e) {
+  journal.write("Auto-order: " + e.count + " x " + e.id);
+}
+```
+
+## 26. Report idle-blocked machines (machines)
+
+```js
+var last = 0;
+
+function tick() {
+  var list = net.machines();
+  var blocked = 0;
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].pending > 0 && list[i].wait !== "none") blocked++;
+  }
+  if (blocked !== last) {
+    if (blocked > 0) journal.warn(blocked + " machine(s) are blocked");
+    last = blocked;
+  }
+}
+```
+
+## 27. Switch the stock schedule by power level (stock.mode)
+
+```js
+function tick() {
+  var e = net.energy();
+  if (!e) return;
+  var mode = stock.mode().mode;
+  if (e.percent < 20 && mode !== "night") stock.setMode("night");
+  else if (e.percent > 80 && mode !== "always") stock.setMode("always");
+}
+```

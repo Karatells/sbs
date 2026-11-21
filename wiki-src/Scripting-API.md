@@ -46,6 +46,12 @@ If the bus has no network storage available, methods that need it throw `network
 | `net.energy()` | object | `{stored, max, percent}` of the Controller's energy buffer, or `null`. |
 | `net.stats()` | object | `{patterns, assemblers, assemblersBusy, patternBuses, busJobs, libraryRecipes, reserved}`. `libraryRecipes` is 0 without a Recipe Library. |
 
+### Machines
+
+| Method | Returns | Description |
+|---|---|---|
+| `net.machines()` | array | Up to 64 Assemblers and Pattern Buses: `[{kind, x, y, z, busy, pending, wait, output}]`. `kind` is `"assembler"` or `"bus"`; `pending` is the number of queued crafts; `output` is the item id of the current job or `null`. `wait` is `"none"` or the reason it is not progressing: Assembler — `no_card`, `resources`, `card_busy`, `card_small`, `network_off`, `storage_full`; Bus — `resources`, `no_machine`. |
+
 ### Planning (does not order anything)
 
 | Method | Returns | Description |
@@ -74,6 +80,8 @@ The same rules as the Controller's **Stock** tab (8 rules).
 | `stock.list()` | array | `[{slot, id, min, have, state}]`; `state` is `"ok"`, `"crafting"`, `"failed"` or `"off"`. |
 | `stock.set(id, min)` | number | Creates the rule for the item (or changes the existing one). Returns its slot, or `-1` if all 8 rules are in use. `min = 0` removes it. |
 | `stock.clear(id)` | number | Removes the rules for the item; returns how many. |
+| `stock.mode()` | object | The schedule: `{mode, active}`; `mode` is `"always"`, `"night"`, `"day"` or `"energy"`, `active` tells whether rules are running now. |
+| `stock.setMode(name)` | boolean | Changes the schedule (`false` for an unknown name). Can be disabled by the server (`allowControl`). |
 
 ### `recipes` — Recipe Library settings
 
@@ -98,6 +106,18 @@ These can be disabled by the server (`allowControl`).
 | `alert(text)` | boolean | Sends a chat warning to every player who carries a Wireless Terminal bound to this network. Returns `false` if it was sent too recently (once per 30 s per bus). Can be disabled by the server (`allowAlerts`). |
 
 Identical consecutive journal lines from the same bus are merged into `x2`, `x3`, …
+
+## Event handlers
+
+Besides `tick()` a script may define handlers that are called when something happens in the network. They are optional; a script needs at least `tick()` or one handler. Events are delivered at the bus interval, before `tick()`, oldest first.
+
+| Handler | Called when | Event object |
+|---|---|---|
+| `onCraft(e)` | an Assembler finished a craft | `{type: "crafted", id, count, text}` |
+| `onLowStock(e)` | a stock rule ordered a missing amount | `{type: "stock_order", id, count, text}` (`count` = ordered) |
+| `onAlert(e)` | a stock rule failed or a machine is stuck | `{type: "stock_failed" \| "stuck", id, count, text}` |
+
+Rules: events that happened before the script was compiled are not replayed; at most 10 handler calls per run (the rest are dropped); events written by scripts (`journal.write/warn`) are never delivered, so handlers cannot trigger themselves. Handlers use the same budget as `tick()`, and an error in a handler stops the run like an error in `tick()`.
 
 ## `side(dir)` and `side(dir, id)`
 
@@ -157,7 +177,7 @@ To avoid one-call memory bombs, `String.prototype.repeat`, `padStart`, `padEnd` 
 
 | Message | Cause |
 |---|---|
-| `script must define function tick()` | No `tick` function at top level. |
+| `script must define function tick() or an event handler …` | Neither `tick` nor `onCraft` / `onLowStock` / `onAlert` is defined at top level. |
 | `SyntaxError… (line N)` | The script doesn't parse. |
 | `unknown item: x` | Bad item id. |
 | `side(): expected down/up/north/south/west/east` | Bad direction. |
@@ -171,3 +191,9 @@ To avoid one-call memory bombs, `String.prototype.repeat`, `padStart`, `padEnd` 
 | `API call limit exceeded` / `craft call limit exceeded` | Too many calls in one run. |
 
 `try`/`catch` can handle ordinary script errors (like a bad item id). Budget violations **cannot** be caught.
+
+## Redstone, Persistent Store & Network Display
+- `redstone.get(dir)` — returns the incoming redstone signal (`0..15`) on side `dir` (`down`/`up`/`north`/`south`/`west`/`east`).
+- `redstone.set(dir, power)` — outputs a redstone signal (`0..15`) from the Logic Bus on side `dir`.
+- `store.get(key)` / `store.set(key, value)` / `store.remove(key)` / `store.clear()` — persistent per-bus key-value store saved in NBT (up to 64 keys, max 512 chars per value).
+- `display.set(line, text)` / `display.clear()` — updates lines `0..5` on all **Network Display (`network_display`)** blocks connected to the grid.

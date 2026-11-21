@@ -3,6 +3,7 @@
 **Start**
 - [Downloads](Downloads)
 - [Getting Started](Getting-Started)
+- [World & Materials](Worldgen)
 - [Recipes](Recipes)
 
 **Core mod**

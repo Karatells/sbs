@@ -46,3 +46,15 @@ Open a Terminal remotely — see [Wireless Terminal](Wireless-Terminal).
 ## Power
 
 Terminals need the network to be online (see [Network and Power](Network-and-Power)).
+
+## Item tooltip
+
+Hovering an item in a terminal shows how many are stored, how many of them are **reserved** for accepted orders, and how many are currently **in production** (queued or running crafts).
+
+## Order dialog: "Max"
+
+If an order cannot be done in full (an ingredient is missing), the **Start** button becomes **Max: N**, where N is the largest amount the network can craft right now. Click it to recalculate the plan for N, then press **Start**.
+
+## Saved searches
+
+Three slots under the sort buttons (right of the terminal window) store search queries. Click an empty slot (`+`) to save the current search; click a filled slot to apply it; right-click a filled slot to overwrite it with the current search, or to clear it when the search box is empty. The slots are shared by all terminals and saved in `config/simple_bytestorage_searches.txt`.

@@ -1,6 +1,6 @@
 # Network Controller GUI
 
-Right-click the [Network Controller](Network-and-Power) to open its screen. It has three tabs and a slot for the [Wireless Terminal](Wireless-Terminal).
+Right-click the [Network Controller](Network-and-Power) to open its screen. It has seven tabs (Overview, Storage, Crafting, Recipes, Stock, Journal, Graphs) in a column on the left, like a guidebook. The tab content is shown to the right of the column; below it, on every tab, are the slot for the [Wireless Terminal](Wireless-Terminal) and the slot for the Recipe Library, and under them the player inventory. The cross in the top-right corner closes the screen.
 
 ## Overview
 Network status (Online / Offline / Conflict), number of connected devices, stored energy with a bar, the per-tick drain, and a count of each connected block type.
@@ -35,10 +35,18 @@ The last events of the network's autocrafting, newest first, with how long ago t
 ## Warnings
 The network tells you when something does not work, instead of failing silently:
 - **Stock rules:** hover the red `have/minimum` text of a failing rule to see **why** it cannot be crafted (no pattern, missing ingredients with the amount, no machine, queues full). After 3 failed attempts in a row (~10 s) a chat warning is sent.
-- **Stuck machines:** an Assembler that has been waiting for ingredients or for free network storage for more than 30 seconds is reported (journal type **Stuck** and a chat warning naming the item and what is missing).
+- **Stuck machines:** an Assembler or Pattern Bus that has been waiting for ingredients (or, for Assemblers, for free network storage) for more than 30 seconds is reported (journal type **Stuck** and a chat warning naming the item and what is missing). A Pattern Bus with no machine that accepts the ingredients (none adjacent, or its input slots stay full) is reported after 60 seconds, because a slow recipe can legitimately keep a machine busy.
 - Warnings go to every player who has a Wireless Terminal bound to this Controller in their inventory, with the Controller's coordinates. The same warning repeats at most once per 5 minutes.
 
 The journal keeps the last 60 events in memory and is cleared when the world is reloaded.
 
 ## Wireless Terminal slot
 Place a Wireless Terminal into the slot at the bottom to bind it to this network and charge it from the controller's energy buffer. The slot's contents drop when the controller is broken.
+
+## Stock rule schedule
+
+The button under the rules on the **Stock** tab chooses when stock rules place orders: **always**, **night only**, **day only**, or **only when energy is high** (resumes above 50% of the Controller's buffer, pauses below 25%). While paused by the schedule the button shows "(paused now)" and no new stock orders are made; orders already queued continue. The setting is saved with the Controller.
+
+## Statistics graphs
+
+The **Graphs** tab shows two graphs built from snapshots taken every 20 seconds (the last 20 minutes are kept): the total number of items stored and the Controller's energy level. Below them, **Rising** and **Falling** list the three items whose stock changed the most over that period — handy for spotting what is draining. Since **1.3.0**, the graph series (`StatsTotals` and `StatsEnergy`) are saved in the Controller's NBT and survive world reloads.

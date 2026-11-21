@@ -25,6 +25,7 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
+<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -177,6 +178,23 @@
 </tr>
 </tbody>
 </table>
+<h3 id="machines">Machines<a class="anchor" href="#machines" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net.machines()</code></td>
+<td>array</td>
+<td>Up to 64 Assemblers and Pattern Buses: <code>[{kind, x, y, z, busy, pending, wait, output}]</code>. <code>kind</code> is <code>"assembler"</code> or <code>"bus"</code>; <code>pending</code> is the number of queued crafts; <code>output</code> is the item id of the current job or <code>null</code>. <code>wait</code> is <code>"none"</code> or the reason it is not progressing: Assembler — <code>no_card</code>, <code>resources</code>, <code>card_busy</code>, <code>card_small</code>, <code>network_off</code>, <code>storage_full</code>; Bus — <code>resources</code>, <code>no_machine</code>.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="planning-does-not-order-anything">Planning (does not order anything)<a class="anchor" href="#planning-does-not-order-anything" title="Permanent link">#</a></h3>
 <table>
 <thead>
@@ -263,6 +281,16 @@
 <td>number</td>
 <td>Removes the rules for the item; returns how many.</td>
 </tr>
+<tr>
+<td><code>stock.mode()</code></td>
+<td>object</td>
+<td>The schedule: <code>{mode, active}</code>; <code>mode</code> is <code>"always"</code>, <code>"night"</code>, <code>"day"</code> or <code>"energy"</code>, <code>active</code> tells whether rules are running now.</td>
+</tr>
+<tr>
+<td><code>stock.setMode(name)</code></td>
+<td>boolean</td>
+<td>Changes the schedule (<code>false</code> for an unknown name). Can be disabled by the server (<code>allowControl</code>).</td>
+</tr>
 </tbody>
 </table>
 <h3 id="recipes-recipe-library-settings"><code>recipes</code> — Recipe Library settings<a class="anchor" href="#recipes-recipe-library-settings" title="Permanent link">#</a></h3>
@@ -332,6 +360,35 @@
 </tbody>
 </table>
 <p>Identical consecutive journal lines from the same bus are merged into <code>x2</code>, <code>x3</code>, …</p>
+<h2 id="event-handlers">Event handlers<a class="anchor" href="#event-handlers" title="Permanent link">#</a></h2>
+<p>Besides <code>tick()</code> a script may define handlers that are called when something happens in the network. They are optional; a script needs at least <code>tick()</code> or one handler. Events are delivered at the bus interval, before <code>tick()</code>, oldest first.</p>
+<table>
+<thead>
+<tr>
+<th>Handler</th>
+<th>Called when</th>
+<th>Event object</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onCraft(e)</code></td>
+<td>an Assembler finished a craft</td>
+<td><code>{type: "crafted", id, count, text}</code></td>
+</tr>
+<tr>
+<td><code>onLowStock(e)</code></td>
+<td>a stock rule ordered a missing amount</td>
+<td><code>{type: "stock_order", id, count, text}</code> (<code>count</code> = ordered)</td>
+</tr>
+<tr>
+<td><code>onAlert(e)</code></td>
+<td>a stock rule failed or a machine is stuck</td>
+<td><code>{type: "stock_failed" \| "stuck", id, count, text}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Rules: events that happened before the script was compiled are not replayed; at most 10 handler calls per run (the rest are dropped); events written by scripts (<code>journal.write/warn</code>) are never delivered, so handlers cannot trigger themselves. Handlers use the same budget as <code>tick()</code>, and an error in a handler stops the run like an error in <code>tick()</code>.</p>
 <h2 id="sidedir-and-sidedir-id"><code>side(dir)</code> and <code>side(dir, id)</code><a class="anchor" href="#sidedir-and-sidedir-id" title="Permanent link">#</a></h2>
 <p><code>dir</code> is one of <code>"down"</code>, <code>"up"</code>, <code>"north"</code>, <code>"south"</code>, <code>"west"</code>, <code>"east"</code>, relative to the Logic Bus the inventory is read from.</p>
 <ul>
@@ -415,8 +472,8 @@ if (buses(&quot;smelters&quot;) === 0) log(&quot;no smelter buses!&quot;);
 </thead>
 <tbody>
 <tr>
-<td><code>script must define function tick()</code></td>
-<td>No <code>tick</code> function at top level.</td>
+<td><code>script must define function tick() or an event handler …</code></td>
+<td>Neither <code>tick</code> nor <code>onCraft</code> / <code>onLowStock</code> / <code>onAlert</code> is defined at top level.</td>
 </tr>
 <tr>
 <td><code>SyntaxError… (line N)</code></td>
@@ -465,6 +522,13 @@ if (buses(&quot;smelters&quot;) === 0) log(&quot;no smelter buses!&quot;);
 </tbody>
 </table>
 <p><code>try</code>/<code>catch</code> can handle ordinary script errors (like a bad item id). Budget violations <strong>cannot</strong> be caught.</p>
+<h2 id="redstone-persistent-store-network-display">Redstone, Persistent Store &amp; Network Display<a class="anchor" href="#redstone-persistent-store-network-display" title="Permanent link">#</a></h2>
+<ul>
+<li><code>redstone.get(dir)</code> — returns the incoming redstone signal (<code>0..15</code>) on side <code>dir</code> (<code>down</code>/<code>up</code>/<code>north</code>/<code>south</code>/<code>west</code>/<code>east</code>).</li>
+<li><code>redstone.set(dir, power)</code> — outputs a redstone signal (<code>0..15</code>) from the Logic Bus on side <code>dir</code>.</li>
+<li><code>store.get(key)</code> / <code>store.set(key, value)</code> / <code>store.remove(key)</code> / <code>store.clear()</code> — persistent per-bus key-value store saved in NBT (up to 64 keys, max 512 chars per value).</li>
+<li><code>display.set(line, text)</code> / <code>display.clear()</code> — updates lines <code>0..5</code> on all <strong>Network Display (<code>network_display</code>)</strong> blocks connected to the grid.</li>
+</ul>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-API.md">docs/wiki/Scripting-API.md</a> in the mod repository.</p>
