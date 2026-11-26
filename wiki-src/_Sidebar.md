@@ -3,7 +3,6 @@
 **Start**
 - [Downloads](Downloads)
 - [Getting Started](Getting-Started)
-- [World & Materials](Worldgen)
 - [Recipes](Recipes)
 
 **Core mod**
@@ -21,9 +20,13 @@
 
 **Scripting addon**
 - [Overview](Scripting-Overview)
+- [Online Script Library](Scripting-Library)
 - [API](Scripting-API)
 - [Examples](Scripting-Examples)
 - [Administration](Scripting-Administration)
+
+**Dimension addon**
+- [Silicon Plane](Dimension-Addon)
 
 **Other**
 - [Troubleshooting](Troubleshooting)

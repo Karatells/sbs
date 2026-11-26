@@ -29,7 +29,6 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
-<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -45,9 +44,12 @@
 <a href="Guide-Book.html">Guide Book</a>
 <h4>Scripting addon</h4>
 <a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-Library.html">Online Script Library</a>
 <a href="Scripting-API.html">API</a>
 <a href="Scripting-Examples.html">Examples</a>
 <a href="Scripting-Administration.html">Administration</a>
+<h4>Dimension addon</h4>
+<a href="Dimension-Addon.html">Silicon Plane</a>
 <h4>Other</h4>
 <a href="Troubleshooting.html">Troubleshooting</a>
 <a href="Building-from-Source.html">Building from Source</a>
@@ -77,7 +79,7 @@
 <tbody>
 <tr>
 <td><code>iron</code></td>
-<td>part of the item name</td>
+<td>part of the item name <strong>or</strong> item registry path (e.g. <code>iron_ingot</code>)</td>
 </tr>
 <tr>
 <td><code>@mod</code></td>
@@ -88,8 +90,12 @@
 <td>the item has a tag containing <code>tag</code> (e.g. <code>#ingots</code>)</td>
 </tr>
 <tr>
-<td><code>&gt;100</code> <code>&lt;100</code> <code>=100</code></td>
-<td>stored amount (craft-only items count as 0)</td>
+<td><code>%text</code></td>
+<td>matches text inside the item's tooltip (enchantments, descriptions)</td>
+</tr>
+<tr>
+<td><code>&gt;100</code> <code>&lt;100</code> <code>=100</code> <code>&gt;=10k</code> <code>&lt;=2m</code></td>
+<td>stored amount with optional <code>k</code> (1,000) and <code>m</code> (1,000,000) suffixes (craft-only items count as 0)</td>
 </tr>
 <tr>
 <td><code>$craftable</code></td>
@@ -105,7 +111,12 @@
 </tr>
 </tbody>
 </table>
-<p>Example: <code>@minecraft #ingots &gt;64</code>. <strong>Alt + click</strong> an item to mark it as a favorite (gold corner); favorites are listed first inside their group. Favorites are stored on your computer (<code>config/simple_bytestorage_favorites.txt</code>). The list order is always: items in stock first, then craft-only items.</p>
+<p>Example: <code>@minecraft #ingots &gt;=1k %unbreaking</code>. <strong>Alt + click</strong> an item to mark it as a favorite (gold corner); favorites are listed first inside their group. Favorites are stored on the server with your player data, so they follow you between computers and survive death (up to 500 items). Old local favorites (<code>config/simple_bytestorage_favorites.txt</code>) are moved to the server once, the first time you join. The list order is always: items in stock first, then craft-only items.</p>
+<h2 id="fluids-tab-items-fluids">Fluids Tab (<code>Items / Fluids</code>)<a class="anchor" href="#fluids-tab-items-fluids" title="Permanent link">#</a></h2>
+<p>The <strong>Terminal</strong> includes an <strong><code>Items</code> / <code>Fluids</code></strong> toggle button on the right side (below the saved search slots):
+- Switch to <strong><code>Fluids</code></strong> to view all fluids stored in <strong>Fluid Byte Cells</strong> across the network (shown with bucket icons and amounts in Buckets / mB).
+- <strong>Click with an empty bucket</strong> on a fluid to fill it (<code>1,000 mB</code> extracted from the network).
+- <strong>Click with a filled bucket</strong> anywhere in the fluid grid to drain <code>1,000 mB</code> into the network's Fluid Byte Cells (respects locked Drives).</p>
 <h2 id="crafting-terminal">Crafting Terminal<a class="anchor" href="#crafting-terminal" title="Permanent link">#</a></h2>
 <p>A Terminal with a <strong>3×3 crafting grid</strong> and a result slot.</p>
 <ul>
@@ -124,7 +135,7 @@
 <h2 id="order-dialog-max">Order dialog: "Max"<a class="anchor" href="#order-dialog-max" title="Permanent link">#</a></h2>
 <p>If an order cannot be done in full (an ingredient is missing), the <strong>Start</strong> button becomes <strong>Max: N</strong>, where N is the largest amount the network can craft right now. Click it to recalculate the plan for N, then press <strong>Start</strong>.</p>
 <h2 id="saved-searches">Saved searches<a class="anchor" href="#saved-searches" title="Permanent link">#</a></h2>
-<p>Three slots under the sort buttons (right of the terminal window) store search queries. Click an empty slot (<code>+</code>) to save the current search; click a filled slot to apply it; right-click a filled slot to overwrite it with the current search, or to clear it when the search box is empty. The slots are shared by all terminals and saved in <code>config/simple_bytestorage_searches.txt</code>.</p>
+<p>Three slots under the sort buttons (right of the terminal window) store search queries. Click an empty slot (<code>+</code>) to save the current search; click a filled slot to apply it; right-click a filled slot to overwrite it with the current search, or to clear it when the search box is empty. The slots are shared by all terminals and stored on the server with your player data (old <code>config/simple_bytestorage_searches.txt</code> is moved there once; saved searches are up to 64 characters).</p>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Terminals.md">docs/wiki/Terminals.md</a> in the mod repository.</p>

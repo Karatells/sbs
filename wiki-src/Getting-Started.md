@@ -3,13 +3,12 @@
 This page builds a minimal working network.
 
 ## What you need
-- **Bytite Ingots** (smelted from [Bytite Ore](Worldgen), found between `Y = -48` and `+48`) and Overworld Rift materials
 - 1 **Network Controller**
 - 1 **Drive** and at least one **Storage Cell**
 - 1 **Terminal**
 - A source of **FE** (Forge Energy) for the controller, from any energy mod
 
-See [World & Materials](Worldgen) for gathering resources and [Recipes](Recipes) for how to craft everything.
+See [Recipes](Recipes) for how to craft everything.
 
 ## Steps
 
@@ -21,12 +20,11 @@ See [World & Materials](Worldgen) for gathering resources and [Recipes](Recipes)
 
 ## How blocks join the network
 
-Every Simple Byte Storage device is a *grid node*. Nodes connect to each other by **touching** (face to face), through **Cables**, or across long distances and dimensions via linked [Quantum Relays](Network-and-Power#quantum-relay-entangled-crystal). Network topology updates immediately when blocks change (and runs a background scan every 100 ticks without force-loading unloaded chunks). Anything not reachable from the controller is offline.
+Every Simple Byte Storage device is a *grid node*. Nodes connect to each other by **touching** (face to face), or through **Cables**. Every 20 ticks (1 second) the network is re-scanned starting from the controller (a breadth-first search over adjacent nodes). Anything not reachable from the controller is offline.
 
 There must be **exactly one controller** per connected network. Two controllers in one network put it into the `CONFLICT` state.
 
 ## Where to go next
-- Want to connect existing chests or drawers? Place a [Storage Bus](Storage#storage-bus) next to them.
 - Want automatic crafting? Read [Autocrafting](Autocrafting).
-- Want items or fluids moved automatically? See the [I/O Bus](IO-Bus), [Fluid Storage](Storage#fluid-storage), or the [Scripting addon](Scripting-Overview) for full control.
-- Follow the 5 built-in [Advancements](Worldgen#advancements) or read the in-game [Guide Book](Guide-Book).
+- Want items moved automatically between chests and the network? See the [I/O Bus](IO-Bus), or the [Scripting addon](Scripting-Overview) for full control.
+- The in-game [Guide Book](Guide-Book) summarises all of this.

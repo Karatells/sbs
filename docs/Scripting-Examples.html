@@ -29,7 +29,6 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
-<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -45,9 +44,12 @@
 <a href="Guide-Book.html">Guide Book</a>
 <h4>Scripting addon</h4>
 <a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-Library.html">Online Script Library</a>
 <a href="Scripting-API.html">API</a>
 <a class="cur" href="Scripting-Examples.html">Examples</a>
 <a href="Scripting-Administration.html">Administration</a>
+<h4>Dimension addon</h4>
+<a href="Dimension-Addon.html">Silicon Plane</a>
 <h4>Other</h4>
 <a href="Troubleshooting.html">Troubleshooting</a>
 <a href="Building-from-Source.html">Building from Source</a>
@@ -392,6 +394,30 @@ function tick() {
   else if (e.percent &gt; 80 &amp;&amp; mode !== &quot;always&quot;) stock.setMode(&quot;always&quot;);
 }
 </code></pre>
+<h2 id="28-a-control-panel-ui-onbutton">28. A control panel (ui, onButton)<a class="anchor" href="#28-a-control-panel-ui-onbutton" title="Permanent link">#</a></h2>
+<p>Shows how much iron the network holds and lets you switch a stock rule on and off with a button.</p>
+<pre><code class="language-js">var wanted = true;
+
+function onButton(id) {
+  if (id === &quot;toggle&quot;) {
+    wanted = !wanted;
+    if (wanted) {
+      stock.set(&quot;minecraft:iron_ingot&quot;, 256);
+    } else {
+      stock.clear(&quot;minecraft:iron_ingot&quot;);
+    }
+  }
+}
+
+function tick() {
+  var iron = net.count(&quot;minecraft:iron_ingot&quot;);
+  ui.item(&quot;minecraft:iron_ingot&quot;, &quot;Iron: &quot; + iron);
+  ui.bar(&quot;Target 256&quot;, Math.min(iron, 256), 256, iron &gt;= 256 ? &quot;green&quot; : &quot;yellow&quot;);
+  ui.text(wanted ? &quot;Rule is ON&quot; : &quot;Rule is OFF&quot;, wanted ? &quot;green&quot; : &quot;gray&quot;);
+  ui.button(&quot;toggle&quot;, wanted ? &quot;Turn off&quot; : &quot;Turn on&quot;);
+}
+</code></pre>
+<p>Open the Logic Terminal, pick the bus, press <strong>Run</strong> and switch to the <strong>Panel</strong> tab.</p>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-Examples.md">docs/wiki/Scripting-Examples.md</a> in the mod repository.</p>

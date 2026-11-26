@@ -29,7 +29,6 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
-<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -45,9 +44,12 @@
 <a href="Guide-Book.html">Guide Book</a>
 <h4>Scripting addon</h4>
 <a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-Library.html">Online Script Library</a>
 <a class="cur" href="Scripting-API.html">API</a>
 <a href="Scripting-Examples.html">Examples</a>
 <a href="Scripting-Administration.html">Administration</a>
+<h4>Dimension addon</h4>
+<a href="Dimension-Addon.html">Silicon Plane</a>
 <h4>Other</h4>
 <a href="Troubleshooting.html">Troubleshooting</a>
 <a href="Building-from-Source.html">Building from Source</a>
@@ -364,8 +366,42 @@
 </tbody>
 </table>
 <p>Identical consecutive journal lines from the same bus are merged into <code>x2</code>, <code>x3</code>, …</p>
+<h2 id="ui-script-panels"><code>ui</code> — script panels<a class="anchor" href="#ui-script-panels" title="Permanent link">#</a></h2>
+<p>A script can draw a small control panel that appears in the Logic Terminal's <strong>Panel</strong> tab for that bus. Call the <code>ui</code> functions in <code>tick()</code> (or an event handler): the first <code>ui</code> call of a run starts a new panel, so just redraw it every run. If a run makes no <code>ui</code> call, the previous panel stays.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ui.text(text, [color])</code></td>
+<td>A line of text (48 characters).</td>
+</tr>
+<tr>
+<td><code>ui.bar(label, value, max, [color])</code></td>
+<td>A progress bar with <code>value/max</code>.</td>
+</tr>
+<tr>
+<td><code>ui.button(id, text, [color])</code></td>
+<td>A button. Consecutive buttons share a row.</td>
+</tr>
+<tr>
+<td><code>ui.item(id, text, [color])</code></td>
+<td>An item icon with text.</td>
+</tr>
+<tr>
+<td><code>ui.clear()</code></td>
+<td>Start an empty panel.</td>
+</tr>
+</tbody>
+</table>
+<p><code>color</code> is a name (<code>"green"</code>, <code>"red"</code>, <code>"yellow"</code>, <code>"cyan"</code>, <code>"gray"</code>, <code>"white"</code>) or a number like <code>0xFF8800</code>.</p>
+<p>Pressing a button calls the optional handler <code>onButton(id)</code> at the bus's next run (before <code>tick()</code>); up to 8 presses are queued. Buttons work only while the bus is running, and — like editing — only for players allowed to edit scripts (<code>opsOnly</code>). Limits: 24 elements per panel (more stops the script like a budget violation), panels are not saved with the world (the running script redraws them).</p>
 <h2 id="event-handlers">Event handlers<a class="anchor" href="#event-handlers" title="Permanent link">#</a></h2>
-<p>Besides <code>tick()</code> a script may define handlers that are called when something happens in the network. They are optional; a script needs at least <code>tick()</code> or one handler. Events are delivered at the bus interval, before <code>tick()</code>, oldest first.</p>
+<p>Besides <code>tick()</code> a script may define handlers (plus <code>onButton(id)</code> for panel buttons, see <code>ui</code>) that are called when something happens in the network. They are optional; a script needs at least <code>tick()</code> or one handler. Events are delivered at the bus interval, before <code>tick()</code>, oldest first.</p>
 <table>
 <thead>
 <tr>
@@ -531,7 +567,45 @@ if (buses(&quot;smelters&quot;) === 0) log(&quot;no smelter buses!&quot;);
 <li><code>redstone.get(dir)</code> — returns the incoming redstone signal (<code>0..15</code>) on side <code>dir</code> (<code>down</code>/<code>up</code>/<code>north</code>/<code>south</code>/<code>west</code>/<code>east</code>).</li>
 <li><code>redstone.set(dir, power)</code> — outputs a redstone signal (<code>0..15</code>) from the Logic Bus on side <code>dir</code>.</li>
 <li><code>store.get(key)</code> / <code>store.set(key, value)</code> / <code>store.remove(key)</code> / <code>store.clear()</code> — persistent per-bus key-value store saved in NBT (up to 64 keys, max 512 chars per value).</li>
-<li><code>display.set(line, text)</code> / <code>display.clear()</code> — updates lines <code>0..5</code> on all <strong>Network Display (<code>network_display</code>)</strong> blocks connected to the grid.</li>
+<li><code>display.set(line, text)</code> / <code>display.clear()</code> — updates lines <code>0..5</code> on all <strong>Network Display (<code>network_display</code>)</strong> blocks connected to the grid. Text renders <strong>in 3D directly on the block face</strong> in the world and supports:<ul>
+<li>Leading color codes: <code>&amp;a</code> (green), <code>&amp;b</code> (cyan), <code>&amp;c</code> (red), <code>&amp;d</code> (purple), <code>&amp;e</code> (yellow), <code>&amp;f</code> (white), <code>&amp;6</code> (orange), <code>&amp;7</code> (gray), <code>&amp;9</code> (blue).</li>
+<li>Progress bars: <code>"[bar:75]"</code> or <code>"[bar:75:green]"</code> (0–100%, colors: <code>green</code>, <code>cyan</code>, <code>red</code>, <code>yellow</code>, <code>orange</code>, <code>blue</code>, <code>purple</code>, <code>white</code>, <code>gray</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="fluids-140">Fluids (1.4.0+)<a class="anchor" href="#fluids-140" title="Permanent link">#</a></h3>
+<ul>
+<li><code>net.fluidCount(fluidId)</code> — returns total millibuckets (<code>mB</code>) of <code>fluidId</code> (e.g. <code>"minecraft:water"</code>, <code>"minecraft:lava"</code>) stored across all <strong>Fluid Byte Cells</strong> in connected Drives.</li>
+<li><code>net.fluids()</code> — returns an array of <code>{id, amount}</code> objects for every fluid stored in the network (amounts in <code>mB</code>).</li>
+</ul>
+<pre><code class="language-js">function tick() {
+  var water = net.fluidCount(&quot;minecraft:water&quot;);
+  display.set(0, &quot;&amp;9Water: &amp;f&quot; + (water / 1000) + &quot; B&quot;);
+  redstone.set(&quot;north&quot;, water &lt; 4000 ? 15 : 0);
+}
+</code></pre>
+<h3 id="inter-bus-messaging-140">Inter-Bus Messaging (1.4.0+)<a class="anchor" href="#inter-bus-messaging-140" title="Permanent link">#</a></h3>
+<p>Logic Buses on the same network (including across <strong>Quantum Relays</strong>) can send text messages to each other by Bus ID:
+- <code>bus.send(targetId, text)</code> — delivers <code>text</code> (max 256 chars) to all other enabled Logic Buses whose identifier equals <code>targetId</code>. Returns the number of recipient buses.
+- <code>function onMessage(fromId, text)</code> — optional handler called on the recipient bus before <code>tick()</code> for each queued message (queue cap: 32 messages; cleared when the bus stops).</p>
+<pre><code class="language-js">// Sender bus (ID: &quot;hub_main&quot;)
+function tick() {
+  var e = net.energy();
+  if (e &amp;&amp; e.percent &lt; 25) {
+    bus.send(&quot;farm_1&quot;, &quot;pause&quot;);
+  }
+}
+
+// Receiver bus (ID: &quot;farm_1&quot;)
+function onMessage(from, text) {
+  log(&quot;From &quot; + from + &quot;: &quot; + text);
+  redstone.set(&quot;up&quot;, text === &quot;pause&quot; ? 15 : 0);
+}
+</code></pre>
+<h3 id="redstone-endpoint-notes-131-140">Redstone &amp; Endpoint Notes (1.3.1 / 1.4.0+)<a class="anchor" href="#redstone-endpoint-notes-131-140" title="Permanent link">#</a></h3>
+<ul>
+<li><code>redstone.set(dir, power)</code> automatically resets all outputs to <code>0</code> (and notifies neighbors) if the bus is stopped, hits a runtime error, or loses grid power.</li>
+<li>Top-level <code>var a = side("up"); var b = side("down");</code> endpoints remain valid across ticks for <code>a.move(b, ...)</code>.</li>
 </ul>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from

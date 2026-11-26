@@ -27,6 +27,7 @@
       <a href="#autocraft"><span class="ru">Автокрафт</span><span class="en">Autocrafting</span></a>
       <a href="#wireless"><span class="ru">Беспроводной</span><span class="en">Wireless</span></a>
       <a href="#scripting">Scripting</a>
+      <a href="#dimension">Silicon Plane</a>
       <a href="#install"><span class="ru">Установка</span><span class="en">Install</span></a>
     </nav>
     <button class="lang" id="langBtn" aria-label="Language">RU</button>
@@ -54,7 +55,7 @@
       <span class="badge">Minecraft <b>1.20.1</b></span>
       <span class="badge">Forge <b>47.2.0+</b></span>
       <span class="badge">Java <b>17</b></span>
-      <span class="badge"><span class="ru">Версия</span><span class="en">Version</span> <b>1.3.0</b></span>
+      <span class="badge"><span class="ru">Версия</span><span class="en">Version</span> <b>1.4.0</b></span>
       <span class="badge">MIT</span>
     </div>
     <div class="btns">
@@ -68,53 +69,53 @@
 
 <section id="new">
   <div class="wrap">
-    <h2><span class="ru">Новое в 1.2.1 и 1.3.0</span><span class="en">What's new since 1.2.0 (1.2.1 &amp; 1.3.0)</span></h2>
+    <h2><span class="ru">Новое в 1.4.0</span><span class="en">What's new in 1.4.0</span></h2>
     <p class="sub">
-      <span class="ru">Собственная мирогенерация (Байтит и Кремниевый разлом), ячейки 256k и 1M, хранение жидкостей, квантовые ретрансляторы, Шина хранения, Архиватор, Верстак ячеек, Терминал безопасности, обновлённый интерфейс с графиками и мощный редактор скриптов.</span>
-      <span class="en">Dedicated worldgen (Bytite &amp; Silicon Rift), 256k and 1M cells, fluid storage, Quantum Relays, Storage Bus, Byte Archiver, Cell Workbench, Security Terminal, restyled GUIs with persisted graphs, and a full JavaScript code editor.</span>
+      <span class="ru">Крупное обновление основного мода, аддона Scripting и совершенно новый необязательный аддон измерения <b>Silicon Plane</b> (`simple_bytestorage_dimension`): 8 биомов, 4 кастомных 3D-моба, эндгейм-машины сети, полный набор Optic Wood Set, Портативные и Энергоячейки, Сетевой интерфейс, Фасады кабелей и Онлайн-библиотека скриптов.</span>
+      <span class="en">A major release for the main mod, Scripting addon, and the brand-new optional <b>Silicon Plane</b> dimension addon (`simple_bytestorage_dimension`): 8 biomes, 4 custom 3D mobs, endgame network machines, the complete Optic Wood Set, Portable &amp; Energy Cells, Network Interface, Cable Facades, and an Online Script Library.</span>
     </p>
     <div class="grid g3">
       <div class="card">
-        <h3><span class="ru">Байтит и Кремниевый разлом</span><span class="en">Bytite &amp; Silicon Rift worldgen</span></h3>
-        <p><span class="ru">Руда Байтит (Y = −48..+48), Силикатная корка, кластеры Квантового кварца и Контурный цветок. Новые материалы прогрессии: слиток Байтита, Логическая пластина, Квантовый кварц, Циановый люминофор.</span><span class="en">Bytite Ore (Y = −48..+48), Silicate Crust, Quantum Quartz Clusters, and Circuit Blooms. New progression materials: Bytite Ingot, Logic Wafer, Quantum Quartz, and Cyan Phosphor.</span></p>
+        <h3><span class="ru">Измерение Silicon Plane</span><span class="en">The Silicon Plane dimension</span></h3>
+        <p><span class="ru">Новый необязательный аддон: 3-слойный мир (<code>Y = −64..256</code>), кастомное небо со звёздами, матричной сеткой и сиянием без ванильных облаков, 8 уникальных биомов, 7 руд, Жидкий хладагент и Врата Разлома (работают только в <code>Silicon Rift</code>).</span><span class="en">New optional addon: 3-layer world (<code>Y = −64..256</code>), custom stars/matrix/aurora skybox with no vanilla clouds, 8 unique biomes, 7 ores, animated Liquid Coolant, and Rift Gate portals (ignite strictly inside <code>Silicon Rift</code>).</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Ячейки 256k / 1M и жидкости</span><span class="en">256k / 1M cells &amp; fluid storage</span></h3>
-        <p><span class="ru">Ячейки до 1 048 576 байт, жидкостные байт-ячейки 1k–64k (1 000 mB = 1 байт без лимита типов жидкостей) и Жидкостная I/O-шина (1 000 mB за цикл).</span><span class="en">Item cells up to 1,048,576 bytes, 1k–64k Fluid Byte Cells (1,000 mB = 1 byte with unlimited fluid types), and the Fluid I/O Bus (1,000 mB/cycle).</span></p>
+        <h3><span class="ru">4 кастомных 3D-моба и мини-босс</span><span class="en">4 custom 3D mobs &amp; mini-boss</span></h3>
+        <p><span class="ru"><code>Byte Sentinel</code>, <code>Glitch Stalker</code>, нейтральный <code>Cryo Harvester</code> и мини-босс <code>Registry Warden</code> в Null Core с вращающимся нимбом, парящими щитами, Boss Bar и гарантированным дропом <code>Matrix Crystal</code> + <code>Quantum Core</code>.</span><span class="en"><code>Byte Sentinel</code>, <code>Glitch Stalker</code>, neutral <code>Cryo Harvester</code>, and the <code>Registry Warden</code> mini-boss in Null Core with rotating halo, floating shields, Boss Bar, and guaranteed <code>Matrix Crystal</code> + <code>Quantum Core</code> drops.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Квантовая связь между базами</span><span class="en">Cross-dimensional Quantum Relays</span></h3>
-        <p><span class="ru">Свяжите Запутанные кристаллы (Shift+ПКМ) и вставьте их в Квантовые ретрансляторы, чтобы объединить удалённые базы и разные измерения в единую сеть.</span><span class="en">Pair Entangled Crystals (Shift+RMB) and place them in Quantum Relays to bridge distant bases and dimensions into one unified network.</span></p>
+        <h3><span class="ru">Эндгейм-машины и апгрейды</span><span class="en">Endgame machines &amp; upgrades</span></h3>
+        <p><span class="ru"><code>Advanced / Singular Assembler</code> (×2 / ×4), <code>Pattern Bus Mk2</code>, <code>Singular Controller</code> (10M FE + 4 сопроцессора), <code>Interdimensional Energy Transmitter</code> (16 каналов), <code>Speed Card Mk2</code> (×3), <code>Interdimensional Wireless Card</code> и <code>Facade Scanner</code>.</span><span class="en"><code>Advanced / Singular Assembler</code> (×2 / ×4), <code>Pattern Bus Mk2</code>, <code>Singular Controller</code> (10M FE + 4 coprocessors), <code>Interdimensional Energy Transmitter</code> (16 channels), <code>Speed Card Mk2</code> (×3), <code>Interdimensional Wireless Card</code>, and <code>Facade Scanner</code>.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Шина хранения, Архиватор и Верстак</span><span class="en">Storage Bus, Archiver &amp; Workbench</span></h3>
-        <p><span class="ru">Подключайте сундуки напрямую через Storage Bus, сжимайте излишки 64:1 в Data Blob Архиватором, настраивайте NBT-фильтры ячеек на Верстаке и ставьте карты Void / Lock в Накопитель.</span><span class="en">Attach external chests with Storage Bus, compress bulk items 64:1 into Data Blobs with the Archiver, write per-cell NBT filters in the Cell Workbench, and slot Void / Lock cards into Drives.</span></p>
+        <h3><span class="ru">Полный набор Optic Wood Set</span><span class="en">Complete Optic Wood Set</span></h3>
+        <p><span class="ru">22 блока из светящейся оптической древесины: брёвна, обтёсанные брёвна, доски, ступеньки, плиты, забор, калитка, дверь, люк, кнопка, мозаика, книжная и резная полки, лестница, 27-слотовый ящик, таблички и 2 лодки.</span><span class="en">22 glowing optic wood blocks: logs, stripped logs, planks, stairs, slabs, fence, gate, door, trapdoor, button, mosaic, bookshelf &amp; chiseled bookshelf, ladder, 27-slot crate, signs, hanging signs, plus Boat &amp; Chest Boat.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Безопасность, Монитор и Эко-режим</span><span class="en">Security, Display, Analyzer &amp; Eco Mode</span></h3>
-        <p><span class="ru">Терминал безопасности защищает доступ в мультиплеере, Сканер сети диагностирует узлы, Конденсатор хранит 500 000 FE, а Эко-режим (&lt;10% заряда) бережёт терминалы.</span><span class="en">Security Terminal locks terminals to the owner, Network Analyzer inspects nodes, Capacitor stores 500,000 FE, and Eco Mode (&lt;10% energy) pauses buses while keeping terminals online.</span></p>
+        <h3><span class="ru">Сетевой интерфейс и Фасады кабелей</span><span class="en">Network Interface &amp; Cable Facades</span></h3>
+        <p><span class="ru"><code>Network Interface</code> — двусторонний мост для воронок и труб других модов с 9 слотами автопополнения. <code>Cable Facade</code> маскирует кабели под любой целый блок, а <code>Network Display</code> рендерит 3D-текст и прогресс-бары в мире.</span><span class="en"><code>Network Interface</code> bridges hoppers, pipes, and machines with 9 ghost stock slots. <code>Cable Facade</code> disguises cables as any solid block, and <code>Network Display</code> renders 3D glowing text &amp; progress bars in-world.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Ускоренный автокрафт и новый GUI</span><span class="en">Faster autocrafting &amp; restyled GUIs</span></h3>
-        <p><span class="ru">Сопроцессор крафта, Blocking Mode у Шины шаблонов, древовидный план крафта, кнопка «Максимум», редизайн всех экранов, сохраняемые графики, расписание запаса и сохранённые поиски.</span><span class="en">Crafting Co-Processor, Pattern Bus Blocking Mode, hierarchical craft plan tree, “Max” order button, restyled screens, persisted Graphs tab, stock schedule, and saved searches.</span></p>
+        <h3><span class="ru">Портативные и Энергоячейки</span><span class="en">Portable &amp; Energy Byte Cells</span></h3>
+        <p><span class="ru">Карманные <code>Portable Byte Cells</code> (1k–64k) с автоподбором лута, <code>Energy Byte Cells</code> (1k–256k, до 262M FE внутри Накопителя), <code>Corrupted Byte Cell</code> и миграция данных между ячейками в Верстаке.</span><span class="en">Handheld <code>Portable Byte Cells</code> (1k–64k) with Auto-Pickup, <code>Energy Byte Cells</code> (1k–256k, up to 262M FE inside Drives), <code>Corrupted Byte Cell</code>, and one-click cell migration in the Cell Workbench.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Редактор кода и API скриптов</span><span class="en">Code editor &amp; Scripting API</span></h3>
-        <p><span class="ru">Подсветка синтаксиса и автодополнение в Логическом терминале, события <code>onCraft</code> / <code>onLowStock</code> / <code>onAlert</code>, <code>net.machines()</code>, <code>redstone.*</code>, персистентный <code>store.*</code> и <code>display.*</code>.</span><span class="en">Syntax highlighting &amp; autocomplete in Logic Terminal, <code>onCraft</code> / <code>onLowStock</code> / <code>onAlert</code> events, <code>net.machines()</code>, <code>redstone.*</code>, persistent <code>store.*</code>, and <code>display.*</code>.</span></p>
+        <h3><span class="ru">Жидкости и умный поиск в Терминале</span><span class="en">Terminal Fluids tab &amp; smart search</span></h3>
+        <p><span class="ru">Вкладка <code>Items / Fluids</code> прямо в Терминале (наполнение и слив вёдер кликом), а также умный поиск по тултипам (<code>%tooltip</code>), сравнениям (<code>&gt;=10k</code>, <code>&lt;=2m</code>) и ID предметов.</span><span class="en"><code>Items / Fluids</code> tab right inside the Terminal (fill/drain buckets by clicking), plus smart search with <code>%tooltip</code>, comparisons (<code>&gt;=10k</code>, <code>&lt;=2m</code>), and registry path matching.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Производительность и Достижения</span><span class="en">Performance &amp; Advancements</span></h3>
-        <p><span class="ru">Индекс <code>O(1)</code> и кэш ячеек с отложенной записью NBT, событийный BFS без прогрузки чанков и ветка из 5 внутриигровых достижений.</span><span class="en"><code>O(1)</code> cell index with cached inventories &amp; deferred NBT flushes, chunk-safe event-driven BFS topology, and 5 progression advancements.</span></p>
+        <h3><span class="ru">Онлайн-библиотека скриптов и Script Disk</span><span class="en">Online Script Library &amp; Script Disk</span></h3>
+        <p><span class="ru">Вкладка <code>Library</code> в Логическом терминале с модерируемыми скриптами, категориями и SHA-256 проверкой, <code>Script Disk</code> для переноса кода, межшинные сообщения <code>bus.send</code> и Fluid API.</span><span class="en"><code>Library</code> tab in Logic Terminal with curated scripts, categories, and SHA-256 verification, <code>Script Disk</code> for copy/paste, inter-bus <code>bus.send</code> messaging, and Fluid API.</span></p>
       </div>
       <div class="card">
-        <h3><span class="ru">Улучшенная I/O-шина</span><span class="en">Upgraded I/O Bus</span></h3>
-        <p><span class="ru">4 слота под Карты ускорения (до 320 предметов за 2 тика), переключатель Белый/Чёрный список для импорта и управление редстоуном (Всегда / Сигнал / Без сигнала).</span><span class="en">4 Speed Card slots (up to 320 items every 2 ticks), Allow/Deny import filter toggle, and Redstone control (Always / High / Low).</span></p>
+        <h3><span class="ru">Обновлённая книга-справочник</span><span class="en">Redesigned Guide Book</span></h3>
+        <p><span class="ru">Полностью переработанный внутриигровой справочник с 3D-иконками, поиском по главам и живыми карточками рецептов крафта и плавки прямо из <code>RecipeManager</code> (включая все рецепты Silicon Plane).</span><span class="en">Redesigned in-game manual with 3D icons, chapter search, and live crafting &amp; smelting recipe cards pulled straight from <code>RecipeManager</code> (including all Silicon Plane recipes).</span></p>
       </div>
     </div>
     <p style="margin-top:18px">
-      <a href="docs/Worldgen.html"><span class="ru">Мирогенерация и ресурсы →</span><span class="en">World &amp; Materials guide →</span></a> ·
+      <a href="docs/Dimension-Addon.html"><span class="ru">Гайд по Silicon Plane →</span><span class="en">Silicon Plane guide →</span></a> ·
       <a href="docs/Downloads.html#versions"><span class="ru">История версий →</span><span class="en">Version history →</span></a> ·
-      <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.2.1.md"><span class="ru">Заметки 1.2.1 →</span><span class="en">1.2.1 release notes →</span></a>
+      <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.4.0.md"><span class="ru">Заметки релиза 1.4.0 →</span><span class="en">1.4.0 release notes →</span></a>
     </p>
   </div>
 </section>
@@ -123,11 +124,12 @@
   <div class="wrap">
     <h2><span class="ru">Галерея скриншотов</span><span class="en">Screenshot gallery</span></h2>
     <p class="sub">
-      <span class="ru">Все 30 внутриигровых кадров Simple Byte Storage 1.3.0: рабочая база, биом Кремниевый разлом, руды и каждый интерфейс мода. Нажмите на любой снимок для полноэкранного просмотра.</span>
-      <span class="en">All 30 in-game screenshots of Simple Byte Storage 1.3.0: a full working network, the Silicon Rift biome, ores, and every GUI screen. Click any image to view fullscreen.</span>
+      <span class="ru">Все 38 внутриигровых кадров Simple Byte Storage 1.4.0: рабочая база, интерфейсы, биом Silicon Rift и новое измерение Silicon Plane с мобами, эндгейм-машинами и набором Optic Wood Set. Нажмите на любой снимок для полноэкранного просмотра.</span>
+      <span class="en">All 38 in-game screenshots of Simple Byte Storage 1.4.0: a full working network, every GUI screen, Silicon Rift, and the new Silicon Plane dimension with mobs, endgame machines, and the Optic Wood Set. Click any image to view fullscreen.</span>
     </p>
     <div class="gal-tabs" id="galTabs" role="tablist">
-      <button class="gal-tab active" data-cat="all"><span class="ru">Все (30)</span><span class="en">All (30)</span></button>
+      <button class="gal-tab active" data-cat="all"><span class="ru">Все (38)</span><span class="en">All (38)</span></button>
+      <button class="gal-tab" data-cat="dimension"><span class="ru">Silicon Plane (8)</span><span class="en">Silicon Plane (8)</span></button>
       <button class="gal-tab" data-cat="world"><span class="ru">Мир и блоки (6)</span><span class="en">World &amp; Blocks (6)</span></button>
       <button class="gal-tab" data-cat="controller"><span class="ru">Контроллер (7)</span><span class="en">Controller (7)</span></button>
       <button class="gal-tab" data-cat="storage"><span class="ru">Хранение и терминалы (6)</span><span class="en">Storage &amp; Terminals (6)</span></button>
@@ -135,6 +137,14 @@
       <button class="gal-tab" data-cat="network"><span class="ru">Сеть и утилиты (5)</span><span class="en">Network &amp; Tools (5)</span></button>
     </div>
     <div class="gallery" id="galleryGrid">
+      <button class="gitem" data-cat="dimension" data-src="assets/screenshots/31_dim_portal_lit.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/31_dim_portal_lit.png" alt="Rift Gate activated"><span class="gcat">Silicon Plane</span></div><div class="gcap"><span class="ru">Врата Разлома (100 000 FE)</span><span class="en">Rift Gate Portal (100,000 FE)</span><small><span class="ru">Рамка из кремниевого базальта и ядро портала</span><span class="en">Silicon Basalt frame &amp; energized Rift Gate Core</span></small></div></button>
+      <button class="gitem" data-cat="dimension" data-src="assets/screenshots/32_dim_sky_aurora.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/32_dim_sky_aurora.png" alt="Silicon Plane custom skybox"><span class="gcat">Silicon Plane</span></div><div class="gcap"><span class="ru">Кастомное небо Silicon Plane</span><span class="en">Silicon Plane custom skybox</span><small><span class="ru">Звёзды, матричная сетка и сияние без облаков</span><span class="en">Stars, holographic matrix grid &amp; aurora (no clouds)</span></small></div></button>
+      <button class="gitem" data-cat="dimension" data-src="assets/screenshots/33_dim_optic_spirewood.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/33_dim_optic_spirewood.png" alt="Optic Spirewood biome"><span class="gcat">Silicon Plane</span></div><div class="gcap"><span class="ru">Биом Optic Spirewood</span><span class="en">Optic Spirewood biome</span><small><span class="ru">Оптические кибер-деревья и светящаяся флора</span><span class="en">Glowing optic cyber-trees &amp; crystal flora</span></small></div></button>
+      <button class="gitem" data-cat="dimension" data-src="assets/screenshots/34_dim_capacitor_flats.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/34_dim_capacitor_flats.png" alt="Capacitor Flats biome"><span class="gcat">Silicon Plane</span></div><div class="gcap"><span class="ru">Биом Capacitor Flats</span><span class="en">Capacitor Flats biome</span><small><span class="ru">Поля конденсаторов, молнии и руда Флаксит</span><span class="en">Stormy plains, lightning capture &amp; Fluxite Ore</span></small></div></button>
+      <button class="gitem" data-cat="dimension" data-src="assets/screenshots/35_dim_cloud_islands.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/35_dim_cloud_islands.png" alt="Floating Cloud Archive islands"><span class="gcat">Silicon Plane</span></div><div class="gcap"><span class="ru">Парящие острова Cloud Archive</span><span class="en">Floating Cloud Archive islands</span><small><span class="ru">Третий вертикальный слой Y = 128..184</span><span class="en">Layer 3 floating islands at Y = 128..184</span></small></div></button>
+      <button class="gitem" data-cat="dimension" data-src="assets/screenshots/36_dim_4_mobs_bossbar.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/36_dim_4_mobs_bossbar.png" alt="All 4 custom 3D mobs and Registry Warden boss bar"><span class="gcat">Silicon Plane</span></div><div class="gcap"><span class="ru">4 кастомных 3D-моба и мини-босс</span><span class="en">4 custom 3D mobs &amp; mini-boss</span><small><span class="ru">Byte Sentinel, Glitch Stalker, Cryo Harvester и Registry Warden</span><span class="en">Byte Sentinel, Glitch Stalker, Cryo Harvester &amp; Registry Warden</span></small></div></button>
+      <button class="gitem" data-cat="dimension" data-src="assets/screenshots/37_dim_endgame_machines.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/37_dim_endgame_machines.png" alt="Endgame network machines and ore blocks"><span class="gcat">Silicon Plane</span></div><div class="gcap"><span class="ru">Эндгейм-машины и блоки руд</span><span class="en">Endgame machines &amp; ore blocks</span><small><span class="ru">Ускоренные асемблеры, Сингулярный контроллер, передатчик FE</span><span class="en">Tiered Assemblers, Singular Controller &amp; Energy Transmitter</span></small></div></button>
+      <button class="gitem" data-cat="dimension" data-src="assets/screenshots/38_dim_optic_wood_set.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/38_dim_optic_wood_set.png" alt="Complete Optic Wood Set and boats"><span class="gcat">Silicon Plane</span></div><div class="gcap"><span class="ru">Набор Optic Wood Set и лодки</span><span class="en">Optic Wood Set &amp; boats</span><small><span class="ru">22 декоративных и функциональных блока + 2 лодки</span><span class="en">22 decorative &amp; functional blocks + 2 boats</span></small></div></button>
       <button class="gitem" data-cat="world" data-src="assets/screenshots/01_network_base_overview.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/01_network_base_overview.png" alt="Full network base"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Общий план базы</span><span class="en">Full network base</span><small><span class="ru">Все устройства сети 1.3.0 в работе</span><span class="en">All 1.3.0 network blocks running together</span></small></div></button>
       <button class="gitem" data-cat="world" data-src="assets/screenshots/02_network_closeup_left.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/02_network_closeup_left.png" alt="Power and autocrafting bay"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Энергия и автокрафт</span><span class="en">Power &amp; autocrafting bay</span><small><span class="ru">Конденсатор, Ассемблер, Сопроцессор, шины</span><span class="en">Capacitor, Assembler, Co-Processor &amp; buses</span></small></div></button>
       <button class="gitem" data-cat="world" data-src="assets/screenshots/03_network_closeup_right.png"><div class="gthumb"><img loading="lazy" decoding="async" src="assets/screenshots/03_network_closeup_right.png" alt="Terminals and quantum bay"><span class="gcat"><span class="ru">Мир</span><span class="en">World</span></span></div><div class="gcap"><span class="ru">Терминалы и квантовый узел</span><span class="en">Terminals &amp; quantum bay</span><small><span class="ru">Терминалы, Верстак, Безопасность, Монитор, Ретранслятор</span><span class="en">Terminals, Workbench, Security, Display &amp; Relay</span></small></div></button>
@@ -442,13 +452,41 @@ function onAlert(ev) {
   </div>
 </section>
 
+<section id="dimension">
+  <div class="wrap">
+    <h2>Simple Byte Storage: Silicon Plane <span style="font-size:.9rem;color:var(--muted);font-weight:400">(<span class="ru">необязательный аддон измерения</span><span class="en">optional dimension addon</span>)</span></h2>
+    <p class="sub">
+      <span class="ru">Полноценное техно-кристаллическое измерение для эндгейма Simple Byte Storage, не меняющее старые рецепты основного мода. Постройте Врата Разлома в биоме <code>Silicon Rift</code>, зарядите их на 100 000 FE и исследуйте три вертикальных слоя мира.</span>
+      <span class="en">A full techno-crystalline endgame dimension for Simple Byte Storage that leaves all core mod recipes untouched. Build a Rift Gate inside <code>Silicon Rift</code>, supply 100,000 FE, and explore three vertical world layers.</span>
+    </p>
+    <div class="grid g3">
+      <div class="card">
+        <h3><span class="ru">8 биомов и 3 слоя мира</span><span class="en">8 biomes &amp; 3 vertical layers</span></h3>
+        <p><span class="ru">Пещеры Deep Cache (<code>Y = −64..18</code>), поверхность с 8 биомами, 7 рудами, Жидким хладагентом и лифтами <code>Magnetic Updraft</code>, а выше — парящие острова Cloud Archive (<code>Y = 128..184</code>).</span><span class="en">Deep Cache caverns (<code>Y = −64..18</code>), surface grid with 8 biomes, 7 ores, Liquid Coolant &amp; <code>Magnetic Updraft</code> elevators, plus floating Cloud Archive islands (<code>Y = 128..184</code>).</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Эндгейм-сеть без границ</span><span class="en">Borderless endgame networking</span></h3>
+        <p><span class="ru">Ускоренные асемблеры (×2 и ×4), <code>Pattern Bus Mk2</code>, <code>Singular Controller</code> (10M FE), межпространственный передатчик энергии на 16 каналов, <code>Interdimensional Wireless Card</code> и <code>Facade Scanner</code>.</span><span class="en">Tiered Assemblers (×2 &amp; ×4), <code>Pattern Bus Mk2</code>, <code>Singular Controller</code> (10M FE), 16-channel cross-dimension Energy Transmitter, <code>Interdimensional Wireless Card</code>, and <code>Facade Scanner</code>.</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="ru">Мобы, босс и Optic Wood Set</span><span class="en">Mobs, mini-boss &amp; Optic Wood Set</span></h3>
+        <p><span class="ru">4 кастомных 3D-моба (включая босса <code>Registry Warden</code>), 6 компактных блоков руд и полный декоративный набор оптической древесины из 22 блоков и 2 лодок.</span><span class="en">4 custom 3D mobs (including the <code>Registry Warden</code> mini-boss), 6 compact ore blocks, and the complete 22-block Optic Wood Set with Boat &amp; Chest Boat.</span></p>
+      </div>
+    </div>
+    <p style="margin-top:16px">
+      <a href="docs/Dimension-Addon.html"><span class="ru">Полный гайд по Silicon Plane →</span><span class="en">Full Silicon Plane guide →</span></a> ·
+      <a href="docs/Recipes.html"><span class="ru">Рецепты аддона →</span><span class="en">Addon recipes →</span></a>
+    </p>
+  </div>
+</section>
+
 <section id="install">
   <div class="wrap">
     <h2><span class="ru">Установка</span><span class="en">Installation</span></h2>
     <p class="sub"><span class="ru">Нужны Minecraft 1.20.1, Forge 47.2.0+ и Java 17. JEI необязателен.</span><span class="en">Requires Minecraft 1.20.1, Forge 47.2.0+ and Java 17. JEI is optional.</span></p>
     <ol class="steps">
       <li><span class="ru">Установите Forge для Minecraft 1.20.1.</span><span class="en">Install Forge for Minecraft 1.20.1.</span></li>
-      <li><span class="ru">Скачайте <code>simple_bytestorage-&lt;версия&gt;.jar</code> со страницы <a href="https://github.com/Karatells/ByteStorage/releases/latest">Releases</a> и положите в папку <code>mods</code>. Для скриптов добавьте и <code>simple_bytestorage_scripting-&lt;версия&gt;.jar</code>.</span><span class="en">Download <code>simple_bytestorage-&lt;version&gt;.jar</code> from <a href="https://github.com/Karatells/ByteStorage/releases/latest">Releases</a> and drop it into <code>mods</code>. Add <code>simple_bytestorage_scripting-&lt;version&gt;.jar</code> too if you want scripting.</span></li>
+      <li><span class="ru">Скачайте <code>simple_bytestorage-1.4.0.jar</code> со страницы <a href="https://github.com/Karatells/ByteStorage/releases/latest">Releases</a> и положите в папку <code>mods</code>. По желанию добавьте аддоны <code>simple_bytestorage_scripting-1.4.0.jar</code> и <code>simple_bytestorage_dimension-1.4.0.jar</code>.</span><span class="en">Download <code>simple_bytestorage-1.4.0.jar</code> from <a href="https://github.com/Karatells/ByteStorage/releases/latest">Releases</a> and drop it into <code>mods</code>. Optionally add <code>simple_bytestorage_scripting-1.4.0.jar</code> and/or <code>simple_bytestorage_dimension-1.4.0.jar</code>.</span></li>
       <li><span class="ru">На сервере ставьте те же файлы на сервер <b>и</b> на каждого клиента, версии должны совпадать.</span><span class="en">On a server, install the same files on the server <b>and</b> every client; versions must match.</span></li>
       <li><span class="ru">Добудьте <b>Байтитовую руду</b> (<code>Y = −48..+48</code>) и скрафтите <b>Справочник</b> (книга + кабель).</span><span class="en">Mine <b>Bytite Ore</b> (<code>Y = −48..+48</code>) and craft the <b>Guide Book</b> (book + cable).</span> <img class="px" style="width:22px;height:22px;vertical-align:middle" src="assets/img/guide_book.png" alt=""></li>
     </ol>
@@ -466,11 +504,11 @@ function onAlert(ev) {
   <div class="wrap">
     <h2><span class="ru">Ссылки</span><span class="en">Links</span></h2>
     <div class="grid g3">
-      <a class="card" href="https://github.com/Karatells/ByteStorage/releases"><h3>Releases</h3><p><span class="ru">Готовые jar-файлы и заметки релизов.</span><span class="en">Ready-made jars and release notes.</span></p></a>
-      <a class="card" href="docs/Home.html"><h3><span class="ru">Документация</span><span class="en">Documentation</span></h3><p><span class="ru">Полная документация по каждому блоку и механике 1.3.0.</span><span class="en">Full documentation for every block and 1.3.0 mechanic.</span></p></a>
-      <a class="card" href="docs/Recipes.html"><h3><span class="ru">Рецепты</span><span class="en">Recipes</span></h3><p><span class="ru">Все 55 рецептов крафта, плавки и обжига с сетками.</span><span class="en">All 55 crafting, smelting, and blasting recipes with grids.</span></p></a>
-      <a class="card" href="docs/Worldgen.html"><h3><span class="ru">Мирогенерация</span><span class="en">World &amp; Materials</span></h3><p><span class="ru">Байтит, Кремниевый разлом, прогрессия и достижения.</span><span class="en">Bytite Ore, Silicon Rift resources, progression, and advancements.</span></p></a>
-      <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.2.1.md"><h3><span class="ru">Заметки релиза 1.2.1</span><span class="en">Release notes 1.2.1</span></h3><p><span class="ru">Подробности обновления 1.2.1.</span><span class="en">Details of the 1.2.1 update.</span></p></a>
+      <a class="card" href="https://github.com/Karatells/ByteStorage/releases/tag/v1.4.0"><h3>Release v1.4.0</h3><p><span class="ru">Все 3 готовых jar-файла (Core, Scripting, Silicon Plane).</span><span class="en">All 3 ready-made jars (Core, Scripting, Silicon Plane).</span></p></a>
+      <a class="card" href="docs/Home.html"><h3><span class="ru">Документация</span><span class="en">Documentation</span></h3><p><span class="ru">Полная документация по каждому блоку и механике 1.4.0.</span><span class="en">Full documentation for every block and 1.4.0 mechanic.</span></p></a>
+      <a class="card" href="docs/Dimension-Addon.html"><h3><span class="ru">Аддон Silicon Plane</span><span class="en">Silicon Plane Addon</span></h3><p><span class="ru">Портал, 8 биомов, 4 моба, эндгейм-машины и Optic Wood Set.</span><span class="en">Portal, 8 biomes, 4 mobs, endgame machines &amp; Optic Wood Set.</span></p></a>
+      <a class="card" href="docs/Recipes.html"><h3><span class="ru">Рецепты</span><span class="en">Recipes</span></h3><p><span class="ru">Все рецепты крафта, плавки и обжига с сетками (включая аддоны).</span><span class="en">All crafting, smelting, and blasting recipes with grids (including addons).</span></p></a>
+      <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/docs/RELEASE_NOTES_1.4.0.md"><h3><span class="ru">Заметки релиза 1.4.0</span><span class="en">Release notes 1.4.0</span></h3><p><span class="ru">Полный список нововведений обновления 1.4.0.</span><span class="en">Full list of what's new in the 1.4.0 update.</span></p></a>
       <a class="card" href="https://github.com/Karatells/ByteStorage/blob/main/CHANGELOG.md"><h3>Changelog</h3><p><span class="ru">История всех изменений проекта.</span><span class="en">Full history of all project changes.</span></p></a>
     </div>
   </div>

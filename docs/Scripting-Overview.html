@@ -29,7 +29,6 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
-<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -45,9 +44,12 @@
 <a href="Guide-Book.html">Guide Book</a>
 <h4>Scripting addon</h4>
 <a class="cur" href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-Library.html">Online Script Library</a>
 <a href="Scripting-API.html">API</a>
 <a href="Scripting-Examples.html">Examples</a>
 <a href="Scripting-Administration.html">Administration</a>
+<h4>Dimension addon</h4>
+<a href="Dimension-Addon.html">Silicon Plane</a>
 <h4>Other</h4>
 <a href="Troubleshooting.html">Troubleshooting</a>
 <a href="Building-from-Source.html">Building from Source</a>
@@ -60,22 +62,26 @@
 <li><strong>Installed</strong> → two new blocks, a creative tab, a server config, and new chapters in the <a href="Guide-Book.html">Guide Book</a>.</li>
 </ul>
 <p>The addon bundles <strong>Rhino</strong> (a JavaScript engine for Java). Rhino is <em>only</em> inside the addon jar; the core mod never contains it.</p>
-<h2 id="blocks">Blocks<a class="anchor" href="#blocks" title="Permanent link">#</a></h2>
+<h2 id="blocks-items">Blocks &amp; Items<a class="anchor" href="#blocks-items" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
-<th>Block</th>
+<th>Block / Item</th>
 <th>Role</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Logic Bus</strong></td>
-<td>Runs one JavaScript script. Sees its six neighbouring inventories and the network. Has its own GUI (right-click) where its identifier is set.</td>
+<td>Runs one JavaScript script. Sees its six neighbouring inventories, redstone sides, and the network. Has its own GUI (right-click) where its identifier is set.</td>
 </tr>
 <tr>
 <td><strong>Logic Terminal</strong></td>
-<td>Opens the script editor for every Logic Bus connected to the same network.</td>
+<td>Opens the script editor, custom <strong>Panel</strong> tab, built-in <strong>Templates</strong>, and <strong>Online Script Library</strong> for every Logic Bus connected to the same network.</td>
+</tr>
+<tr>
+<td><strong>Script Disk (<code>script_disk</code>)</strong></td>
+<td>Portable copy/paste disk for scripts. <strong>Shift + Right-click</strong> a Logic Bus to copy its script and interval; <strong>Right-click</strong> another Logic Bus to write them (respects Security Terminal permissions).</td>
 </tr>
 </tbody>
 </table>
@@ -150,12 +156,16 @@ function tick() {
 }
 </code></pre>
 <ul>
-<li>A script must define <strong><code>function tick()</code></strong> or at least one event handler (<strong><code>onCraft(e)</code></strong>, <strong><code>onLowStock(e)</code></strong>, <strong><code>onAlert(e)</code></strong>), otherwise the bus reports an error.</li>
-<li><strong>Global variables persist</strong> between runs, but are reset when the script is saved, the world reloads, or the bus is restarted (the top level runs again). For data that survives world reloads, use <strong><code>store.get</code> / <code>store.set</code></strong> (saved in the Logic Bus NBT).</li>
+<li>A script <strong>must define <code>function tick()</code> or at least one event handler</strong> (<code>onCraft</code>, <code>onLowStock</code>, <code>onAlert</code>, <code>onButton</code>, <code>onMessage</code>), otherwise the bus reports an error.</li>
+<li><strong>Global variables persist</strong> between runs, but are reset when the script is saved, the world reloads, or the bus is restarted (the top level runs again). Use <code>store.set(key, val)</code> for data that must survive world reloads.</li>
 <li>The default interval is 20 ticks (1 s). The server enforces a minimum (default 10 ticks); max 1,200.</li>
 <li>A bus runs only while it is <strong>enabled</strong>, its network is <strong>online</strong>, and scripting is <strong>enabled</strong> in the config.</li>
-<li>Any error, or exceeding a limit, <strong>stops the bus</strong>, sets the status to <code>ERROR: &lt;reason&gt;</code> and writes it to the log.</li>
+<li>Any error, stopping the bus, or losing grid power <strong>stops the bus and resets any <code>redstone.set()</code> outputs back to <code>0</code></strong>.</li>
 </ul>
+<h2 id="built-in-templates-online-script-library">Built-in Templates &amp; Online Script Library<a class="anchor" href="#built-in-templates-online-script-library" title="Permanent link">#</a></h2>
+<p>In the <strong>Logic Terminal</strong> header next to the <strong><code>Code</code></strong> and <strong><code>Panel</code></strong> tabs:
+- <strong><code>Library</code> tab</strong>: browse, filter by category, and download moderated community scripts directly from GitHub (<code>Karatells/sbs-scripts</code>) with SHA-256 verification — see <a href="Scripting-Library.html">Online Script Library</a>.
+- <strong><code>Tpl (1/5)</code> button</strong>: cycles through 5 built-in starter templates (<em>Display Dashboard</em>, <em>Auto-Pull Chest</em>, <em>Redstone Energy Guard</em>, <em>Inter-Bus Messenger</em>, <em>Control Panel UI</em>) and loads them into the editor.</p>
 <h2 id="status-values">Status values<a class="anchor" href="#status-values" title="Permanent link">#</a></h2>
 <table>
 <thead>
@@ -220,12 +230,21 @@ function tick() {
 <td>undo / redo</td>
 </tr>
 <tr>
+<td>Ctrl+E</td>
+<td>open / close the full-screen editor</td>
+</tr>
+<tr>
+<td>Ctrl+S</td>
+<td>save (full-screen editor)</td>
+</tr>
+<tr>
 <td>Ctrl+A, C, X, V</td>
 <td>select all, copy, cut, paste</td>
 </tr>
 </tbody>
 </table>
 <p>Suggestions cover <code>net</code>, <code>stock</code>, <code>recipes</code>, <code>journal</code>, the global functions and, inside quotes, item ids. Brackets and quotes close automatically.</p>
+<p>Autocomplete also offers code snippets (<code>tick</code>, <code>onCraft</code>, <code>for</code>, <code>if</code>...), your own variables and functions, the fields of a handler's event parameter, and context-aware values inside quotes (sides for <code>side("</code>, schedules for <code>stock.setMode("</code>, item ids elsewhere). While you type call arguments a signature hint shows the current parameter.</p>
     <hr>
     <p class="docnote">Found a mistake? This page is generated from
     <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Scripting-Overview.md">docs/wiki/Scripting-Overview.md</a> in the mod repository.</p>

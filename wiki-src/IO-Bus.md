@@ -4,30 +4,38 @@ Moves items between a **neighbouring inventory** and the network automatically.
 
 | Property | Value |
 |---|---|
-| Base cycle | every 10 ticks (`max(2, 10 - 2 × speed_cards)`) |
-| Items per cycle | `64 × (1 + speed_cards)` (64 up to 320) |
+| Cycle | every 10 ticks |
+| Items per cycle | 64 |
 | Filter slots | 9 (ghost slots) |
-| Upgrade slots | 4 (Speed Cards) |
-| Idle drain | 2 FE/t |
 
 ## Modes (toggle with the button)
 
 ### Import
-Pulls items from the neighbouring inventory into the network. Supports an **Allow / Deny** toggle:
-- **Allow (Whitelist)**: only listed items are imported (empty filter = imports everything).
-- **Deny (Blacklist)**: imports everything *except* the listed items.
+Pulls items from the neighbouring inventory into the network. With the filter **empty, everything is imported**; otherwise only filtered items.
 
 ### Export
-Keeps the listed items stocked in the neighbouring inventory. The **count in a filter slot is the amount to keep**. Left-click sets the stack count, right-click adds 1. The bus tops up from the network when the inventory has less than that.
-
-## Speed Cards & Redstone Control
-
-- **Speed Cards (up to 4)**: each card reduces the cycle interval by 2 ticks (10 → 8 → 6 → 4 → 2 ticks) and adds +64 items per cycle (64 → 128 → 192 → 256 → 320 items/cycle). Cards drop when the block is broken.
-- **Redstone control**: click the `RS` button to cycle between **RS: Always**, **RS: High** (active only with a redstone signal), and **RS: Low** (active only without a redstone signal).
+Keeps the listed items stocked in the neighbouring inventory. The **count in a filter slot is the amount to keep**. The bus tops up from the network when the inventory has less than that.
 
 ## Notes
 - The bus works on **every adjacent inventory** (not other network devices).
-- Automatically pauses when the network enters **Eco Mode** (Controller energy `< 10%`).
-- For fluids, use the [Fluid I/O Bus](Storage#fluid-storage).
-- For connecting an external inventory directly as storage without moving items, use the [Storage Bus](Storage#storage-bus).
+- The status line shows whether a machine/inventory is connected and the network is online.
+- Breaking an I/O Bus drops all installed **Speed Cards**.
 - For logic that goes beyond filters (thresholds, conditions, auto-crafting), see the [Scripting addon](Scripting-Overview).
+
+---
+
+## Network Interface (`network_interface`)
+
+A bidirectional automation bridge designed for hoppers, pipes, chutes, conveyors, and machines from other mods.
+
+| Property | Value |
+|---|---|
+| Idle energy | 2 FE/t |
+| Config slots | 9 (ghost Keep-in-Stock slots) |
+| Buffer slots | 9 (real item slots) |
+| Sync cycle | every 10 ticks |
+
+### How it works
+- **Push-In (Input):** Any item inserted into the Network Interface by hoppers, pipes, or machines via `IItemHandler` is routed **directly into the network's storage** (respecting network online state and Eco Mode).
+- **Keep-in-Stock (Output Buffer):** Place ghost items with desired stack counts (1–64) in the top 9 **Keep in Stock** slots. The Network Interface automatically pulls items from the network into the matching bottom 9 **Buffer** slots (and returns excess or unconfigured items back to the network). External pipes/hoppers can extract directly from the Buffer slots.
+- Respects **Security Terminal** permissions and **Eco Mode**; breaking the block drops any items currently in the Buffer.

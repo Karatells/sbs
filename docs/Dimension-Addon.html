@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Аддон «Кремниевый План» (`simple_bytestorage_dimension`) — Simple Byte Storage</title>
+<meta name="description" content="&gt; Старые рецепты основного мода не изменяются — аддон добавляет новые тиры и предметы поверх базовой прогрессии.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img class="brandlogo" src="../assets/logo-256.png" alt="" width="32" height="32"> Simple Byte Storage</a>
+    <nav class="links doc-links">
+      <a href="../index.html">Home</a>
+      <a href="Home.html">Documentation</a>
+      <a href="https://github.com/Karatells/ByteStorage/releases/latest">Download</a>
+      <a href="https://github.com/Karatells/ByteStorage">GitHub</a>
+    </nav>
+    <button class="lang nav-menu-btn" id="menuBtn" aria-label="Documentation menu" aria-expanded="false">☰ Pages</button>
+  </div>
+</header>
+<div class="side-backdrop" id="sideBackdrop"></div>
+<div class="wrap doc">
+  <aside class="side" id="side">
+    <div class="side-head"><span>Documentation</span><button class="side-close" id="sideClose" aria-label="Close">✕</button></div>
+    <a href="Home.html">Home</a>
+<h4>Start</h4>
+<a href="Downloads.html">Downloads</a>
+<a href="Getting-Started.html">Getting Started</a>
+<a href="Recipes.html">Recipes</a>
+<h4>Core mod</h4>
+<a href="Network-and-Power.html">Network and Power</a>
+<a href="Storage.html">Storage</a>
+<a href="Terminals.html">Terminals</a>
+<a href="Network-Controller.html">Network Controller GUI</a>
+<a href="Wireless-Terminal.html">Wireless Terminal</a>
+<a href="Autocrafting.html">Autocrafting</a>
+<a href="Assembler.html">Assembler</a>
+<a href="Pattern-Bus.html">Pattern Bus</a>
+<a href="IO-Bus.html">I/O Bus</a>
+<a href="JEI-Integration.html">JEI Integration</a>
+<a href="Guide-Book.html">Guide Book</a>
+<h4>Scripting addon</h4>
+<a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-Library.html">Online Script Library</a>
+<a href="Scripting-API.html">API</a>
+<a href="Scripting-Examples.html">Examples</a>
+<a href="Scripting-Administration.html">Administration</a>
+<h4>Dimension addon</h4>
+<a class="cur" href="Dimension-Addon.html">Silicon Plane</a>
+<h4>Other</h4>
+<a href="Troubleshooting.html">Troubleshooting</a>
+<a href="Building-from-Source.html">Building from Source</a>
+  </aside>
+  <main class="prose">
+    <h1 id="simple_bytestorage_dimension">Аддон «Кремниевый План» (<code>simple_bytestorage_dimension</code>)<a class="anchor" href="#simple_bytestorage_dimension" title="Permanent link">#</a></h1>
+<p><strong>Simple Byte Storage: Silicon Plane</strong> — необязательный аддон для Minecraft 1.20.1 (Forge), добавляющий полноценное техно-кристаллическое измерение с 3-слойной генерацией, 8 уникальными биомами, 4 мобами (включая мини-босса), 7 рудами, Жидким хладагентом и высокоуровневыми тирами хранения.</p>
+<blockquote>
+<p>Старые рецепты основного мода <strong>не изменяются</strong> — аддон добавляет новые тиры и предметы поверх базовой прогрессии.</p>
+</blockquote>
+<hr />
+<h2 id="1">1. Как попасть в измерение (Врата Разлома)<a class="anchor" href="#1" title="Permanent link">#</a></h2>
+<ol>
+<li>Скрафтите <strong>Компас Разлома</strong> (<code>rift_compass</code>) и найдите в Обычном мире биом <strong><code>Silicon Rift</code></strong> (Кремниевый Разлом).</li>
+<li>Постройте прямоугольную рамку (<code>4×5</code> .. <code>12×12</code>) из <strong>Кремниевого базальта</strong> (<code>silicon_basalt</code>) с <strong>Ядром Врат Разлома</strong> (<code>rift_gate_core</code>) в нижнем ряду.</li>
+<li>Подайте <strong>100 000 FE</strong> в Ядро Врат Разлома (можно перелить из <strong>Аккумулятора конденсатора</strong>).</li>
+<li>Кликните ПКМ по Ядру <strong>Повреждённой байт-ячейкой</strong> (<code>corrupted_cell</code>, расходуется) или многоразовым <strong>Резонатором Разлома</strong> (<code>rift_resonator</code>).</li>
+</ol>
+<blockquote>
+<p><strong>Важно:</strong> В Обычном мире Врата Разлома подпитываются резонансом самого биома и <strong>активируются ТОЛЬКО внутри <code>simple_bytestorage:silicon_rift</code></strong> (настраивается в <code>config/simple_bytestorage_dimension-common.toml</code>). Попытка зажечь портал в обычном биоме выдаст шуточную ачивку <strong>«Сигнал не ловит» (<code>No Signal Here</code>)</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="2-3-8">2. 3-слойная генерация и 8 уникальных биомов<a class="anchor" href="#2-3-8" title="Permanent link">#</a></h2>
+<p>Измерение (<code>Y = -64 .. 256</code>) состоит из трёх вертикальных слоёв под кастомным звёздно-матричным небом с полярным сиянием (без ванильных облаков и цикла дня/ночи):</p>
+<ul>
+<li><strong>Слой 3 (<code>Y = 128..184</code>) — Облачный Архив:</strong> естественные парящие острова с покрытием <code>Archive Plate</code>, до которых можно подняться по природным столбам <strong>Магнитных Потоков (<code>magnetic_updraft</code>)</strong>.</li>
+<li><strong>Слой 2 (<code>Y = 18..116</code>) — Основные Сектора:</strong> 8 биомов, террасы, каньоны, озёра <strong>Жидкого хладагента</strong> (<code>sea_level = 48</code>), 3 вида кибер-деревьев, 4 светящихся растения и 6 видов техно-структур с сундуками лута.</li>
+<li><strong>Слой 1 (<code>Y = -64..18</code>) — Глубокий Кэш:</strong> подземные полости-залы с богатыми жилами руд.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Биом</th>
+<th>Поверхность</th>
+<th>Ключевые ресурсы</th>
+<th>Особенности и мобы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Кремниевые Террасы</strong> (<code>silicon_terraces</code>)</td>
+<td><code>Silicate Crust</code></td>
+<td><code>Busium</code>, <code>Optic Quartz</code></td>
+<td>Безопасная точка входа, Серверные башни</td>
+</tr>
+<tr>
+<td><strong>Оптоволоконный Лес</strong> (<code>optic_spirewood</code>)</td>
+<td><code>Silicon Slate</code></td>
+<td><code>Optic Quartz Ore</code></td>
+<td>Синие оптоволоконные деревья, цифровые цветы</td>
+</tr>
+<tr>
+<td><strong>Магистральные Каньоны</strong> (<code>bus_canyons</code>)</td>
+<td><code>Cyber Panel</code></td>
+<td><code>Busium Ore</code>, <code>Liquid Coolant</code></td>
+<td>Глубокие каньоны, Серверные башни, <code>Байт-Страж</code></td>
+</tr>
+<tr>
+<td><strong>Крио-Кэш</strong> (<code>cryo_cache</code>)</td>
+<td><code>Cryo Basalt</code></td>
+<td><code>Cryo-Silicate Ore</code></td>
+<td>Холод (нужен <code>Стабилизатор фазы</code>), крио-деревья, <code>Крио-Сборщик</code></td>
+</tr>
+<tr>
+<td><strong>Поля Конденсаторов</strong> (<code>capacitor_flats</code>)</td>
+<td><code>Silicon Basalt</code></td>
+<td><code>Fluxite Ore</code></td>
+<td>Ускорение, удары молний (ловятся <code>Аккумулятором</code>), <code>Байт-Страж</code></td>
+</tr>
+<tr>
+<td><strong>Битые Сектора</strong> (<code>corrupted_badlands</code>)</td>
+<td><code>Corrupted Stone</code></td>
+<td><code>Entropy Ore</code>, <code>Corrupted Cell</code></td>
+<td>Десинхронизация, фиолетовый кибер-лес, <code>Глитч-Сталкер</code></td>
+</tr>
+<tr>
+<td><strong>Парящий Архив</strong> (<code>cloud_archive</code>)</td>
+<td><code>Archive Plate</code></td>
+<td><code>Quantumite Ore</code></td>
+<td>Пониженная гравитация, парящие острова, <code>Байт-Страж</code></td>
+</tr>
+<tr>
+<td><strong>Сердце Реестра</strong> (<code>null_core</code>)</td>
+<td><code>Registry Obsidian</code></td>
+<td><code>Matrix Ore</code></td>
+<td>Арки-пилоны, мини-босс <strong><code>Хранитель Реестра</code></strong> (Босс-бар)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3">3. Высокоуровневые предметы, машины и декорации<a class="anchor" href="#3" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Хранение и энергия:</strong> <code>256k Байт-ячейка</code>, <strong><code>1M Байт-ячейка</code></strong> (1 048 576 предметов без лимита типов), <code>64k Портативная ячейка</code>, <code>64k Энергоячейка</code>, <strong><code>256k Энергоячейка</code></strong> (262M FE), <code>256k Жидкостная байт-ячейка</code>.</li>
+<li><strong>Эндгейм сетевые машины и апгрейды:</strong><ul>
+<li><code>Advanced Assembler</code> (скорость <strong>×2</strong>, мин. 2 тика) и <code>Singular Assembler</code> (скорость <strong>×4</strong>, мин. 1 тик).</li>
+<li><code>Pattern Bus Mk2</code> (цикл каждые 4 тика, до 64 подач за цикл).</li>
+<li><code>Singular Controller</code> (буфер <strong>10 000 000 FE</strong>, пассивная подпитка <code>+250 FE/t</code>, бонус <strong>+4 сопроцессора</strong>).</li>
+<li><code>Interdimensional Energy Transmitter</code> (буфер <strong>1 000 000 FE</strong>, 16 каналов <code>Shift+ПКМ</code>, передача FE между измерениями до 20k FE/t).</li>
+<li><code>Quantum Relay</code> (<code>0 FE/t</code> расход, <strong>+2 сопроцессора</strong>).</li>
+<li><code>Speed Card Mk2</code> (×3 ускорение в слотах асемблера), <code>Interdimensional Wireless Card</code> (доступ к привязанной сети между измерениями даже при выгруженном чанке) и <code>Facade Scanner</code> (многоразовый инструмент, маскирующий до 32 соединённых кабелей за клик).</li>
+</ul>
+</li>
+<li><strong>Выживание и утилиты:</strong> <code>Маяк возврата</code> (точка возрождения в измерении), <code>Стабилизатор фазы</code> (защита от Десинхронизации и холода), <code>Аккумулятор конденсатора</code> (500 000 FE, перехватывает молнии +50 000 FE), <code>Кирка из бузиума</code>, <code>Крио-силикатная кирка</code>, <code>Фрагмент лора Архива</code> (5 расшифровываемых записей).</li>
+<li><strong>Компактные блоки и полный набор Optic Wood Set:</strong> 6 компактных блоков руд (<code>9 ↔ 1</code>), техно-колонны, кристаллы, а также полный декоративный набор оптической древесины (22 блока — брёвна, обтёсанные брёвна, доски, ступеньки, плиты, забор, калитка, дверь, люк, нажимная плита, кнопка, мозаика, книжная и резная книжная полки, лестница, 27-слотовый ящик, таблички, подвесные таблички, саженец + <code>Optic Boat</code> и <code>Optic Chest Boat</code>).</li>
+<li><strong>Конфиг (<code>simple_bytestorage_dimension-common.toml</code>):</strong> <code>enableDimension</code>, <code>requireSiliconRiftBiome</code>, <code>portalActivationEnergy</code>.</li>
+</ul>
+    <hr>
+    <p class="docnote">Found a mistake? This page is generated from
+    <a href="https://github.com/Karatells/ByteStorage/blob/main/docs/wiki/Dimension-Addon.md">docs/wiki/Dimension-Addon.md</a> in the mod repository.</p>
+  </main>
+</div>
+<footer><div class="wrap"><div>Simple Byte Storage · MIT · <a href="https://github.com/Karatells/ByteStorage">github.com/Karatells/ByteStorage</a></div>
+<div>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</div></div></footer>
+<script src="../assets/vendor/highlight.min.js" defer></script>
+<script>
+(function(){
+  var side=document.getElementById('side'), bd=document.getElementById('sideBackdrop'),
+      btn=document.getElementById('menuBtn'), closeBtn=document.getElementById('sideClose');
+  function setOpen(v){
+    side.classList.toggle('open',v);
+    bd.classList.toggle('open',v);
+    document.body.classList.toggle('no-scroll',v);
+    btn.setAttribute('aria-expanded',v?'true':'false');
+  }
+  btn.addEventListener('click',function(){setOpen(!side.classList.contains('open'))});
+  bd.addEventListener('click',function(){setOpen(false)});
+  closeBtn.addEventListener('click',function(){setOpen(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false)});
+})();
+</script>
+</body>
+</html>

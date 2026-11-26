@@ -28,14 +28,28 @@ if len(sys.argv) > 1:
         shutil.copy(f, SRC / f.name)
     if wiki != arg:                                                            # refresh recipe data from the mod repo
         pairs = [(arg / "src/main/resources/data/simple_bytestorage/recipes", ROOT / "data-src/recipes"),
-                 (arg / "scripting/src/main/resources/data/simple_bytestorage_scripting/recipes", ROOT / "data-src/recipes-scripting")]
+                 (arg / "scripting/src/main/resources/data/simple_bytestorage_scripting/recipes", ROOT / "data-src/recipes-scripting"),
+                 (arg / "dimension/src/main/resources/data/simple_bytestorage_dimension/recipes", ROOT / "data-src/recipes-dimension")]
         for src, dst in pairs:
             if src.is_dir():
                 shutil.rmtree(dst, ignore_errors=True); shutil.copytree(src, dst)
         for src, dst in [(arg / "src/main/resources/assets/simple_bytestorage/lang/en_us.json", "en_us.json"),
-                         (arg / "scripting/src/main/resources/assets/simple_bytestorage_scripting/lang/en_us.json", "scripting_en_us.json")]:
+                         (arg / "scripting/src/main/resources/assets/simple_bytestorage_scripting/lang/en_us.json", "scripting_en_us.json"),
+                         (arg / "dimension/src/main/resources/assets/simple_bytestorage_dimension/lang/en_us.json", "dimension_en_us.json")]:
             if src.is_file():
                 shutil.copy(src, ROOT / "data-src/lang" / dst)
+        for tex_dir in (
+            arg / "src/main/resources/assets/simple_bytestorage/textures/item",
+            arg / "src/main/resources/assets/simple_bytestorage/textures/block",
+            arg / "scripting/src/main/resources/assets/simple_bytestorage_scripting/textures/item",
+            arg / "dimension/src/main/resources/assets/simple_bytestorage_dimension/textures/item",
+            arg / "dimension/src/main/resources/assets/simple_bytestorage_dimension/textures/block",
+        ):
+            if tex_dir.is_dir():
+                for png in tex_dir.glob("*.png"):
+                    dst_png = ROOT / "assets/img" / png.name
+                    if not dst_png.exists():
+                        shutil.copy(png, dst_png)
 
 # ---- sidebar from the wiki's own _Sidebar.md -------------------------------
 groups, cur = [], None

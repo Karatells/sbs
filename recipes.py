@@ -70,6 +70,8 @@ GROUPS = [
     ("Storage cells", [
         "cell_1k", "cell_4k", "cell_16k", "cell_64k", "cell_256k", "cell_1m",
         "fluid_cell_1k", "fluid_cell_4k", "fluid_cell_16k", "fluid_cell_64k",
+        "portable_cell_1k", "portable_cell_4k", "portable_cell_16k",
+        "energy_cell_1k", "energy_cell_4k", "energy_cell_16k",
     ]),
     ("Terminals", [
         "terminal", "crafting_terminal", "pattern_terminal",
@@ -79,25 +81,49 @@ GROUPS = [
         "pattern", "assembler", "crafting_coprocessor", "pattern_provider",
     ]),
     ("Buses & utility", [
-        "io_bus", "fluid_io_bus", "cell_workbench", "archiver",
+        "network_interface", "cable_facade", "io_bus", "fluid_io_bus", "cell_workbench", "archiver",
         "network_analyzer", "guide_book",
     ]),
     ("Cards & upgrades", [
         "speed_card", "void_card", "lock_card", "recipe_library",
         "auto_transfer_card", "insurance_card", "tool_card", "macro_card",
+        "magnet_card", "crafting_card",
     ]),
-    ("Scripting addon", ["logic_bus", "logic_terminal"]),
+    ("Scripting addon", ["logic_bus", "logic_terminal", "script_disk"]),
+    ("Silicon Plane: Portal, Gear & Cells", [
+        "rift_gate_core", "rift_resonator", "rift_compass", "return_beacon",
+        "phase_stabilizer", "capacitor_accumulator", "busium_pickaxe", "cryo_pickaxe",
+        "portable_cell_64k", "energy_cell_64k", "energy_cell_256k", "fluid_cell_256k",
+    ]),
+    ("Silicon Plane: Endgame Machines & Upgrades", [
+        "advanced_assembler", "singular_assembler", "pattern_bus_mk2",
+        "singular_controller", "interdimensional_energy_transmitter",
+        "speed_card_mk2", "interdimensional_wireless_card", "facade_scanner",
+        "optic_processor", "cryo_core", "singularity_core",
+    ]),
+    ("Silicon Plane: Optic Wood Set", [
+        "optic_planks", "optic_stairs", "optic_slab", "optic_fence", "optic_fence_gate",
+        "optic_door", "optic_trapdoor", "optic_pressure_plate", "optic_button",
+        "optic_mosaic", "optic_bookshelf", "chiseled_optic_bookshelf",
+        "optic_ladder", "optic_crate", "optic_sign", "optic_hanging_sign",
+        "optic_boat", "optic_chest_boat",
+    ]),
 ]
 
 
 def load():
     recipes, lang = {}, {}
-    for folder in ("recipes", "recipes-scripting"):
-        for f in sorted((DATA / folder).glob("*.json")):
+    for folder in ("recipes", "recipes-scripting", "recipes-dimension"):
+        d = DATA / folder
+        if not d.is_dir():
+            continue
+        for f in sorted(d.glob("*.json")):
             r = json.loads(f.read_text(encoding="utf-8"))
             recipes[f.stem] = r
-    for name in ("en_us.json", "scripting_en_us.json"):
-        lang.update(json.loads((DATA / "lang" / name).read_text(encoding="utf-8")))
+    for name in ("en_us.json", "scripting_en_us.json", "dimension_en_us.json"):
+        p = DATA / "lang" / name
+        if p.is_file():
+            lang.update(json.loads(p.read_text(encoding="utf-8")))
     return recipes, lang
 
 

@@ -49,4 +49,4 @@ The button under the rules on the **Stock** tab chooses when stock rules place o
 
 ## Statistics graphs
 
-The **Graphs** tab shows two graphs built from snapshots taken every 20 seconds (the last 20 minutes are kept): the total number of items stored and the Controller's energy level. Below them, **Rising** and **Falling** list the three items whose stock changed the most over that period — handy for spotting what is draining. Since **1.3.0**, the graph series (`StatsTotals` and `StatsEnergy`) are saved in the Controller's NBT and survive world reloads.
+The **Graphs** tab shows two graphs built from snapshots taken every 20 seconds (the last 20 minutes are kept): the total number of items stored and the Controller's energy level. Below them, **Rising** and **Falling** list the three items whose stock changed the most over that period — handy for spotting what is draining. The history is not saved: it starts empty after a world reload, and the graphs show "collecting data..." until two snapshots exist.

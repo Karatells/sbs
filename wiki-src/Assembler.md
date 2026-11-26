@@ -10,22 +10,21 @@ Executes crafting-table patterns for the network.
 
 All blocks must be connected to an online controller.
 
-## Speed Cards & Crafting Co-Processors
+## Speed cards
 
-The Assembler has **4 upgrade slots** for **Speed Cards**, and benefits from **Crafting Co-Processors (`crafting_coprocessor`)** connected anywhere on the network (up to 8 co-processors counted; each co-processor costs 8 FE/t idle):
+The Assembler has **4 upgrade slots** for **Speed Cards**.
 
 ```
-ticks per craft = max(4, 40 / (1 + speed_cards + min(8, coprocessors)))
+ticks per craft = max(4, 40 / (1 + number_of_cards))
 ```
 
-| Speed Cards (0 Co-Processors) | Ticks per craft |
+| Cards | Ticks per craft |
 |---|---|
 | 0 | 40 |
 | 1 | 20 |
 | 2 | 13 |
 | 3 | 10 |
 | 4 | 8 |
-| 4 + 5 Co-Processors (or 9 total) | **4 (maximum speed)** |
 
 ## Queue
 

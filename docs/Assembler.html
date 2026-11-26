@@ -29,7 +29,6 @@
 <h4>Start</h4>
 <a href="Downloads.html">Downloads</a>
 <a href="Getting-Started.html">Getting Started</a>
-<a href="Worldgen.html">World &amp; Materials</a>
 <a href="Recipes.html">Recipes</a>
 <h4>Core mod</h4>
 <a href="Network-and-Power.html">Network and Power</a>
@@ -45,9 +44,12 @@
 <a href="Guide-Book.html">Guide Book</a>
 <h4>Scripting addon</h4>
 <a href="Scripting-Overview.html">Overview</a>
+<a href="Scripting-Library.html">Online Script Library</a>
 <a href="Scripting-API.html">API</a>
 <a href="Scripting-Examples.html">Examples</a>
 <a href="Scripting-Administration.html">Administration</a>
+<h4>Dimension addon</h4>
+<a href="Dimension-Addon.html">Silicon Plane</a>
 <h4>Other</h4>
 <a href="Troubleshooting.html">Troubleshooting</a>
 <a href="Building-from-Source.html">Building from Source</a>
@@ -62,14 +64,14 @@
 <li>It crafts, then returns the result (and any leftovers, such as buckets) to the network.</li>
 </ol>
 <p>All blocks must be connected to an online controller.</p>
-<h2 id="speed-cards-crafting-co-processors">Speed Cards &amp; Crafting Co-Processors<a class="anchor" href="#speed-cards-crafting-co-processors" title="Permanent link">#</a></h2>
-<p>The Assembler has <strong>4 upgrade slots</strong> for <strong>Speed Cards</strong>, and benefits from <strong>Crafting Co-Processors (<code>crafting_coprocessor</code>)</strong> connected anywhere on the network (up to 8 co-processors counted; each co-processor costs 8 FE/t idle):</p>
-<pre><code>ticks per craft = max(4, 40 / (1 + speed_cards + min(8, coprocessors)))
+<h2 id="speed-cards">Speed cards<a class="anchor" href="#speed-cards" title="Permanent link">#</a></h2>
+<p>The Assembler has <strong>4 upgrade slots</strong> for <strong>Speed Cards</strong>.</p>
+<pre><code>ticks per craft = max(4, 40 / (1 + number_of_cards))
 </code></pre>
 <table>
 <thead>
 <tr>
-<th>Speed Cards (0 Co-Processors)</th>
+<th>Cards</th>
 <th>Ticks per craft</th>
 </tr>
 </thead>
@@ -93,10 +95,6 @@
 <tr>
 <td>4</td>
 <td>8</td>
-</tr>
-<tr>
-<td>4 + 5 Co-Processors (or 9 total)</td>
-<td><strong>4 (maximum speed)</strong></td>
 </tr>
 </tbody>
 </table>

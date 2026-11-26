@@ -9,6 +9,7 @@ All releases: https://github.com/Karatells/ByteStorage/releases
 |---|---|---|
 | `simple_bytestorage-<version>.jar` | **Yes** | The main mod. |
 | `simple_bytestorage_scripting-<version>.jar` | No | The scripting addon (Logic Bus + Logic Terminal). Needs the main mod. |
+| `simple_bytestorage_dimension-<version>.jar` | No | The Silicon Plane dimension addon (8 biomes, 4 mobs, endgame machines, 1M cells, Optic Wood Set). Needs the main mod. |
 
 Releases are published only for versions that are announced as releases. Builds of every commit are available only as GitHub Actions artifacts (for testers) and may be unstable.
 
@@ -22,25 +23,22 @@ Releases are published only for versions that are announced as releases. Builds 
 ## Installation
 
 1. Install Forge for Minecraft 1.20.1.
-2. Put `simple_bytestorage-<version>.jar` into the `mods` folder. Add the scripting jar there too if you want scripting.
+2. Put `simple_bytestorage-<version>.jar` into the `mods` folder. Add the scripting and/or dimension addon jars there too if you want them.
 3. On a server, install the same jars on the server **and** on every client.
-4. Start the game, mine [Bytite Ore](Worldgen), and craft the **Guide Book** (book + cable) for an in-game manual.
+4. Start the game, then craft the **Guide Book** (book + cable) for an in-game manual.
 
 ## Updating
 
-Replace the jar(s) with the newer version. Keep the main mod and the addon on the same version.
+Replace the jar(s) with the newer version. Keep the main mod and any installed addons on the same version.
 
-Removing the scripting addon from a world deletes any placed Logic Buses and Logic Terminals.
+Removing an optional addon from a world deletes any blocks, items, or dimension data belonging to that addon.
 
 ## Versions
 
 | Version | Notes |
 |---|---|
-| **1.3.0** | Bytite Ore & Silicon Rift worldgen, `256k`/`1M` cells, Fluid Byte Cells & Fluid I/O Bus, Storage Bus, Cell Workbench, Void & Lock cards, Byte Archiver & Data Blobs, Quantum Relay & Entangled Crystal, Crafting Co-Processor, Security Terminal, Network Display, Network Analyzer, Eco Mode (`<10%`), Pattern Bus Blocking Mode, I/O Bus Speed/Redstone/Blacklist upgrades, persisted Graphs, `redstone`/`store`/`display` scripting APIs, performance optimizations, and 5 advancements. |
-| **1.2.1** | Redesigned Controller (left-column tabs, Graphs tab) and restyled screens, Capacitor (500k FE), stock rule schedule, saved searches, `Max: N` order button, terminal reserved/in-production tooltips, persisted reservations, stuck Pattern Bus detection, Logic Terminal code editor with syntax highlighting & autocomplete, `onCraft`/`onLowStock`/`onAlert` events, `net.machines()`. |
-| **1.2.0** | Journal tab, resource reservation, Energy Interface & Pattern Bus machine charging, shortage warnings, expanded Scripting API & `NetworkControl`. |
-| **1.1.3** | Stock rules tab, Recipes tab, Crafting queue priorities/pause/ETA, extended terminal search & favorites, Pattern Bus learning mode. |
-| **1.1.0–1.1.2** | Controller GUI, Recipe Library, Wireless Terminal upgrades (Auto-Transfer, Insurance, Tool, Macro), terminal sorting & ordering from any terminal. |
-| **1.0.0** | First stable release. |
+| 1.4.0 | Network Interface, Portable/Energy Cells, Cable Facades, Online Script Library, and the new Silicon Plane Dimension addon. |
+| 1.3.1 | Bugfix and GUI polish release. |
+| 1.0.0 | First stable release. |
 
-Development builds use four-part version numbers (`major.minor.patch.build`, e.g. `1.2.1.32`); the fourth number is a global build counter.
+Development builds have four parts (`1.4.0.40`); stable releases use three parts (`1.4.0`).
